@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import bgImg from "../assets/about/bg-pattern.png";
-import leftImg from "../assets/about/about-left.jpg";
-import rightImg from "../assets/about/about-right.jpg";
+import bgImg from "../../assets/about/bg-pattern.png";
+import leftImg from "../../assets/about/about-left.jpg";
+import rightImg from "../../assets/about/about-right.jpg";
 
 export default function About() {
   return (
     <section className="relative overflow-hidden">
       {/* ================= TOP BG SECTION ================= */}
-      <div className="relative w-full lg:w-[60%] h-[260px] md:h-[320px] lg:h-[360px]">
+      <div className="relative w-full lg:w-[60%] h-[260px] md:h-[260px] lg:h-[300px]">
         <Image src={bgImg} alt="Background" fill className="object-cover" />
 
         {/* TEXT OVER BG */}
@@ -20,8 +20,7 @@ export default function About() {
             </p>
 
             <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus tempore iure iste.
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             </h2>
           </div>
         </div>

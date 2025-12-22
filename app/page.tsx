@@ -1,12 +1,16 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSlider from "./components/Hero";
-import About from "./components/About";
+import About from "./components/home/About";
 import project1 from "./assets/projects/project_1.jpg";
 import project2 from "./assets/projects/project_2.jpg";
 import project3 from "./assets/projects/project_3.jpg";
 import project4 from "./assets/projects/project_4.jpg";
 import project5 from "./assets/projects/project_5.jpg";
+import Footer from "./components/Footer";
+import QuickEnquiry from "./components/QuickEnquiry";
+import WhyChooseUs from "./components/home/WhyChooseUs";
+import FactsSection from "./components/home/Fact";
 
 const projects = [
   {
@@ -50,7 +54,7 @@ export default function Home() {
       <section className="py-16">
         <div className="w-11/12 md:w-5/6 mx-auto">
           {/* HEADER */}
-          <div className="flex items-end justify-between mb-16">
+          <div className="flex items-end justify-between mb-8">
             <div>
               <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
                 Featured Projects
@@ -111,6 +115,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <WhyChooseUs />
+      <FactsSection />
+      <QuickEnquiry />
+      <Footer />
     </div>
   );
 }
