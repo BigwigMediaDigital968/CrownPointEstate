@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSlider from "./components/Hero";
@@ -12,6 +13,11 @@ import QuickEnquiry from "./components/QuickEnquiry";
 import WhyChooseUs from "./components/home/WhyChooseUs";
 import FactsSection from "./components/home/Fact";
 import TestimonialSection from "./components/home/Testimonial";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
 
 const projects = [
   {
@@ -46,6 +52,46 @@ const projects = [
   },
 ];
 
+const clients = [
+  { id: 1, logo: project1, name: "Client 1" },
+  { id: 2, logo: project1, name: "Client 2" },
+  { id: 3, logo: project1, name: "Client 3" },
+  { id: 4, logo: project1, name: "Client 4" },
+  { id: 5, logo: project1, name: "Client 5" },
+  { id: 6, logo: project1, name: "Client 6" },
+];
+
+const blogs = [
+  {
+    id: 1,
+    title: "How smart planning transforms modern living",
+    category: "Real Estate",
+    date: "March 18, 2024",
+    image: project1,
+  },
+  {
+    id: 2,
+    title: "Luxury apartments vs villas: What to choose?",
+    category: "Insights",
+    date: "March 10, 2024",
+    image: project2,
+  },
+  {
+    id: 3,
+    title: "Why location matters more than price",
+    category: "Investment",
+    date: "March 05, 2024",
+    image: project3,
+  },
+  {
+    id: 4,
+    title: "Why location matters more than price",
+    category: "Investment",
+    date: "March 05, 2024",
+    image: project4,
+  },
+];
+
 export default function Home() {
   return (
     <div>
@@ -73,7 +119,6 @@ export default function Home() {
             </a>
           </div>
 
-          {/* GRID */}
           {/* GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:auto-rows-[280px]">
             {projects.map((project, index) => {
@@ -119,7 +164,122 @@ export default function Home() {
       <WhyChooseUs />
       <FactsSection />
       <TestimonialSection />
+      {/* <section className="py-16">
+        <div className="w-11/12 md:w-5/6 mx-auto">
+          <div className="text-center mb-8">
+            <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
+              Our Clients
+            </p>
+            <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
+              Trusted by leading brands
+            </h2>
+          </div>
+          <Swiper
+            modules={[Autoplay]}
+            loop
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            speed={3500}
+            spaceBetween={24}
+            slidesPerView={2}
+            breakpoints={{
+              640: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 },
+            }}
+            className="!py-4"
+          >
+            {clients.map((client) => (
+              <SwiperSlide key={client.id}>
+                <div className=" flex items-center justify-center bg-white border-gray-200 rounded-md hover:shadow-md transition">
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    width={140}
+                    height={70}
+                    className="object-cover transition"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section> */}
       <QuickEnquiry />
+
+      <section className="py-16 bg-white">
+        <div className="w-11/12 md:w-5/6 mx-auto">
+          {/* HEADER */}
+          <div className="flex items-end justify-between mb-14">
+            <div>
+              <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
+                Our Blog
+              </p>
+              <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]  ">
+                Latest insights & updates
+              </h2>
+            </div>
+
+            <a
+              href="/blog"
+              className="hidden md:block text-sm tracking-widest text-[var(--primary-color)] hover:underline"
+            >
+              VIEW ALL →
+            </a>
+          </div>
+
+          {/* GRID */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {/* FEATURED BLOG */}
+            <div className="lg:col-span-2 group">
+              <div className="relative h-[300px] md:h-[420px] overflow-hidden">
+                <Image
+                  src={blogs[0].image}
+                  alt={blogs[0].title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="mt-6">
+                <p className="text-xs tracking-widest text-[var(--primary-color)] mb-2">
+                  {blogs[0].category} • {blogs[0].date}
+                </p>
+                <h3 className="font-heading text-2xl text-[var(--primary-bg)] leading-snug">
+                  {blogs[0].title}
+                </h3>
+              </div>
+            </div>
+
+            {/* SIDE BLOGS */}
+            <div className="flex flex-col gap-16">
+              {blogs.slice(1).map((blog) => (
+                <div key={blog.id} className="group flex gap-6">
+                  <div className="relative w-32 h-24 flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={blog.image}
+                      alt={blog.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div>
+                    <p className="text-xs tracking-widest text-[var(--primary-color)] mb-2">
+                      {blog.category} • {blog.date}
+                    </p>
+                    <h4 className="font-heading text-lg text-[var(--primary-bg)] leading-snug">
+                      {blog.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
