@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Phone, ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
-import logo from "../assets/logo.svg";
+import logo from "../assets/cpe-logo.png";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -26,14 +26,14 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 w-full z-40 border-b border-white/30 transition-all duration-300 ${
           scrolled
-            ? "bg-[var(--primary-bg)]/80 backdrop-blur-md shadow-lg"
+            ? "bg-[var(--primary-bg)]/60 backdrop-blur-md shadow-lg"
             : "bg-transparent"
         }`}
       >
-        <nav className="relative w-11/12 mx-auto flex items-center justify-between text-white py-4">
+        <nav className="relative w-11/12 mx-auto flex items-center justify-between text-white py-1">
           {/* LEFT — LOGO */}
           <Link href="/" className="flex items-center">
-            <Image src={logo} alt="Logo" width={220} height={220} priority />
+            <Image src={logo} alt="Logo" width={60} height={60} priority />
           </Link>
 
           {/* CENTER — MENU */}

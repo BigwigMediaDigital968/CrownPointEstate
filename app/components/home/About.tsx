@@ -7,6 +7,7 @@ import rightImg from "../../assets/about/about-right.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function About() {
   useEffect(() => {
@@ -99,14 +100,15 @@ export default function About() {
                   dicta unde sit repudiandae id distinctio sunt rem totam.
                 </p>
               </div>
-
-              <button
-                data-aos="zoom-in"
-                data-aos-delay="450"
-                className="mt-6 px-8 py-4 bg-[#c2a178] text-white text-sm tracking-widest hover:bg-[#b09168] transition"
-              >
-                MORE ABOUT US →
-              </button>
+              <Link href="/about">
+                <button
+                  data-aos="zoom-in"
+                  data-aos-delay="450"
+                  className="mt-6 px-8 py-4 bg-[#c2a178] text-white text-sm tracking-widest hover:bg-[#b09168] transition cursor-pointer"
+                >
+                  MORE ABOUT US →
+                </button>
+              </Link>
             </div>
           </div>
         </div>

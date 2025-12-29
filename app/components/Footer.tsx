@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={18} />
-                <span className="font-body">info@rehomes.com</span>
+                <span className="font-body">abc@xyz.com</span>
               </div>
             </div>
 
@@ -55,8 +55,8 @@ export default function Footer() {
             <div className="flex items-start gap-3">
               <MapPin size={18} className="mt-1" />
               <p className="font-body text-sm text-gray-300">
-                123 Luxury Avenue, <br />
-                New York, NY 10001, USA
+                123 Lorem, ipsum dolor., <br />
+                Lorem ipsum dolor sit amet.
               </p>
             </div>
 
@@ -134,7 +134,7 @@ export default function Footer() {
 
         {/* ================= BOTTOM BAR ================= */}
         <div className="w-11/12 md:w-5/6 mx-auto py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
-          <p>© {new Date().getFullYear()} ReHomes. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} CPE. All rights reserved.</p>
           <p>
             Designed & Developed by{" "}
             <span className="text-white">
