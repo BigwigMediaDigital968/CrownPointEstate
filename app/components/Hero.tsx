@@ -163,12 +163,14 @@ export default function HeroSlider() {
             {slides[index].desc}
           </p>
 
-          <button
-            key={`btn-${index}`}
-            className="px-8 py-4 bg-white text-black font-semibold tracking-wide hover:bg-gray-200 transition lux-slide delay-3"
-          >
-            GET IN TOUCH →
-          </button>
+          <Link href="/contact">
+            <button
+              key={`btn-${index}`}
+              className="px-8 py-4 bg-white text-black font-semibold tracking-wide hover:bg-gray-200 transition lux-slide delay-3"
+            >
+              GET IN TOUCH →
+            </button>
+          </Link>
         </div>
       </div>
     </section>

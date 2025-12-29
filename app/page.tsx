@@ -21,7 +21,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import PopupForm from "./components/Popup";
 
 const projects = [
   {
@@ -97,6 +98,8 @@ const blogs = [
 ];
 
 export default function Home() {
+  const [openPopup, setOpenPopup] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -104,6 +107,13 @@ export default function Home() {
       once: true,
       offset: 120,
     });
+
+    const timer = setTimeout(() => {
+      setOpenPopup(true);
+    }, 1500);
+
+    // Cleanup (important)
+    return () => clearTimeout(timer);
   }, []);
   return (
     <div>
@@ -309,7 +319,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
       <Footer />
     </div>
   );

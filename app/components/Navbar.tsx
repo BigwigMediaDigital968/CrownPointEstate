@@ -6,6 +6,8 @@ import { Phone, ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import logo from "../assets/cpe-logo.png";
 import { usePathname } from "next/navigation";
+import PopupForm from "./Popup";
+import ButtonFill from "./ButtonFill";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +15,7 @@ export default function Navbar() {
   const [productOpen, setProductOpen] = useState(false);
   const [mobilePropOpen, setMobilePropOpen] = useState(false);
   const pathname = usePathname();
+  const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -118,25 +121,32 @@ export default function Navbar() {
           </ul>
 
           {/* RIGHT — PHONE */}
-          <div
-            className={`hidden lg:flex items-center gap-3 text-sm font-medium group cursor-pointer ${
-              scrolled ? "text-black" : "text-white"
-            }`}
-          >
-            <span
-              className={`flex items-center justify-center w-9 h-9 rounded-full border transition ${
-                scrolled
-                  ? "border-black/20 group-hover:bg-[var(--primary-color)]"
-                  : "border-white/30 group-hover:bg-[var(--primary-color)]"
+          <div className="flex gap-5 items-center">
+            {/* GET IN TOUCH BUTTON */}
+            <ButtonFill onClick={() => setOpenForm(true)} text="Get in touch" />
+
+            {/* PHONE */}
+            <div
+              className={`hidden lg:flex items-center gap-3 text-sm font-medium group cursor-pointer ${
+                scrolled ? "text-black" : "text-white"
               }`}
             >
-              <Phone size={16} color={scrolled ? "black" : "white"} />
-            </span>
+              <span
+                className={`flex items-center justify-center w-9 h-9 rounded-full border transition ${
+                  scrolled
+                    ? "border-black/20 group-hover:bg-[var(--primary-color)]"
+                    : "border-white/30 group-hover:bg-[var(--primary-color)]"
+                }`}
+              >
+                <Phone size={16} color={scrolled ? "black" : "white"} />
+              </span>
 
-            <span className="transition group-hover:text-[var(--primary-color)]">
-              +01 123456789
-            </span>
+              <span className="transition group-hover:text-[var(--primary-color)]">
+                +91 123456789
+              </span>
+            </div>
           </div>
+          <PopupForm open={openForm} onClose={() => setOpenForm(false)} />
 
           {/* MOBILE TOGGLE */}
           <button

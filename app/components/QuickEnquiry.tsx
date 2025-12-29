@@ -66,9 +66,9 @@ export default function QuickEnquiry() {
 
                 <select className="border border-gray-200 px-4 py-3 focus:outline-none md:col-span-2">
                   <option>Select Project</option>
-                  <option>ReHomes Riverside</option>
-                  <option>Smart City</option>
-                  <option>Golden River</option>
+                  <option>Project 1</option>
+                  <option>Project 2</option>
+                  <option>Project 3</option>
                 </select>
 
                 <button

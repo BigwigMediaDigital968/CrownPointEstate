@@ -93,7 +93,7 @@ const Contact = () => {
                     <p className="text-sm text-gray-500 uppercase tracking-widest mb-1">
                       Phone
                     </p>
-                    <p className="font-medium">+91 98765 43210</p>
+                    <p className="font-medium">+91 01234 56789</p>
                   </div>
                 </div>
 
@@ -103,7 +103,7 @@ const Contact = () => {
                     <p className="text-sm text-gray-500 uppercase tracking-widest mb-1">
                       Email
                     </p>
-                    <p className="font-medium">info@yourcompany.com</p>
+                    <p className="font-medium">Sales@crownpointestates.com</p>
                   </div>
                 </div>
               </div>
