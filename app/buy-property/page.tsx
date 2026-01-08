@@ -10,7 +10,6 @@ import QuickEnquiry from "../components/QuickEnquiry";
 
 import heroImg from "../assets/hero/aboutpage.jpg";
 
-import { propertyData } from "../data/propertyData";
 import { useEffect } from "react";
 
 // Icons
@@ -24,6 +23,20 @@ import {
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
+interface Property {
+  _id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  type: string;
+  purpose: "Buy" | "Sell" | "Lease";
+  location: string;
+  images: string[];
+  price: number;
+  bedrooms?: string;
+  bathrooms?: string;
+  areaSqft?: string;
+}
 
 const staticLocations = [
   "Select Location",
@@ -51,16 +64,38 @@ export default function BuyProperty() {
   const [type, setType] = useState("");
   const [budget, setBudget] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`
+        );
+        const data = await res.json();
+
+        if (data.success) {
+          setProperties(data.properties);
+        }
+      } catch (error) {
+        console.error("Failed to fetch properties", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   /* ------------------ FILTER LOGIC ------------------ */
-  const filteredProperties = propertyData
+  const filteredProperties = properties
     // ✅ ONLY BUY PROPERTIES
-    .filter((property) => property.purpose === "buy")
-    // ✅ THEN APPLY UI FILTERS
+    .filter((property) => property.purpose === "Buy")
+    // ✅ APPLY FILTERS
     .filter((property) => {
       const matchLocation = location
-        ? property.location.city === location ||
-          property.location.area === location
+        ? property.location.includes(location)
         : true;
 
       const matchType = type ? property.type === type : true;
@@ -169,13 +204,13 @@ export default function BuyProperty() {
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredProperties.map((property) => (
             <div
-              key={property.id}
+              key={property._id}
               className="group rounded-3xl overflow-hidden border bg-white shadow hover:shadow-2xl transition"
             >
               {/* IMAGE */}
               <div className="relative h-64">
                 <Image
-                  src={property.coverImage}
+                  src={property.images?.[0] || "/placeholder.jpg"}
                   alt={property.title}
                   fill
                   className="object-cover group-hover:scale-105 transition duration-500"
@@ -193,7 +228,7 @@ export default function BuyProperty() {
 
                 <p className="flex items-center gap-2 text-gray-600 text-sm mb-4">
                   <MapPin size={16} />
-                  {property.location.area}, {property.location.city}
+                  {property.location}
                 </p>
 
                 {/* META INFO */}
@@ -216,7 +251,7 @@ export default function BuyProperty() {
                 {/* PRICE */}
                 <p className="flex items-center gap-1 text-lg font-bold mb-5">
                   <IndianRupee size={18} />
-                  {property.priceLabel}
+                  {property.price.toLocaleString("en-IN")}
                 </p>
 
                 {/* ACTION */}

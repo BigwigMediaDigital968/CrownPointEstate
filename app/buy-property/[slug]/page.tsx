@@ -3,12 +3,10 @@
 import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import QuickEnquiry from "../../components/QuickEnquiry";
-
-import { propertyData } from "../../data/propertyData";
 
 // Icons
 import {
@@ -20,24 +18,84 @@ import {
   CheckCircle,
   IndianRupee,
   Building2,
-  Sofa,
   Calendar,
-  ParkingSquare,
 } from "lucide-react";
 
-interface Props {
-  params: {
-    slug: string;
-  };
+/* ================= TYPES ================= */
+
+interface Property {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  type: string;
+  purpose: "Buy" | "Sell" | "Lease";
+  location: string;
+  images: string[];
+  price: number;
+  bedrooms?: string;
+  bathrooms?: string;
+  areaSqft?: string;
+  builder?: string;
+  highlights: string[];
+  featuresAmenities: string[];
+  nearby: string[];
 }
+
+/* ================= PAGE ================= */
 
 export default function PropertyDetails() {
   const params = useParams();
   const slug = params?.slug as string;
 
-  const property = propertyData.find((item) => item.slug === slug);
+  const [property, setProperty] = useState<Property | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!property) return notFound();
+  /* ================= FETCH PROPERTY ================= */
+
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchProperty = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property?slug=${slug}`
+        );
+        const data = await res.json();
+
+        if (data.success && data.properties.length > 0) {
+          setProperty(data.properties[0]);
+        } else {
+          notFound();
+        }
+      } catch (error) {
+        console.error("Failed to fetch property", error);
+        notFound();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperty();
+  }, [slug]);
+
+  /* ================= LOADING / NOT FOUND ================= */
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className="py-40 text-center text-lg">Loading property...</div>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!property) {
+    notFound();
+  }
+
+  /* ================= JSX ================= */
 
   return (
     <>
@@ -46,7 +104,7 @@ export default function PropertyDetails() {
       {/* ================= HERO ================= */}
       <section className="relative h-[65vh] lg:h-[90vh]">
         <Image
-          src={property.coverImage}
+          src={property.images?.[0] || "/placeholder.jpg"}
           alt={property.title}
           fill
           priority
@@ -66,7 +124,7 @@ export default function PropertyDetails() {
 
             <p className="flex items-center gap-2 text-white/80">
               <MapPin size={16} />
-              {property.location.area}, {property.location.city}
+              {property.location}
             </p>
           </div>
         </div>
@@ -77,12 +135,12 @@ export default function PropertyDetails() {
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* ================= LEFT ================= */}
           <div className="lg:col-span-2 space-y-14">
-            {/* PRICE & KEY STATS */}
+            {/* PRICE & STATS */}
             <div className="bg-white rounded-3xl shadow p-8">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <p className="flex items-center gap-1 text-3xl font-bold">
                   <IndianRupee size={26} />
-                  {property.priceLabel}
+                  {property.price.toLocaleString("en-IN")}
                 </p>
 
                 <div className="flex flex-wrap gap-6 text-gray-700">
@@ -96,16 +154,18 @@ export default function PropertyDetails() {
                       <Bath /> {property.bathrooms} Baths
                     </div>
                   )}
-                  <div className="flex items-center gap-2">
-                    <Ruler /> {property.areaSqft} Sqft
-                  </div>
+                  {property.areaSqft && (
+                    <div className="flex items-center gap-2">
+                      <Ruler /> {property.areaSqft} Sqft
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
-            {/* OVERVIEW TABLE */}
+            {/* OVERVIEW */}
             <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
+              <h2 className="font-heading text-2xl font-bold mb-5">
                 Property Overview
               </h2>
 
@@ -116,31 +176,21 @@ export default function PropertyDetails() {
                   value={property.builder || "—"}
                 />
                 <OverviewItem
-                  icon={<Calendar />}
-                  label="Year Built"
-                  value={property.yearBuilt?.toString() || "—"}
-                />
-                <OverviewItem
-                  icon={<Sofa />}
-                  label="Furnishing"
-                  value={property.furnishing}
-                />
-                <OverviewItem
-                  icon={<ParkingSquare />}
-                  label="Parking"
-                  value={property.parking?.toString() || "—"}
-                />
-                <OverviewItem
                   icon={<Home />}
-                  label="Possession"
-                  value={property.possessionStatus}
+                  label="Property Type"
+                  value={property.type}
+                />
+                <OverviewItem
+                  icon={<Calendar />}
+                  label="Purpose"
+                  value={property.purpose}
                 />
               </div>
             </div>
 
             {/* DESCRIPTION */}
             <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
+              <h2 className="font-heading text-2xl font-bold mb-5">
                 Property Description
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -150,11 +200,11 @@ export default function PropertyDetails() {
 
             {/* HIGHLIGHTS */}
             <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
+              <h2 className="font-heading text-2xl font-bold mb-5">
                 Property Highlights
               </h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {property.highlights.map((item, index) => (
+                {property.highlights.map((item: string, index: number) => (
                   <li key={index} className="flex gap-2">
                     <CheckCircle className="text-green-600" size={18} />
                     <span>{item}</span>
@@ -163,71 +213,45 @@ export default function PropertyDetails() {
               </ul>
             </div>
 
-            {/* FEATURES */}
+            {/* FEATURES & AMENITIES */}
             <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
-                Features
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {property.features.map((item, index) => (
-                  <li key={index} className="flex gap-2">
-                    <Home size={18} />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* AMENITIES */}
-            <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
-                Amenities
+              <h2 className="font-heading text-2xl font-bold mb-5">
+                Features & Amenities
               </h2>
               <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {property.amenities.map((item, index) => (
-                  <li
-                    key={index}
-                    className="bg-gray-100 px-4 py-3 rounded-xl text-sm"
-                  >
-                    {item}
-                  </li>
-                ))}
+                {property.featuresAmenities.map(
+                  (item: string, index: number) => (
+                    <li
+                      key={index}
+                      className="bg-gray-100 px-4 py-3 rounded-xl text-sm"
+                    >
+                      {item}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
             {/* NEARBY */}
             <div>
-              <h2 className="font-heading text-2xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
+              <h2 className="font-heading text-2xl font-bold mb-5">
                 Nearby Locations
               </h2>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-                {property.nearby.schools && (
-                  <NearbyBlock
-                    title="Schools"
-                    items={property.nearby.schools}
-                  />
-                )}
-                {property.nearby.hospitals && (
-                  <NearbyBlock
-                    title="Hospitals"
-                    items={property.nearby.hospitals}
-                  />
-                )}
-                {property.nearby.malls && (
-                  <NearbyBlock title="Malls" items={property.nearby.malls} />
-                )}
-                {property.nearby.metro && (
-                  <NearbyBlock title="Metro" items={property.nearby.metro} />
-                )}
-              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {property.nearby.map((item: string, index: number) => (
+                  <li key={index} className="flex gap-2">
+                    <CheckCircle className="text-green-600" size={18} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
           {/* ================= RIGHT ================= */}
           <div className="lg:sticky lg:top-28 h-fit space-y-6">
             <div className="bg-white shadow rounded-3xl p-6">
-              <h3 className="font-heading text-xl leading-snug font-bold text-[var(--primary-bg)] mb-5">
+              <h3 className="font-heading text-xl font-bold mb-5">
                 Interested in this property?
               </h3>
               <Link
@@ -237,7 +261,6 @@ export default function PropertyDetails() {
                 Enquire Now
               </Link>
             </div>
-
             <div className="bg-white shadow rounded-3xl p-6">
               <h3 className="font-heading text-xl leading-snug font-bold text-[var(--primary-bg)] mb-3">
                 Enquire About This Property
@@ -297,7 +320,7 @@ export default function PropertyDetails() {
   );
 }
 
-/* ================= SMALL COMPONENTS ================= */
+/* ================= SMALL COMPONENT ================= */
 
 function OverviewItem({
   icon,
@@ -315,15 +338,6 @@ function OverviewItem({
         <p className="text-gray-500 text-xs">{label}</p>
         <p className="font-medium">{value}</p>
       </div>
-    </div>
-  );
-}
-
-function NearbyBlock({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <h4 className="font-semibold mb-1">{title}</h4>
-      <p className="text-gray-600">{items.join(", ")}</p>
     </div>
   );
 }
