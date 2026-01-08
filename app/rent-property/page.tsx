@@ -67,10 +67,10 @@ export default function BuyProperty() {
 
       const matchBudget = budget
         ? budget === "50k - 1 Lakh"
-          ? property.price < 20000000
+          ? property.price >= 50000 && property.price <= 100000
           : budget === "1Lakh - 2 Lakh"
-          ? property.price >= 20000000 && property.price <= 50000000
-          : property.price > 50000000
+          ? property.price > 100000 && property.price <= 200000
+          : property.price > 200000
         : true;
 
       return matchLocation && matchType && matchBudget;
