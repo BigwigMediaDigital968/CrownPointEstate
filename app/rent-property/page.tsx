@@ -23,9 +23,10 @@ import {
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
+import { useEffect } from "react";
 
 const staticLocations = [
-  "All",
+  "Select Location",
   "DLF Phase 1",
   "DLF Phase 2",
   "DLF Phase 3",
@@ -65,16 +66,18 @@ export default function BuyProperty() {
       const matchType = type ? property.type === type : true;
 
       const matchBudget = budget
-        ? budget === "below-2cr"
+        ? budget === "50k - 1 Lakh"
           ? property.price < 20000000
-          : budget === "2cr-5cr"
+          : budget === "1Lakh - 2 Lakh"
           ? property.price >= 20000000 && property.price <= 50000000
           : property.price > 50000000
         : true;
 
       return matchLocation && matchType && matchBudget;
     });
-
+  useEffect(() => {
+    setBudget("");
+  }, [type]);
   return (
     <div>
       <Navbar />
@@ -132,14 +135,20 @@ export default function BuyProperty() {
           </select>
 
           <select
-            className="border rounded-xl px-4 py-3"
+            className={`border rounded-xl px-4 py-3 ${
+              !type ? "bg-gray-100 cursor-not-allowed" : ""
+            }`}
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
+            disabled={!type}
           >
+            <option value="">
+              {type ? "Select Budget" : "Select Property Type First"}
+            </option>
             <option value="">Budget</option>
-            <option value="below-2cr">Below ₹2 Cr</option>
-            <option value="2cr-5cr">₹2 Cr – ₹5 Cr</option>
-            <option value="above-5cr">Above ₹5 Cr</option>
+            <option value="50k - 1 Lakh">50k - 1 Lakh</option>
+            <option value="1Lakh - 2 Lakh">1Lakh - 2 Lakh</option>
+            <option value="2Lakh & above">2Lakh & above</option>
           </select>
 
           <ButtonFill

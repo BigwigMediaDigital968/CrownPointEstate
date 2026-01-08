@@ -11,6 +11,7 @@ import QuickEnquiry from "../components/QuickEnquiry";
 import heroImg from "../assets/hero/aboutpage.jpg";
 
 import { propertyData } from "../data/propertyData";
+import { useEffect } from "react";
 
 // Icons
 import {
@@ -25,7 +26,7 @@ import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
 
 const staticLocations = [
-  "All",
+  "Select Location",
   "DLF Phase 1",
   "DLF Phase 2",
   "DLF Phase 3",
@@ -74,6 +75,10 @@ export default function BuyProperty() {
 
       return matchLocation && matchType && matchBudget;
     });
+
+  useEffect(() => {
+    setBudget("");
+  }, [type]);
 
   return (
     <div>
@@ -132,11 +137,17 @@ export default function BuyProperty() {
           </select>
 
           <select
-            className="border rounded-xl px-4 py-3"
+            className={`border rounded-xl px-4 py-3 ${
+              !type ? "bg-gray-100 cursor-not-allowed" : ""
+            }`}
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
+            disabled={!type}
           >
-            <option value="">Budget</option>
+            <option value="">
+              {type ? "Select Budget" : "Select Property Type First"}
+            </option>
+
             <option value="below-2cr">Below ₹2 Cr</option>
             <option value="2cr-5cr">₹2 Cr – ₹5 Cr</option>
             <option value="above-5cr">Above ₹5 Cr</option>
