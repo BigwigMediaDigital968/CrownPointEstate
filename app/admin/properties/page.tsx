@@ -82,7 +82,7 @@ export default function AllProperties() {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE}/property/${slug}`
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`
       );
       fetchProperties(currentPage); // refetch after delete
     } catch (error) {

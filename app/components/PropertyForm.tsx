@@ -184,16 +184,20 @@ export default function PropertyForm({
 
       if (property) {
         await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/property/${property.slug}`,
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`,
           data,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
       } else {
-        await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/property`, data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+          data,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
       }
 
       onSuccess();
