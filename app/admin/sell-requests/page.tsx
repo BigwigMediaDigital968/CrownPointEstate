@@ -1,7 +1,8 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Eye, Trash2, X } from "lucide-react";
+import { Trash2, Eye, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface SellRequest {
@@ -9,24 +10,9 @@ interface SellRequest {
   name: string;
   email: string;
   phone: string;
-  title: string;
-  slug: string;
-  description: string;
-
-  purpose: string;
   location: string;
-  price: number | null;
-  bedrooms: number | null;
-  bathrooms: number | null;
-  areaSqft: number | null;
-  highlights: string[];
-  featuresAmenities: string[];
-  nearby: string[];
-  googleMapUrl: string;
-  videoLink: string;
-  extraHighlights: string[];
-  images: string[];
-  approved: boolean;
+  expectedPrice: number;
+  areaSqft: number;
   createdAt: string;
 }
 
@@ -36,23 +22,24 @@ export default function SellRequests() {
   const [selectedRequest, setSelectedRequest] = useState<SellRequest | null>(
     null
   );
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [isApproving, setIsApproving] = useState(false);
 
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
+  /* ================= AUTH CHECK ================= */
   useEffect(() => {
-    // ✅ Check login status
     const loggedIn = localStorage.getItem("isAdmin");
     if (loggedIn !== "true") {
-      router.push("/login"); // redirect if not logged in
+      router.push("/login");
       return;
     }
     fetchSellRequests();
   }, []);
 
+  /* ================= FETCH DATA ================= */
   const fetchSellRequests = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/viewsell`
+        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/all`
       );
       setSellRequests(res.data);
     } catch (error) {
@@ -60,85 +47,65 @@ export default function SellRequests() {
     }
   };
 
-  const handleDelete = async (slug: string) => {
-    if (!confirm("Are you sure you want to delete this request?")) return;
+  /* ================= DELETE ================= */
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this enquiry?")) return;
+
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/${slug}`
+        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/${id}`
       );
-      setSellRequests(sellRequests.filter((r) => r.slug !== slug));
+      setSellRequests((prev) => prev.filter((r) => r._id !== id));
     } catch (error) {
       console.error("Delete failed", error);
     }
   };
 
-  const handleApprove = async (_id: string) => {
-    try {
-      setIsApproving(true);
-      console.log(_id);
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE}/sell/approve/${_id}`
-      );
-      alert("Request approved!");
-      setIsViewModalOpen(false);
-      fetchSellRequests();
-    } catch (error) {
-      console.error("Approve failed", error);
-    } finally {
-      setIsApproving(false);
-    }
-  };
-
-  const openViewModal = (request: SellRequest) => {
-    setSelectedRequest(request);
+  /* ================= VIEW ================= */
+  const openViewModal = (req: SellRequest) => {
+    setSelectedRequest(req);
     setIsViewModalOpen(true);
   };
 
   return (
     <div className="p-6">
-      {/* Top Bar */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Manage Sell Requests</h1>
-      </div>
+      <h1 className="text-2xl font-semibold mb-6">Sell Enquiries</h1>
 
-      {/* Table */}
+      {/* ================= TABLE ================= */}
       <div className="overflow-x-auto">
-        <table className="w-full border border-gray-700 rounded-lg">
+        <table className="w-full border border-gray-300 rounded-lg">
           <thead className="bg-gray-900 text-white">
             <tr>
-              <th className="p-3">Title</th>
-
+              <th className="p-3">Name</th>
+              <th className="p-3">Phone</th>
               <th className="p-3">Location</th>
-              <th className="p-3">Seller</th>
-              <th className="p-3">Approved</th>
+              <th className="p-3">Expected Price</th>
+              <th className="p-3">Area (Sqft)</th>
               <th className="p-3">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {sellRequests.length > 0 ? (
               sellRequests.map((req) => (
-                <tr key={req._id} className="border-t border-gray-300">
-                  <td className="p-3 text-center">{req.title}</td>
-
-                  <td className="p-3 text-center">{req.location}</td>
+                <tr key={req._id} className="border-t">
                   <td className="p-3 text-center">{req.name}</td>
+                  <td className="p-3 text-center">{req.phone}</td>
+                  <td className="p-3 text-center">{req.location}</td>
                   <td className="p-3 text-center">
-                    {req.approved ? (
-                      <span className="text-green-600 font-semibold">Yes</span>
-                    ) : (
-                      <span className="text-red-500 font-semibold">No</span>
-                    )}
+                    ₹{req.expectedPrice.toLocaleString("en-IN")}
                   </td>
-                  <td className="p-3 flex gap-3 justify-center">
+                  <td className="p-3 text-center">{req.areaSqft}</td>
+                  <td className="p-3 flex justify-center gap-3">
                     <button
                       onClick={() => openViewModal(req)}
-                      className="p-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white"
+                      className="p-2 bg-blue-600 rounded-lg text-white"
                     >
                       <Eye size={16} />
                     </button>
                     <button
-                      onClick={() => handleDelete(req.slug)}
-                      className="p-2 bg-red-500 hover:bg-red-600 rounded-lg text-white"
+                      onClick={() => handleDelete(req._id)}
+                      className="p-2 bg-red-600 rounded-lg text-white"
                     >
                       <Trash2 size={16} />
                     </button>
@@ -147,11 +114,8 @@ export default function SellRequests() {
               ))
             ) : (
               <tr>
-                <td
-                  colSpan={6}
-                  className="text-center p-4 text-gray-500 italic"
-                >
-                  No sell requests found.
+                <td colSpan={6} className="text-center p-4 text-gray-500">
+                  No sell enquiries found
                 </td>
               </tr>
             )}
@@ -159,24 +123,20 @@ export default function SellRequests() {
         </table>
       </div>
 
-      {/* View Modal */}
+      {/* ================= VIEW MODAL ================= */}
       {isViewModalOpen && selectedRequest && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto no-scrollbar rounded-lg shadow-lg p-6 relative">
+          <div className="bg-white w-11/12 md:w-1/2 rounded-lg p-6 relative">
             <button
               onClick={() => setIsViewModalOpen(false)}
-              className="absolute top-3 right-3 text-gray-400 hover:text-white"
+              className="absolute top-3 right-3 text-gray-600"
             >
-              <X size={20} />
+              <X />
             </button>
 
-            {/* Title & Description */}
-            <h2 className="text-2xl font-bold mb-2">{selectedRequest.title}</h2>
-            <p className="mb-4 text-gray-300">{selectedRequest.description}</p>
+            <h2 className="text-xl font-semibold mb-4">Seller Details</h2>
 
-            {/* Seller Info */}
-            <div className="mb-4 p-4 border border-gray-600 rounded-lg bg-gray-900">
-              <h3 className="font-semibold mb-2">Seller Info</h3>
+            <div className="space-y-2 text-gray-800">
               <p>
                 <strong>Name:</strong> {selectedRequest.name}
               </p>
@@ -186,60 +146,21 @@ export default function SellRequests() {
               <p>
                 <strong>Phone:</strong> {selectedRequest.phone}
               </p>
+              <p>
+                <strong>Location:</strong> {selectedRequest.location}
+              </p>
+              <p>
+                <strong>Expected Price:</strong> ₹
+                {selectedRequest.expectedPrice.toLocaleString("en-IN")}
+              </p>
+              <p>
+                <strong>Area:</strong> {selectedRequest.areaSqft} sqft
+              </p>
+              <p>
+                <strong>Submitted On:</strong>{" "}
+                {new Date(selectedRequest.createdAt).toLocaleDateString()}
+              </p>
             </div>
-
-            {/* Property Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <p>
-                  <strong>Purpose:</strong> {selectedRequest.purpose}
-                </p>
-                <p>
-                  <strong>Location:</strong> {selectedRequest.location}
-                </p>
-                <p>
-                  <strong>Price:</strong> {selectedRequest.price ?? "—"}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <strong>Bedrooms:</strong> {selectedRequest.bedrooms ?? "—"}
-                </p>
-                <p>
-                  <strong>Bathrooms:</strong> {selectedRequest.bathrooms ?? "—"}
-                </p>
-                <p>
-                  <strong>Area (sqft):</strong>{" "}
-                  {selectedRequest.areaSqft ?? "—"}
-                </p>
-              </div>
-            </div>
-
-            {/* Approve Button */}
-
-            {/* Images */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-6">
-              {selectedRequest.images?.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Sell request image ${idx}`}
-                  className="rounded-lg w-full h-40 object-cover"
-                />
-              ))}
-            </div>
-            {/* Approve Button */}
-            {!selectedRequest.approved && (
-              <div className="flex justify-end mt-10">
-                <button
-                  onClick={() => handleApprove(selectedRequest._id)}
-                  disabled={isApproving}
-                  className="inline-block bg-[var(--primary-color)] text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:scale-105 transition"
-                >
-                  {isApproving ? "Approving..." : "Approve"}
-                </button>
-              </div>
-            )}
           </div>
         </div>
       )}
