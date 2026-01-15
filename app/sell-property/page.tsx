@@ -11,6 +11,60 @@ import QuickEnquiry from "../components/QuickEnquiry";
 import heroImg from "../assets/hero/aboutpage.jpg";
 
 export default function BuyProperty() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    expectedPrice: "",
+    areaSqft: "",
+  });
+
+  /* ======================
+     SUBMIT SELL FORM
+  ======================= */
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...formData,
+            expectedPrice: Number(formData.expectedPrice),
+            areaSqft: Number(formData.areaSqft),
+          }),
+        }
+      );
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      setSuccess("Thank you! Our team will contact you shortly.");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        location: "",
+        expectedPrice: "",
+        areaSqft: "",
+      });
+    } catch (err: any) {
+      setError(err.message || "Failed to submit enquiry");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -84,46 +138,84 @@ export default function BuyProperty() {
           <div className="bg-white rounded-3xl shadow-lg p-8">
             <h3 className="text-xl font-semibold mb-6">List Your Property</h3>
 
-            <form className="space-y-4">
-              {/* PROPERTY TYPE */}
-              <select className="w-full border rounded-xl px-4 py-3 text-sm">
-                <option value="">Property Type</option>
-                <option>Apartment</option>
-                <option>Builder Floor</option>
-                <option>Villa</option>
-                <option>Plot</option>
-                <option>Commercial</option>
-              </select>
+            {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
+            {success && (
+              <p className="text-green-600 text-sm mb-3">{success}</p>
+            )}
 
-              {/* LOCATION */}
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
-                placeholder="Property Location"
-                className="w-full border rounded-xl px-4 py-3 text-sm"
+                placeholder="Your Name"
                 required
-              />
-
-              {/* EXPECTED PRICE */}
-              <input
-                type="text"
-                placeholder="Expected Price"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full border rounded-xl px-4 py-3 text-sm"
               />
 
-              {/* PHONE */}
+              <input
+                type="email"
+                placeholder="Email Address"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                className="w-full border rounded-xl px-4 py-3 text-sm"
+              />
+
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full border rounded-xl px-4 py-3 text-sm"
                 required
+                value={formData.phone}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
+                className="w-full border rounded-xl px-4 py-3 text-sm"
               />
 
-              {/* CTA */}
+              <input
+                type="text"
+                placeholder="Property Location"
+                required
+                value={formData.location}
+                onChange={(e) =>
+                  setFormData({ ...formData, location: e.target.value })
+                }
+                className="w-full border rounded-xl px-4 py-3 text-sm"
+              />
+
+              <input
+                type="number"
+                placeholder="Expected Price (₹)"
+                required
+                value={formData.expectedPrice}
+                onChange={(e) =>
+                  setFormData({ ...formData, expectedPrice: e.target.value })
+                }
+                className="w-full border rounded-xl px-4 py-3 text-sm"
+              />
+
+              <input
+                type="number"
+                placeholder="Area (Sqft)"
+                required
+                value={formData.areaSqft}
+                onChange={(e) =>
+                  setFormData({ ...formData, areaSqft: e.target.value })
+                }
+                className="w-full border rounded-xl px-4 py-3 text-sm"
+              />
+
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full bg-[var(--primary-color)] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
               >
-                Get Free Consultation
+                {loading ? "Submitting..." : "Get Free Consultation"}
               </button>
             </form>
 
