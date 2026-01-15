@@ -328,7 +328,6 @@ export default function BuyPageContent() {
 
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
 
-      <QuickEnquiry />
       <Footer />
     </div>
   );

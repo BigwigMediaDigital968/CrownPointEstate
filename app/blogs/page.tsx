@@ -221,7 +221,6 @@ const Blogs = () => {
           </div>
         )}
       </div>
-      <QuickEnquiry />
 
       <PopupForm open={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
 

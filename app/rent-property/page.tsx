@@ -276,7 +276,6 @@ export default function BuyProperty() {
 
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
 
-      <QuickEnquiry />
       <Footer />
     </div>
   );

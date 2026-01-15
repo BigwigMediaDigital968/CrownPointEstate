@@ -283,7 +283,6 @@ export default function BuyProperty() {
         </a>
       </section>
 
-      <QuickEnquiry />
       <Footer />
     </div>
   );
