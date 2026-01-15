@@ -20,6 +20,7 @@ import {
   Ruler,
   Home,
   IndianRupee,
+  Loader,
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
@@ -116,6 +117,19 @@ export default function BuyPageContent() {
     setBudget("");
   }, [type]);
 
+  const PageLoader = () => {
+    return (
+      <div className="col-span-full flex items-center justify-center min-h-[300px]">
+        <div className="flex flex-col items-center gap-4">
+          <Loader className="h-10 w-10 animate-spin text-gray-800" />
+          <p className="text-sm text-gray-600 tracking-wide">
+            Loading properties...
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <Navbar />
@@ -203,75 +217,79 @@ export default function BuyPageContent() {
       {/* PROPERTY LIST */}
       <section className="py-16">
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredProperties.map((property) => (
-            <div
-              key={property._id}
-              className="group rounded-3xl overflow-hidden border bg-white shadow hover:shadow-2xl transition"
-            >
-              {/* IMAGE */}
-              <div className="relative h-64">
-                <Image
-                  src={property.images?.[0] || "/placeholder.jpg"}
-                  alt={property.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
-                />
+          {/* 🔄 LOADER */}
+          {loading && <PageLoader />}
 
-                {/* PURPOSE BADGE */}
-                <span className="absolute top-4 left-4 bg-black text-white text-xs px-3 py-1 rounded-full uppercase">
-                  {property.purpose}
-                </span>
-              </div>
+          {/* ✅ PROPERTIES */}
+          {!loading &&
+            filteredProperties.length > 0 &&
+            filteredProperties.map((property) => (
+              <div
+                key={property._id}
+                className="group rounded-3xl overflow-hidden border bg-white shadow hover:shadow-2xl transition"
+              >
+                {/* IMAGE */}
+                <div className="relative h-64">
+                  <Image
+                    src={property.images?.[0] || "/placeholder.jpg"}
+                    alt={property.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-500"
+                  />
 
-              {/* CONTENT */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-1">{property.title}</h3>
-
-                <p className="flex items-center gap-2 text-gray-600 text-sm mb-4">
-                  <MapPin size={16} />
-                  {property.location}
-                </p>
-
-                {/* META INFO */}
-                <div className="grid grid-cols-3 gap-4 text-sm text-gray-700 mb-4">
-                  {property.bedrooms && (
-                    <div className="flex items-center gap-2">
-                      <BedDouble size={16} /> {property.bedrooms} Beds
-                    </div>
-                  )}
-                  {property.bathrooms && (
-                    <div className="flex items-center gap-2">
-                      <Bath size={16} /> {property.bathrooms} Baths
-                    </div>
-                  )}
-                  <div className="flex items-center gap-2">
-                    <Ruler size={16} /> {property.areaSqft} Sqft
-                  </div>
+                  <span className="absolute top-4 left-4 bg-black text-white text-xs px-3 py-1 rounded-full uppercase">
+                    {property.purpose}
+                  </span>
                 </div>
 
-                {/* PRICE */}
-                <p className="flex items-center gap-1 text-lg font-bold mb-5">
-                  <IndianRupee size={18} />
-                  {(property.price ?? 0).toLocaleString("en-IN")}
-                </p>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-1">
+                    {property.title}
+                  </h3>
 
-                {/* ACTION */}
-                <Link href={`/buy-property/${property.slug}`}>
-                  <ButtonFill
-                    className="w-full"
-                    text={
-                      <span className="flex items-center gap-2">
-                        <Home size={18} />
-                        View Details
-                      </span>
-                    }
-                  />
-                </Link>
+                  <p className="flex items-center gap-2 text-gray-600 text-sm mb-4">
+                    <MapPin size={16} />
+                    {property.location}
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-4 text-sm text-gray-700 mb-4">
+                    {property.bedrooms && (
+                      <div className="flex items-center gap-2">
+                        <BedDouble size={16} /> {property.bedrooms} Beds
+                      </div>
+                    )}
+                    {property.bathrooms && (
+                      <div className="flex items-center gap-2">
+                        <Bath size={16} /> {property.bathrooms} Baths
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2">
+                      <Ruler size={16} /> {property.areaSqft} Sqft
+                    </div>
+                  </div>
+
+                  <p className="flex items-center gap-1 text-lg font-bold mb-5">
+                    <IndianRupee size={18} />
+                    {(property.price ?? 0).toLocaleString("en-IN")}
+                  </p>
+
+                  <Link href={`/buy-property/${property.slug}`}>
+                    <ButtonFill
+                      className="w-full"
+                      text={
+                        <span className="flex items-center gap-2">
+                          <Home size={18} />
+                          View Details
+                        </span>
+                      }
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {filteredProperties.length === 0 && (
+          {/* ❌ NO DATA */}
+          {!loading && filteredProperties.length === 0 && (
             <div className="col-span-full flex justify-center">
               <div className="bg-white border rounded-3xl shadow-md p-10 max-w-xl w-full text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
