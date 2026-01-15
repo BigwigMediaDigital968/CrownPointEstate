@@ -215,11 +215,6 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
               <MapPin size={18} /> {property.location}
             </p>
           )}
-          {property.price && (
-            <p className="text-2xl font-semibold text-[var(--title)]">
-              ₹ {property.price.toLocaleString()}
-            </p>
-          )}
 
           {/* Badges */}
           <div className="flex flex-wrap gap-3">

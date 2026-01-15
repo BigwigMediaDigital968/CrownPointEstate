@@ -342,8 +342,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      <QuickEnquiry />
       <Footer />
     </div>
   );

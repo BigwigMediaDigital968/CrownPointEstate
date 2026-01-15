@@ -3,7 +3,7 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSlider from "./components/Hero";
 import About from "./components/home/About";
-import project1 from "./assets/projects/project_1.jpg";
+import project1 from "./assets/projects/project.jpg";
 import project2 from "./assets/projects/project_2.jpg";
 import project3 from "./assets/projects/project_3.jpg";
 import project4 from "./assets/projects/project_4.jpg";
@@ -23,37 +23,43 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useEffect, useState } from "react";
 import PopupForm from "./components/Popup";
+import Link from "next/link";
 
 const projects = [
   {
     id: "01",
-    title: "ReHomes Riverside",
-    location: "West Virginia, USA",
+    title: "New 4 BHK Builder Floor ",
+    location: "DLF Phase 2, Gurugram",
     image: project1,
+    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
   },
   {
     id: "02",
     title: "Smart City",
     location: "Oklahoma, USA",
     image: project2,
+    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
   },
   {
     id: "03",
     title: "Centre Park",
     location: "Tennessee, USA",
     image: project3,
+    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
   },
   {
     id: "04",
     title: "ReHomes Gardenia",
     location: "South Carolina, USA",
     image: project4,
+    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
   },
   {
     id: "05",
     title: "Golden River",
     location: "North Carolina, USA",
     image: project5,
+    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
   },
 ];
 
@@ -157,30 +163,34 @@ export default function Home() {
           ${isTall ? "lg:row-span-2" : ""}
         `}
                 >
-                  {/* IMAGE */}
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className={`w-full object-cover transition-transform duration-700 group-hover:scale-105
+                  <Link href={project.link}>
+                    {/* IMAGE */}
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={600}
+                      height={400}
+                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-105
             h-[260px] sm:h-[280px] lg:h-full
           `}
-                  />
+                    />
 
-                  {/* OVERLAY */}
-                  <div className="absolute inset-0 bg-[var(--primary-bg)]/40 group-hover:bg-[var(--primary-bg)]/60 transition duration-500" />
+                    {/* OVERLAY */}
+                    <div className="absolute inset-0 bg-[var(--primary-bg)]/40 group-hover:bg-[var(--primary-bg)]/60 transition duration-500" />
 
-                  {/* HUGE NUMBER */}
-                  <span className="absolute bottom-6 right-6 text-[100px] lg:text-[120px] font-heading text-white opacity-20 group-hover:opacity-60 transition duration-500 leading-none select-none">
-                    {project.id}
-                  </span>
+                    {/* HUGE NUMBER */}
+                    <span className="absolute bottom-6 right-6 text-[100px] lg:text-[120px] font-heading text-white opacity-20 group-hover:opacity-60 transition duration-500 leading-none select-none">
+                      {project.id}
+                    </span>
 
-                  {/* TEXT */}
-                  <div className="absolute bottom-6 left-6 z-10 text-white">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
-                    <p className="text-sm text-gray-200">{project.location}</p>
-                  </div>
+                    {/* TEXT */}
+                    <div className="absolute bottom-6 left-6 z-10 text-white">
+                      <h3 className="text-lg font-semibold">{project.title}</h3>
+                      <p className="text-sm text-gray-200">
+                        {project.location}
+                      </p>
+                    </div>
+                  </Link>
                 </div>
               );
             })}
@@ -232,7 +242,7 @@ export default function Home() {
           </Swiper>
         </div>
       </section>
-      <QuickEnquiry />
+      {/* <QuickEnquiry /> */}
 
       <section className="py-16 bg-white overflow-hidden">
         <div className="w-11/12 md:w-5/6 mx-auto">

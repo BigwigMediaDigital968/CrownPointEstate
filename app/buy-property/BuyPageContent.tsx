@@ -268,11 +268,6 @@ export default function BuyPageContent() {
                     </div>
                   </div>
 
-                  <p className="flex items-center gap-1 text-lg font-bold mb-5">
-                    <IndianRupee size={18} />
-                    {(property.price ?? 0).toLocaleString("en-IN")}
-                  </p>
-
                   <Link href={`/buy-property/${property.slug}`}>
                     <ButtonFill
                       className="w-full"

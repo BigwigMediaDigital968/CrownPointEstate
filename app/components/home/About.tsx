@@ -77,7 +77,7 @@ export default function About() {
 
             {/* MISSION & VISION */}
             <div
-              className="max-w-md space-y-10"
+              className="max-w-md space-y-10 -ml-14"
               data-aos="fade-up"
               data-aos-delay="250"
             >

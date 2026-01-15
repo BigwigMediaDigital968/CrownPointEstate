@@ -111,7 +111,6 @@ export default function Navbar() {
             </li>
 
             {[
-              { name: "Projects", link: "/projects" },
               { name: "Blogs", link: "/blogs" },
               { name: "Contact", link: "/contact" },
             ].map((item) => (
@@ -122,8 +121,8 @@ export default function Navbar() {
                     pathname === item.link
                       ? "border-b-2 border-[var(--primary-color)] text-[var(--primary-color)]"
                       : scrolled
-                      ? "hover:text-[var(--primary-color)]"
-                      : "hover:text-[var(--primary-color)]"
+                        ? "hover:text-[var(--primary-color)]"
+                        : "hover:text-[var(--primary-color)]"
                   }`}
                 >
                   {item.name}

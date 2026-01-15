@@ -13,133 +13,202 @@ interface PopupFormProps {
 }
 
 const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
-  const [phone, setPhone] = useState("");
+  const [step, setStep] = useState<"FORM" | "OTP">("FORM");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    requirements: "",
+    budget: "",
+    message: "",
+  });
+
+  const [otp, setOtp] = useState("");
 
   if (!open) return null;
+
+  /* =========================
+     SEND OTP
+  ========================== */
+  const handleSendOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/send-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      setStep("OTP");
+    } catch (err: any) {
+      setError(err.message || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* =========================
+     VERIFY OTP
+  ========================== */
+  const handleVerifyOtp = async () => {
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/verify-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone: formData.phone,
+            otp,
+          }),
+        }
+      );
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      onClose();
+      setStep("FORM");
+      setOtp("");
+    } catch (err: any) {
+      setError(err.message || "OTP verification failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md animate-fadeIn">
       <div className="relative w-11/12 max-w-3xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.15)] border border-white/30 animate-popupSlide overflow-hidden flex flex-col md:flex-row">
-        {/* CLOSE BUTTON */}
+        {/* CLOSE */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black transition text-xl z-10"
+          className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl z-10"
         >
           ✕
         </button>
 
-        {/* LEFT IMAGE */}
-        <div className="hidden md:block relative w-full md:w-1/2 h-48 md:h-auto">
-          <Image
-            src={popup}
-            alt="Doctor Appointment"
-            fill
-            className="object-fill"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-black/10 to-black/40" />
+        {/* IMAGE */}
+        <div className="hidden md:block relative w-1/2">
+          <Image src={popup} alt="Popup" fill className="object-fill" />
         </div>
 
-        {/* RIGHT FORM */}
-        {/* RIGHT FORM */}
+        {/* FORM */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-bold text-center mb-6 text-[var(--primary-color)]">
-            Enquire Now
+            {step === "FORM" ? "Enquire Now" : "Verify OTP"}
           </h2>
 
-          <form className="space-y-3">
-            {/* Name */}
-            <input
-              type="text"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-black focus:border-[var(--primary-color)]"
-              placeholder="Full Name"
-              required
-            />
+          {error && (
+            <p className="text-red-600 text-sm text-center mb-3">{error}</p>
+          )}
 
-            {/* Phone */}
-            <PhoneInput
-              country="in"
-              value={phone}
-              onChange={setPhone}
-              enableSearch
-              countryCodeEditable={false}
-              placeholder="Phone Number"
-              containerClass="!w-full"
-              inputClass="!w-full !h-[44px] !pl-12 !pr-4 !rounded-lg text-black !border !border-gray-300 focus:!border-[var(--primary-color)]"
-              buttonClass="!border !border-gray-300 !rounded-l-lg text-black"
-              dropdownClass="!text-gray-800"
-            />
+          {step === "FORM" && (
+            <form onSubmit={handleSendOtp} className="space-y-3">
+              <input
+                type="text"
+                placeholder="Full Name"
+                required
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
 
-            {/* Email */}
-            <input
-              type="email"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-black  focus:border-[var(--primary-color)]"
-              placeholder="Email Address"
-            />
+              <PhoneInput
+                country="in"
+                value={formData.phone}
+                onChange={(phone) => setFormData({ ...formData, phone })}
+                inputClass="!w-full !h-[44px] !pl-12 !rounded-lg !border !border-gray-400 !text-black placeholder:!text-gray-500 focus:!border-[var(--primary-color)] focus:!ring-1 focus:!ring-[var(--primary-color)]"
+                buttonClass="!border !border-gray-400 !rounded-l-lg"
+                dropdownClass="!text-gray-800"
+              />
 
-            {/* Property Type */}
-            <select
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-black focus:border-[var(--primary-color)]"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Select Property Type
-              </option>
-              <option>Apartment / Flat</option>
-              <option>Independent House</option>
-              <option>Villa</option>
-              <option>Plot / Land</option>
-              <option>Commercial Property</option>
-            </select>
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
 
-            {/* Budget */}
-            <select
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-black focus:border-[var(--primary-color)]"
-              defaultValue=""
-              required
-            >
-              <option value="" disabled>
-                Budget Range
-              </option>
-              <option>Under ₹50 Lakh</option>
-              <option>₹50 Lakh – ₹1 Cr</option>
-              <option>₹1 Cr – ₹2 Cr</option>
-              <option>₹2 Cr+</option>
-            </select>
+              <select
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                onChange={(e) =>
+                  setFormData({ ...formData, requirements: e.target.value })
+                }
+              >
+                <option value="">Property Type</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>Plot</option>
+                <option>Commercial</option>
+              </select>
 
-            {/* Message */}
-            <textarea
-              className="w-full px-4 py-2.5 rounded-lg h-24 border border-gray-300 text-black resize-none focus:border-[var(--primary-color)]"
-              placeholder="Any specific requirement (BHK, facing, possession timeline, etc.)"
-            />
+              <select
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                onChange={(e) =>
+                  setFormData({ ...formData, budget: e.target.value })
+                }
+              >
+                <option value="">Budget</option>
+                <option>Under ₹50L</option>
+                <option>₹50L – ₹1Cr</option>
+                <option>₹1Cr+</option>
+              </select>
 
-            <ButtonFill
-              type="submit"
-              text="Get Call Back"
-              className="w-full mt-2"
-            />
-          </form>
+              <textarea
+                placeholder="Any specific requirement (BHK, facing, possession timeline, etc.)"
+                className="w-full h-24 px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black resize-none focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+              />
+
+              <ButtonFill
+                type="submit"
+                className="w-full"
+                text={loading ? "Sending OTP..." : "Get Call Back"}
+              />
+            </form>
+          )}
+
+          {step === "OTP" && (
+            <div className="space-y-4">
+              <input
+                type="text"
+                maxLength={6}
+                placeholder="Enter 6-digit OTP"
+                className="w-full px-4 py-3 rounded-lg border border-gray-400 placeholder-gray-500 text-black text-center tracking-[0.4em] focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+
+              <ButtonFill
+                onClick={handleVerifyOtp}
+                className="w-full"
+                text={loading ? "Verifying..." : "Verify & Submit"}
+              />
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Animations */}
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fadeIn {
-          animation: fadeIn .35s ease-out;
-        }
-
-        @keyframes popupSlide {
-          0% { opacity:0; transform: translateY(20px) scale(.95); }
-          100% { opacity:1; transform: translateY(0) scale(1); }
-        }
-        .animate-popupSlide {
-          animation: popupSlide .45s cubic-bezier(0.16,0.8,0.32,1);
-        }
-      `}</style>
     </div>
   );
 };
