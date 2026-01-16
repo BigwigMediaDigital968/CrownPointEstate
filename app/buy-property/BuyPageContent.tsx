@@ -195,10 +195,10 @@ export default function BuyPageContent() {
             onChange={(e) => setType(e.target.value)}
           >
             <option value="">Property Type</option>
-            <option value="apartment">Apartment</option>
-            <option value="villa">Villa</option>
-            <option value="builder-floor">Builder Floor</option>
-            <option value="plot">Plot</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Builder Floor">Builder Floor</option>
+            <option value="Plot">Plot</option>
           </select>
 
           <select
