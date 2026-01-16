@@ -5,9 +5,9 @@ import { Facebook, Twitter, Instagram } from "lucide-react";
 import Link from "next/link";
 
 const heroContent = {
-  tag: "Crownpoint Estates",
-  title: "Luxury Living\nRedefined",
-  desc: "Experience the pinnacle of luxury real estate with Crownpoint Estates. Discover exceptional properties that combine elegance, comfort, and sophistication.",
+  tag: "",
+  title: "CROWNPOINT ESTATES",
+  desc: "WE CAN HELP YOU FIND A PLACE YOU CALL HOME",
 };
 
 const socialLinks = [
@@ -89,7 +89,7 @@ export default function HeroSlider() {
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-white/10" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* LEFT SOCIAL ICONS */}
@@ -113,25 +113,27 @@ export default function HeroSlider() {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-20 h-full flex items-center">
-        <div className="w-11/12 md:w-5/6 mx-auto text-white">
-          <p className="uppercase tracking-widest text-sm mb-4 lux-slide">
-            {heroContent.tag}
-          </p>
+      <div className="relative z-20 h-full flex items-center justify-center">
+        <div className="w-full md:w-5/6 mx-auto text-center px-4 md:px-0">
+          <div className="max-w-5xl mx-auto">
+            <p className="uppercase tracking-widest text-sm mb-6 text-white/80 lux-slide font-medium">
+              {heroContent.tag}
+            </p>
 
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 whitespace-pre-line lux-slide delay-1">
-            {heroContent.title}
-          </h1>
+            <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-8 text-white lux-slide delay-1 font-heading whitespace-nowrap">
+              {heroContent.title}
+            </h1>
 
-          <p className="max-w-xl text-gray-200 mb-10 lux-slide delay-2">
-            {heroContent.desc}
-          </p>
+            <p className="text-xl md:text-2xl text-white/90 mb-12 lux-slide delay-2 font-light">
+              {heroContent.desc}
+            </p>
 
-          <Link href="/contact">
-            <button className="px-8 py-4 bg-white text-black font-semibold tracking-wide hover:bg-gray-200 transition lux-slide delay-3">
-              GET IN TOUCH →
-            </button>
-          </Link>
+            <Link href="/contact" className="inline-block">
+              <button className="px-10 py-4 bg-[#b59a78] text-white font-semibold tracking-widest hover:bg-[#a08968] transition lux-slide delay-3 uppercase text-sm">
+                GET IN TOUCH →
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

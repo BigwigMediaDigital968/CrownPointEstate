@@ -27,13 +27,13 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <header
-        className={`fixed top-0 left-0 w-full z-40 border-b transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-40 border-b transition-all duration-300 text-black ${
           scrolled
-            ? "bg-[#f6f2ec] text-black border-black/10 shadow-lg"
-            : "bg-transparent text-white border-white/30"
+            ? "bg-[#f6f2ec] border-black/10 shadow-lg"
+            : "bg-transparent border-white/30"
         }`}
       >
-        <nav className="relative w-11/12 mx-auto flex items-center justify-between text-white py-1">
+        <nav className="relative w-11/12 mx-auto flex items-center justify-between text-black py-1">
           {/* LEFT — LOGO */}
           <Link href="/" className="flex items-center">
             <Image src={logo} alt="Logo" width={60} height={60} priority />
@@ -41,9 +41,7 @@ export default function Navbar() {
 
           {/* CENTER — MENU */}
           <ul
-            className={`hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 font-medium ${
-              scrolled ? "text-black" : "text-white"
-            }`}
+            className={`hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-10 font-medium text-black`}
           >
             {[
               { name: "Home", link: "/" },
@@ -70,11 +68,7 @@ export default function Navbar() {
               onMouseLeave={() => setProductOpen(false)}
             >
               <button
-                className={`flex items-center gap-1 py-8 transition ${
-                  scrolled
-                    ? "text-black hover:text-[var(--primary-color)]"
-                    : "text-white hover:text-[var(--primary-color)]"
-                }`}
+                className={`flex items-center gap-1 py-8 transition text-black hover:text-[var(--primary-color)]`}
               >
                 {" "}
                 Properties <ChevronDown size={16} />
@@ -138,9 +132,7 @@ export default function Navbar() {
 
             {/* PHONE */}
             <div
-              className={`hidden lg:flex items-center gap-3 text-sm font-medium group cursor-pointer ${
-                scrolled ? "text-black" : "text-white"
-              }`}
+              className={`hidden lg:flex items-center gap-3 text-sm font-medium group cursor-pointer text-black`}
             >
               <span
                 className={`flex items-center justify-center w-9 h-9 rounded-full border transition ${
@@ -162,9 +154,7 @@ export default function Navbar() {
           {/* MOBILE TOGGLE */}
           <button
             onClick={() => setOpen(!open)}
-            className={`lg:hidden z-[60] ${
-              scrolled ? "text-black" : "text-white"
-            }`}
+            className={`lg:hidden z-[60] text-black`}
           >
             {open ? <X size={32} /> : <Menu size={32} />}
           </button>
