@@ -6,17 +6,8 @@ import {
   Phone,
   Mail,
   MapPin,
-  Facebook,
-  Instagram,
-  Twitter,
 } from "lucide-react";
 import footerBg from "../assets/footer-bg.jpg";
-
-const socialLinks = [
-  { icon: Facebook, href: "#" },
-  { icon: Instagram, href: "#" },
-  { icon: Twitter, href: "#" },
-];
 
 export default function Footer() {
   return (
@@ -64,21 +55,7 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* SOCIAL */}
-            <div className="flex items-center gap-4">
-              {socialLinks.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={i}
-                    href={item.href}
-                    className="w-10 h-10 flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-black transition"
-                  >
-                    <Icon size={18} />
-                  </a>
-                );
-              })}
-            </div>
+            {/* SOCIAL REMOVED - Using GooeyButton component instead */}
           </div>
         </div>
 

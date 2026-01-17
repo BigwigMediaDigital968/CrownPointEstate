@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Facebook, Twitter, Instagram } from "lucide-react";
 import Link from "next/link";
 import PopupForm from "./Popup";
 
@@ -10,24 +9,6 @@ const heroContent = {
   title: "CROWNPOINT ESTATES",
   desc: "WE CAN HELP YOU FIND A PLACE YOU CALL HOME",
 };
-
-const socialLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/",
-    icon: Facebook,
-  },
-  {
-    name: "Twitter",
-    href: "https://twitter.com/",
-    icon: Twitter,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/",
-    icon: Instagram,
-  },
-];
 
 export default function HeroSlider() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -94,25 +75,7 @@ export default function HeroSlider() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* LEFT SOCIAL ICONS */}
-      <div className="absolute left-6 bottom-10 z-30 hidden md:flex flex-col gap-4 text-white">
-        {socialLinks.map((item, i) => {
-          const Icon = item.icon;
-
-          return (
-            <Link
-              key={i}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.name}
-              className="w-10 h-10 cursor-pointer flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-black transition"
-            >
-              <Icon size={18} />
-            </Link>
-          );
-        })}
-      </div>
+      {/* LEFT SOCIAL ICONS - REMOVED (Using GooeyButton instead) */}
 
       {/* CONTENT */}
       <div className="relative z-20 h-full flex items-center justify-center">
