@@ -24,6 +24,7 @@ import {
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
 import { useEffect } from "react";
+import { log } from "console";
 
 const staticLocations = [
   "Select Location",
@@ -75,6 +76,8 @@ export default function BuyProperty() {
 
       return matchLocation && matchType && matchBudget;
     });
+
+    console.log(propertyData)
   useEffect(() => {
     setBudget("");
   }, [type]);
