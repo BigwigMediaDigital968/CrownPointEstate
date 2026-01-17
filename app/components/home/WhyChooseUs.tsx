@@ -12,12 +12,6 @@ import {
   Users,
   FileCheck,
 } from "lucide-react";
-import img7 from "../../assets/15years.png";
-import img2 from "../../assets/h8_pic5.jpg";
-import img3 from "../../assets/h8_bg2.jpg";
-import img4 from "../../assets/Centric-Approach.png";
-import img5 from "../../assets/End-to-End.png";
-import img6 from "../../assets/cl1.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -26,47 +20,59 @@ const features = [
     title: "15+ Years of Industry Experience",
     desc: "Over 15 years of proven real estate expertise in Gurugram, backed by deep local market knowledge and long-term client trust.",
     icon: Building2,
-    image: img7,
+    image: "/assets/15years.webp",
   },
   {
     title: "Complete Property Solutions",
     desc: "Specialised advisory for fresh bookings, resale, and renting across both residential and commercial real estate markets.",
     icon: Home,
-    image: img2,
+    image: "/assets/Complete-Property-Solutions.svg",
   },
   {
     title: "Strong Industry Network",
     desc: "Well-established relationships with leading developers, property owners, and corporate clients for better opportunities.",
     icon: Network,
-    image: img3,
+    image: "/assets/network.svg",
   },
   {
     title: "Transparent & Ethical Practices",
     desc: "Clear communication, honest advice, and professional service at every stage of the property transaction.",
     icon: ShieldCheck,
-    image: img4,
+    image: "/assets/Centric-Approach.webp",
   },
   {
     title: "Client-Centric Approach",
     desc: "Tailor-made solutions designed around individual needs, investment goals, and long-term value creation.",
     icon: Users,
-    image: img6,
+    image: "/assets/cl1.webp",
   },
   {
     title: "End-to-End Dedicated Support",
     desc: "Comprehensive assistance from property search and negotiations to documentation and successful closure.",
     icon: FileCheck,
-    image: img5,
+    image: "/assets/End-to-End.webp",
   },
 ];
 
 export default function WhyChooseUs() {
   const [active, setActive] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const current = features[active];
   const Icon = current.icon;
 
-  const prev = () => setActive((p) => (p === 0 ? features.length - 1 : p - 1));
-  const next = () => setActive((p) => (p === features.length - 1 ? 0 : p + 1));
+  const prev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setActive((p) => (p === 0 ? features.length - 1 : p - 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+  
+  const next = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setActive((p) => (p === features.length - 1 ? 0 : p + 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
 
   useEffect(() => {
     AOS.init({
@@ -99,19 +105,32 @@ export default function WhyChooseUs() {
         />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-[640px] items-center">
-          {/* IMAGE */}
+          {/* IMAGE with crossfade animation */}
           <div
-            className="relative z-10 h-[300px] md:h-[420px] lg:h-[520px]"
+            className="relative z-10 h-[300px] sm:h-[350px] md:h-[420px] lg:h-[520px] xl:h-[600px] w-full"
             data-aos="zoom-in"
             data-aos-delay="200"
           >
-            <Image
-              src={current.image}
-              alt={current.title}
-              fill
-              sizes="(max-width: 1024px) 100vw, 55vw"
-              className="object-cover"
-            />
+            <div className="relative w-full h-full">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                    index === active ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
+                >
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 55vw"
+                    className="object-cover object-center"
+                    quality={90}
+                    priority={index === active}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* CONTENT */}

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import factsImg from "../../assets/h8_pic5.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -116,21 +115,33 @@ export default function FactsSection() {
             </div>
           </div>
 
-          <div className="hidden lg:block" />
+          <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:hidden">
+            <Image
+              src="/assets/the-fact.svg"
+              alt="Luxury residential entrance"
+              fill
+              sizes="(max-width: 1024px) 100vw"
+              className="object-cover object-center"
+              quality={90}
+              priority
+            />
+          </div>
         </div>
       </div>
 
-      {/* RIGHT IMAGE */}
+      {/* RIGHT IMAGE - Desktop */}
       <div
         className="hidden lg:block absolute top-0 right-0 h-full w-[45vw]"
         data-aos="zoom-in"
         data-aos-delay="300"
       >
         <Image
-          src={factsImg}
+          src="/assets/the-fact.svg"
           alt="Luxury residential entrance"
           fill
-          className="object-cover"
+          sizes="45vw"
+          className="object-cover object-center"
+          quality={90}
           priority
         />
       </div>
