@@ -103,11 +103,11 @@ export default function BuyPageContent() {
       const matchType = type ? property.type === type : true;
 
       const matchBudget = budget
-        ? budget === "below-2cr"
-          ? property.price < 20000000
-          : budget === "2cr-5cr"
-            ? property.price >= 20000000 && property.price <= 50000000
-            : property.price > 50000000
+        ? budget === "below-4cr"
+          ? property.price < 40000000
+          : budget === "4cr-6cr"
+            ? property.price >= 40000000 && property.price <= 60000000
+            : property.price > 60000000
         : true;
 
       return matchLocation && matchType && matchBudget;
@@ -213,9 +213,9 @@ export default function BuyPageContent() {
               {type ? "Select Budget" : "Select Property Type First"}
             </option>
 
-            <option value="below-2cr">Below ₹2 Cr</option>
-            <option value="2cr-5cr">₹2 Cr – ₹5 Cr</option>
-            <option value="above-5cr">Above ₹5 Cr</option>
+            <option value="below-4cr">Below ₹4 Cr</option>
+            <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
+            <option value="above-6cr">Above ₹6 Cr</option>
           </select>
 
           <ButtonFill
