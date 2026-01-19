@@ -1,11 +1,11 @@
-"use client";
+"use client"; 
 
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import QuickEnquiry from "../components/QuickEnquiry";
 
-import heroImg from "../assets/hero/aboutpage.jpg"; // replace with your image
+import heroImg from "../assets/hero/about-us.svg"; // replace with your image
 import Link from "next/link";
 import { useState } from "react";
 import {

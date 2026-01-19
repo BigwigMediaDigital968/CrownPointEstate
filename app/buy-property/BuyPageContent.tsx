@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import QuickEnquiry from "../components/QuickEnquiry";
 
-import heroImg from "../assets/hero/aboutpage.jpg";
+import heroImg from "../assets/hero/buy-property.svg";
 
 import { useEffect } from "react";
 
