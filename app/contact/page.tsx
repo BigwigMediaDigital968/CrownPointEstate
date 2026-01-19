@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
-import heroImg from "../assets/hero/aboutpage.jpg";
+import heroImg from "../assets/hero/for-contact.svg";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";

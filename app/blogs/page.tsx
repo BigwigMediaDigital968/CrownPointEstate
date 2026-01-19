@@ -10,7 +10,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import PopupForm from "../components/Popup";
 import Footer from "../components/Footer";
-import heroImg from "../assets/hero/aboutpage.jpg";
+import heroImg from "../assets/hero/for-blog.svg";
 import QuickEnquiry from "../components/QuickEnquiry";
 
 interface BlogPost {
