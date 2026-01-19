@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import QuickEnquiry from "../components/QuickEnquiry";
 
-import heroImg from "../assets/hero/rent-property.svg";
+import heroImg from "../assets/hero/for-rent.svg";
 
 import { propertyData } from "../data/propertyData";
 
