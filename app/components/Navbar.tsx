@@ -210,10 +210,10 @@ export default function Navbar() {
 
             {mobilePropOpen && (
               <div className="ml-4 flex flex-col gap-4 text-base text-gray-300">
-                <Link href="/properties/buy" onClick={() => setOpen(false)}>
+                <Link href="/buy-property" onClick={() => setOpen(false)}>
                   Buy Property
                 </Link>
-                <Link href="/properties/sell" onClick={() => setOpen(false)}>
+                <Link href="/sell-property" onClick={() => setOpen(false)}>
                   Sell Property
                 </Link>
               </div>
