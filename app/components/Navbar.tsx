@@ -216,6 +216,12 @@ export default function Navbar() {
                 <Link href="/sell-property" onClick={() => setOpen(false)}>
                   Sell Property
                 </Link>
+                <Link href="/lease-property" onClick={() => setOpen(false)}>
+                  Lease Property
+                </Link>
+                <Link href="/rent-property" onClick={() => setOpen(false)}>
+                  Rent Property
+                </Link>
               </div>
             )}
 

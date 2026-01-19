@@ -105,7 +105,7 @@ export default function BuyProperty() {
             {/* LEFT CONTENT */}
             <div>
               <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4">
-                Lease Property
+                Rent Property
               </h1>
 
               <p className="text-sm tracking-widest text-white/80 uppercase">
@@ -113,7 +113,7 @@ export default function BuyProperty() {
                   Home
                 </Link>
                 <span className="mx-2">›</span>
-                <span className="text-white">Lease Property</span>
+                <span className="text-white">Rent Property</span>
               </p>
             </div>
 
