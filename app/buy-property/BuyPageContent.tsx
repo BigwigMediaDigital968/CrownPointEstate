@@ -103,11 +103,34 @@ export default function BuyPageContent() {
       const matchType = type ? property.type === type : true;
 
       const matchBudget = budget
-        ? budget === "below-4cr"
-          ? property.price < 40000000
-          : budget === "4cr-6cr"
-            ? property.price >= 40000000 && property.price <= 60000000
-            : property.price > 60000000
+        ? (() => {
+            if (type === "Plot") {
+              if (budget === "below-8cr") return property.price < 80000000;
+              if (budget === "8cr-10cr")
+                return property.price >= 80000000 && property.price <= 100000000;
+              if (budget === "above-10cr") return property.price > 100000000;
+            } else if (type === "Villa") {
+              if (budget === "below-10cr") return property.price < 100000000;
+              if (budget === "10cr-12cr")
+                return property.price >= 100000000 && property.price <= 120000000;
+              if (budget === "12cr-14cr")
+                return property.price >= 120000000 && property.price <= 140000000;
+              if (budget === "above-14cr") return property.price > 140000000;
+            } else if (type === "Builder Floor") {
+              //  for Builder Floor)
+              if (budget === "below-4cr") return property.price < 40000000;
+              if (budget === "4cr-6cr")
+                return property.price >= 40000000 && property.price <= 60000000;
+              if (budget === "above-6cr") return property.price > 60000000;
+            }else if (type === "Apartment") {
+              //  for types Apartment)
+              if (budget === "below-4cr") return property.price < 40000000;
+              if (budget === "4cr-6cr")
+                return property.price >= 40000000 && property.price <= 60000000;
+              if (budget === "above-6cr") return property.price > 60000000;
+            }
+            return true;
+          })()
         : true;
 
       return matchLocation && matchType && matchBudget;
@@ -213,9 +236,38 @@ export default function BuyPageContent() {
               {type ? "Select Budget" : "Select Property Type First"}
             </option>
 
-            <option value="below-4cr">Below ₹4 Cr</option>
-            <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
-            <option value="above-6cr">Above ₹6 Cr</option>
+            {type === "Plot" && (
+              <>
+                <option value="below-8cr">Below ₹8 Cr</option>
+                <option value="8cr-10cr">₹8 Cr – ₹10 Cr</option>
+                <option value="above-10cr">Above ₹10 Cr</option>
+              </>
+            )}
+
+            {type === "Villa" && (
+              <>
+                <option value="below-10cr">Below ₹10 Cr</option>
+                <option value="10cr-12cr">₹10 Cr – ₹12 Cr</option>
+                <option value="12cr-14cr">₹12 Cr – ₹14 Cr</option>
+                <option value="above-14cr">Above ₹14 Cr</option>
+              </>
+            )}
+
+            {type === "Apartment" && (
+              <>
+                <option value="below-4cr">Below ₹4 Cr</option>
+                <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
+                <option value="above-6cr">Above ₹6 Cr</option>
+              </>
+            )}
+
+            {type === "Builder Floor" && (
+              <>
+                <option value="below-4cr">Below ₹4 Cr</option>
+                <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
+                <option value="above-6cr">Above ₹6 Cr</option>
+              </>
+            )}
           </select>
 
           <ButtonFill
