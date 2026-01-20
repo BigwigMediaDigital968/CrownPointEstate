@@ -162,21 +162,21 @@ export default function Home() {
           <div className="flex items-end justify-between mb-8">
             <div data-aos="fade-up">
               <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
-                Featured Projects
+                Featured Properties
               </p>
               <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
                 Where happiness lives
               </h2>
             </div>
 
-            <a
+            <Link
               data-aos="zoom-in"
               data-aos-delay="150"
-              href="#"
+              href="/buy-property"
               className="hidden md:flex items-center gap-2 text-sm tracking-widest text-[var(--primary-color)] hover:underline"
             >
-              VIEW ALL PROJECTS →
-            </a>
+              VIEW ALL PROPERTIES →
+            </Link>
           </div>
 
           {/* GRID */}

@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
+import { useEffect } from "react";
 
 const staticLocations = [
   "Select Location",
@@ -75,6 +76,11 @@ export default function BuyProperty() {
       return matchLocation && matchType && matchBudget;
     });
 
+  useEffect(() => {
+    // Reset budget whenever type changes (derived UI state).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setBudget("");
+  }, [type]);
   return (
     <div>
       <Navbar />
@@ -136,10 +142,7 @@ export default function BuyProperty() {
           <select
             className="border rounded-xl px-4 py-3"
             value={type}
-            onChange={(e) => {
-              setType(e.target.value);
-              setBudget("");
-            }}
+            onChange={(e) => setType(e.target.value)}
           >
             <option value="">Property Type</option>
             <option value="apartment">Apartment</option>

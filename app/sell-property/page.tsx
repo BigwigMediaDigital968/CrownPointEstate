@@ -60,11 +60,11 @@ export default function BuyProperty() {
         areaSqft: "",
       });
     } catch (err: unknown) {
-      let message = "Failed to submit enquiry";
       if (err instanceof Error) {
-        message = err.message;
+        setError(err.message || "Failed to submit enquiry");
+      } else {
+        setError("Failed to submit enquiry");
       }
-      setError(message);
     } finally {
       setLoading(false);
     }

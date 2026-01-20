@@ -89,7 +89,7 @@ export default function BuyPageContent() {
 
     fetchProperties();
   }, []);
-
+console.log(properties);
   /* ------------------ FILTER LOGIC ------------------ */
   const filteredProperties = properties
     // ✅ ONLY BUY PROPERTIES

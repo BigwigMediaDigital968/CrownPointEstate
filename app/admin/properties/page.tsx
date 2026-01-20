@@ -43,7 +43,6 @@ export default function AllProperties() {
   const [totalPages, setTotalPages] = useState(1);
 
   const pageSize = 10; // Number of properties per page
-
   const fetchProperties = async (page: number) => {
     try {
       const res = await axios.get(
@@ -75,8 +74,10 @@ export default function AllProperties() {
       router.push("/login");
       return;
     }
+    // This effect is responsible for initial data sync with the server.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProperties(currentPage);
-  }, [currentPage]);
+  }, [currentPage, router]);
 
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;

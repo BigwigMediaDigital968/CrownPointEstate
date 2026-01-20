@@ -25,18 +25,8 @@ export default function SellRequests() {
 
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
-  /* ================= AUTH CHECK ================= */
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("isAdmin");
-    if (loggedIn !== "true") {
-      router.push("/login");
-      return;
-    }
-    fetchSellRequests();
-  }, []);
-
   /* ================= FETCH DATA ================= */
-  const fetchSellRequests = async () => {
+  async function fetchSellRequests() {
     try {
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/all`
@@ -45,7 +35,19 @@ export default function SellRequests() {
     } catch (error) {
       console.error("Failed to fetch sell requests", error);
     }
-  };
+  }
+
+  /* ================= AUTH CHECK ================= */
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isAdmin");
+    if (loggedIn !== "true") {
+      router.push("/login");
+      return;
+    }
+    // This effect is responsible for initial data sync with the server.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchSellRequests();
+  }, [router]);
 
   /* ================= DELETE ================= */
   const handleDelete = async (id: string) => {

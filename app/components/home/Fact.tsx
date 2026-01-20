@@ -49,7 +49,6 @@ export default function FactsSection() {
     if (!startCount) return;
 
     stats.forEach((stat, index) => {
-      let start = 0;
       const duration = 1500;
       const startTime = performance.now();
 

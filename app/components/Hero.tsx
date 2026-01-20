@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import PopupForm from "./Popup";
 
 const heroContent = {
@@ -11,13 +10,7 @@ const heroContent = {
 };
 
 export default function HeroSlider() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsLoaded(true);
-  }, []);
 
   return (
     <section className="relative h-[75vh] lg:h-screen overflow-hidden">

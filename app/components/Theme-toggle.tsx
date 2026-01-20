@@ -8,10 +8,9 @@ export default function ThemeSliderToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
+  // This effect only marks the component as mounted for hydration safety.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
   const isDark = theme === "dark";

@@ -53,11 +53,11 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
 
       setStep("OTP");
     } catch (err: unknown) {
-      let message = "Failed to send OTP";
       if (err instanceof Error) {
-        message = err.message;
+        setError(err.message || "Failed to send OTP");
+      } else {
+        setError("Failed to send OTP");
       }
-      setError(message);
     } finally {
       setLoading(false);
     }
@@ -90,11 +90,11 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
       setStep("FORM");
       setOtp("");
     } catch (err: unknown) {
-      let message = "OTP verification failed";
       if (err instanceof Error) {
-        message = err.message;
+        setError(err.message || "OTP verification failed");
+      } else {
+        setError("OTP verification failed");
       }
-      setError(message);
     } finally {
       setLoading(false);
     }

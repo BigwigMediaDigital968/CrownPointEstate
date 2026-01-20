@@ -134,7 +134,7 @@ export default function TestimonialSection() {
                 >
                   {/* QUOTATION MARK */}
                   <div className="absolute -top-4 -left-4 text-7xl md:text-8xl text-[var(--primary-color)] opacity-20 leading-none font-serif select-none">
-                    &quot;
+                    &ldquo;
                   </div>
 
                   {/* TESTIMONIAL TEXT */}
