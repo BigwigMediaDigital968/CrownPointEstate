@@ -113,13 +113,15 @@ const Contact = () => {
 
       {/* ================= MAP ================= */}
       <section className="relative h-[420px]" data-aos="zoom-in">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.8425971238116!2d77.08364537528334!3d28.484286575746182"
-          className="w-full h-full border-0"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </section>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.8734948011775!2d77.08983769999999!3d28.483356200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19fc22d63287%3A0x86013e4f6dd2d196!2sCrownpoint%20Estate!5e0!3m2!1sen!2sin!4v1768914202564!5m2!1sen!2sin"
+    className="absolute inset-0 w-full h-full border-0"
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</section>
+
 
       <Footer />
     </div>
