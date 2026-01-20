@@ -11,6 +11,7 @@ const heroContent = {
 
 export default function HeroSlider() {
   const [openForm, setOpenForm] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <section className="relative h-[75vh] lg:h-screen overflow-hidden">
