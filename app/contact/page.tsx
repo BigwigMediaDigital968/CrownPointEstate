@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
 import heroImg from "../assets/hero/for-contact.svg";
@@ -9,6 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "../components/Footer";
+import EnquiryForm from "../components/EnquiryForm";
 
 const Contact = () => {
   /* ================= AOS INIT ================= */
@@ -20,87 +21,6 @@ const Contact = () => {
       offset: 120,
     });
   }, []);
-
-  /* ================= FORM STATE ================= */
-  const [step, setStep] = useState<"FORM" | "OTP">("FORM");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [otp, setOtp] = useState("");
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  /* ================= SEND OTP ================= */
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/send-otp`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-
-      setStep("OTP");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || "Failed to send OTP");
-      } else {
-        setError("Failed to send OTP");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  /* ================= VERIFY OTP ================= */
-  const handleVerifyOtp = async () => {
-    setError("");
-    setLoading(true);
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/verify-otp`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            phone: formData.phone,
-            otp,
-          }),
-        }
-      );
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-
-      // Reset form on success
-      setFormData({ name: "", email: "", phone: "", message: "" });
-      setOtp("");
-      setStep("FORM");
-      alert("Thank you! Our team will contact you shortly.");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || "OTP verification failed");
-      } else {
-        setError("OTP verification failed");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="relative">
@@ -182,83 +102,10 @@ const Contact = () => {
               data-aos-delay="200"
             >
               <h3 className="text-2xl font-semibold mb-6">
-                {step === "FORM" ? "Send a Message" : "Verify OTP"}
+                Send a Message
               </h3>
 
-              {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
-
-              {step === "FORM" && (
-                <form onSubmit={handleSendOtp} className="space-y-6">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    required
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full border border-gray-400 px-4 py-3 placeholder-gray-500 focus:border-[var(--primary-color)]"
-                  />
-
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full border border-gray-400 px-4 py-3 placeholder-gray-500 focus:border-[var(--primary-color)]"
-                  />
-
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full border border-gray-400 px-4 py-3 placeholder-gray-500 focus:border-[var(--primary-color)]"
-                  />
-
-                  <textarea
-                    rows={4}
-                    placeholder="Tell us how we can help"
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    className="w-full border border-gray-400 px-4 py-3 placeholder-gray-500 resize-none focus:border-[var(--primary-color)]"
-                  />
-
-                  <button
-                    type="submit"
-                    className="w-full mt-4 px-8 py-4 bg-[var(--primary-color)] text-white tracking-widest hover:opacity-90 transition"
-                  >
-                    {loading ? "SENDING OTP..." : "SEND MESSAGE →"}
-                  </button>
-                </form>
-              )}
-
-              {step === "OTP" && (
-                <div className="space-y-6">
-                  <input
-                    type="text"
-                    maxLength={6}
-                    placeholder="Enter 6-digit OTP"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    className="w-full border border-gray-400 px-4 py-3 text-center tracking-[0.4em] placeholder-gray-500 focus:border-[var(--primary-color)]"
-                  />
-
-                  <button
-                    onClick={handleVerifyOtp}
-                    className="w-full px-8 py-4 bg-[var(--primary-color)] text-white tracking-widest hover:opacity-90 transition"
-                  >
-                    {loading ? "VERIFYING..." : "VERIFY & SUBMIT"}
-                  </button>
-                </div>
-              )}
+              <EnquiryForm variant="default" btnText="SEND MESSAGE" />
             </div>
           </div>
         </div>
