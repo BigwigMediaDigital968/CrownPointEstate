@@ -15,6 +15,7 @@ export default function HeroSlider() {
   const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoaded(true);
   }, []);
 

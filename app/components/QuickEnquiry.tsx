@@ -40,8 +40,12 @@ export default function QuickEnquiry() {
       if (!res.ok) throw new Error(data.message);
 
       setStep("OTP");
-    } catch (err: any) {
-      setError(err.message || "Failed to send OTP");
+    } catch (err: unknown) {
+      let message = "Failed to send OTP";
+      if (err instanceof Error) {
+        message = err.message;
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -74,8 +78,12 @@ export default function QuickEnquiry() {
       setOtp("");
       setFormData({ name: "", email: "", phone: "", message: "" });
       alert("Thank you! Our team will contact you shortly.");
-    } catch (err: any) {
-      setError(err.message || "OTP verification failed");
+    } catch (err: unknown) {
+      let message = "OTP verification failed";
+      if (err instanceof Error) {
+        message = err.message;
+      }
+      setError(message);
     } finally {
       setLoading(false);
     }

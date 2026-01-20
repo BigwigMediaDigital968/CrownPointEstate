@@ -23,8 +23,6 @@ import {
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
-import { useEffect } from "react";
-import { log } from "console";
 
 const staticLocations = [
   "Select Location",
@@ -77,10 +75,6 @@ export default function BuyProperty() {
       return matchLocation && matchType && matchBudget;
     });
 
-    console.log(propertyData)
-  useEffect(() => {
-    setBudget("");
-  }, [type]);
   return (
     <div>
       <Navbar />
@@ -142,7 +136,10 @@ export default function BuyProperty() {
           <select
             className="border rounded-xl px-4 py-3"
             value={type}
-            onChange={(e) => setType(e.target.value)}
+            onChange={(e) => {
+              setType(e.target.value);
+              setBudget("");
+            }}
           >
             <option value="">Property Type</option>
             <option value="apartment">Apartment</option>

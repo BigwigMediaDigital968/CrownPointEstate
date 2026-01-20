@@ -136,7 +136,7 @@ export default function FactsSection() {
         data-aos-delay="300"
       >
         <Image
-          src="/assets/fact.svg"
+          src="assets/fact.svg"
           alt="Luxury residential entrance"
           fill
           sizes="45vw"

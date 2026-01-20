@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
-import { useEffect } from "react";
 
 const staticLocations = [
   "Select Location",
@@ -75,9 +74,6 @@ export default function BuyProperty() {
 
       return matchLocation && matchType && matchBudget;
     });
-  useEffect(() => {
-    setBudget("");
-  }, [type]);
   return (
     <div>
       <Navbar />

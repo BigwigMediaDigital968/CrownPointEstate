@@ -3,7 +3,14 @@
 import Image from "next/image";
 import SidebarSimpleForm from "./SidebarForm";
 
-export default function BlogSidebar({ relatedBlogs }: { relatedBlogs: any[] }) {
+interface BlogPost {
+  title: string;
+  datePublished: string | Date;
+  coverImage: string;
+  slug: string;
+}
+
+export default function BlogSidebar({ relatedBlogs }: { relatedBlogs: BlogPost[] }) {
   return (
     <aside className="space-y-10 sticky top-28">
       {/* ===== CONTACT FORM ===== */}

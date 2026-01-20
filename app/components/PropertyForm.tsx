@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
@@ -355,16 +356,18 @@ export default function PropertyForm({
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className={`relative group cursor-grab rounded-lg overflow-hidden border ${
+                            className={`relative h-32 group cursor-grab rounded-lg overflow-hidden border ${
                               snapshot.isDragging
                                 ? "border-blue-500 scale-105"
                                 : ""
                             } transition-transform duration-150`}
                           >
-                            <img
+                            <Image
                               src={url}
                               alt={`existing-${idx}`}
-                              className="w-full h-32 object-cover rounded-lg"
+                              fill
+                              className="object-cover rounded-lg"
+                              unoptimized
                             />
                             <button
                               type="button"
@@ -398,11 +401,13 @@ export default function PropertyForm({
         />
         <div className="grid grid-cols-4 gap-3 mt-3">
           {newImages.map((file, idx) => (
-            <div key={idx} className="relative group">
-              <img
+            <div key={idx} className="relative h-24 group">
+              <Image
                 src={URL.createObjectURL(file)}
                 alt="preview"
-                className="w-full h-24 object-cover rounded-lg shadow"
+                fill
+                className="object-cover rounded-lg shadow"
+                unoptimized
               />
               <button
                 type="button"

@@ -44,16 +44,6 @@ export default function AllProperties() {
 
   const pageSize = 10; // Number of properties per page
 
-  // ✅ Check login and fetch properties
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("isAdmin");
-    if (loggedIn !== "true") {
-      router.push("/login");
-      return;
-    }
-    fetchProperties(currentPage);
-  }, [currentPage]);
-
   const fetchProperties = async (page: number) => {
     try {
       const res = await axios.get(
@@ -77,6 +67,16 @@ export default function AllProperties() {
       setTotalPages(1);
     }
   };
+
+  // ✅ Check login and fetch properties
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isAdmin");
+    if (loggedIn !== "true") {
+      router.push("/login");
+      return;
+    }
+    fetchProperties(currentPage);
+  }, [currentPage]);
 
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;

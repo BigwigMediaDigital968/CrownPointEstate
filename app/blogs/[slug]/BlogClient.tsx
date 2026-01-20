@@ -8,12 +8,22 @@ import PopupForm from "@/app/components/Popup";
 import Footer from "@/app/components/Footer";
 import BlogSidebar from "@/app/components/BlogSidebar";
 
+interface BlogPost {
+  title: string;
+  author: string;
+  datePublished: string | Date;
+  coverImage: string;
+  coverImageAlt: string;
+  content: string;
+  slug: string;
+}
+
 export default function BlogClient({
   blog,
   relatedBlogs,
 }: {
-  blog: any;
-  relatedBlogs: any[];
+  blog: BlogPost;
+  relatedBlogs: BlogPost[];
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
