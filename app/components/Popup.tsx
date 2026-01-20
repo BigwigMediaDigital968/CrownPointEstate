@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -21,12 +21,50 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
     name: "",
     phone: "",
     email: "",
-    requirements: "",
+    purpose: "",
+    requirements: "", // This maps to Property Type
     budget: "",
     message: "",
   });
 
   const [otp, setOtp] = useState("");
+  const [budgetOptions, setBudgetOptions] = useState<string[]>([]);
+
+  // Update budget options when Purpose or Property Type changes
+  useEffect(() => {
+    const { purpose, requirements } = formData;
+    let options: string[] = [];
+
+    if (purpose === "Sell") {
+      options = [];
+    } else if (purpose === "Rent") {
+      options = ["50k - 1 Lakh", "1Lakh - 2 Lakh", "2Lakh & above"];
+    } else if (purpose === "Lease") {
+      options = ["Below ₹2 Cr", "₹2 Cr – ₹5 Cr", "Above ₹5 Cr"];
+    } else if (purpose === "Buy") {
+      if (requirements === "Apartment" || requirements === "Builder Floor") {
+        options = ["Below ₹4 Cr", "₹4 Cr – ₹6 Cr", "Above ₹6 Cr"];
+      } else if (requirements === "Villa") {
+        options = [
+          "Below ₹10 Cr",
+          "₹10 Cr – ₹12 Cr",
+          "₹12 Cr – ₹14 Cr",
+          "Above ₹14 Cr",
+        ];
+      } else if (requirements === "Plot") {
+        options = ["Below ₹8 Cr", "₹8 Cr – ₹10 Cr", "Above ₹10 Cr"];
+      }
+    }
+
+    setBudgetOptions(options);
+    
+    // Clear budget if it's no longer in the options (unless it's Sell where we hide it anyway)
+    if (purpose === "Sell") {
+       setFormData(prev => ({ ...prev, budget: "" }));
+    } else if (options.length > 0 && formData.budget && !options.includes(formData.budget)) {
+       setFormData(prev => ({ ...prev, budget: "" }));
+    }
+  }, [formData.purpose, formData.requirements]);
 
   if (!open) return null;
 
@@ -133,6 +171,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
                 placeholder="Full Name"
                 required
                 className="w-full px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
@@ -151,39 +190,69 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
                 type="email"
                 placeholder="Email Address"
                 className="w-full px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
               />
 
+              {/* Purpose Dropdown */}
               <select
                 className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={formData.purpose}
+                onChange={(e) =>
+                  setFormData({ ...formData, purpose: e.target.value })
+                }
+              >
+                <option value="">Select Purpose</option>
+                <option value="Buy">Buy</option>
+                <option value="Sell">Sell</option>
+                <option value="Rent">Rent</option>
+                <option value="Lease">Lease</option>
+              </select>
+
+              {/* Property Type Dropdown */}
+              <select
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={formData.requirements}
                 onChange={(e) =>
                   setFormData({ ...formData, requirements: e.target.value })
                 }
               >
                 <option value="">Property Type</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>Plot</option>
-                <option>Commercial</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Villa">Villa</option>
+                <option value="Plot">Plot</option>
+                <option value="Builder Floor">Builder Floor</option>
               </select>
 
-              <select
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
-                onChange={(e) =>
-                  setFormData({ ...formData, budget: e.target.value })
-                }
-              >
-                <option value="">Budget</option>
-                <option>Under ₹50L</option>
-                <option>₹50L – ₹1Cr</option>
-                <option>₹1Cr+</option>
-              </select>
+              {/* Budget Dropdown (Hidden if Purpose is Sell) */}
+              {formData.purpose !== "Sell" && (
+                <select
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-black focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                  value={formData.budget}
+                  onChange={(e) =>
+                    setFormData({ ...formData, budget: e.target.value })
+                  }
+                  disabled={budgetOptions.length === 0}
+                >
+                  <option value="">
+                    {budgetOptions.length > 0
+                      ? "Select Budget"
+                      : "Select Purpose & Type First"}
+                  </option>
+                  {budgetOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              )}
 
               <textarea
                 placeholder="Any specific requirement (BHK, facing, possession timeline, etc.)"
                 className="w-full h-24 px-4 py-2.5 rounded-lg border border-gray-400 placeholder-gray-500 text-black resize-none focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)]"
+                value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
