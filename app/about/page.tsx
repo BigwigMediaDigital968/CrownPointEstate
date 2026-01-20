@@ -16,9 +16,11 @@ import {
   RefreshCcw,
   KeyRound,
 } from "lucide-react";
-import img1 from "../assets/h8_bg2.jpg";
-import img2 from "../assets/h8_pic5.jpg";
-import img3 from "../assets/h8_bg2.jpg";
+import img1 from "../assets/fresh-booking.svg";
+import img2 from "../assets/resale-property.svg";
+import img3 from "../assets/renting-And-leasing.svg";
+import img4 from "../assets/Investment-Advisory.svg";
+
 
 const features = [
   {
@@ -54,7 +56,7 @@ const features = [
   {
     title: "Investment Advisory",
     icon: TrendingUp, // Growth & ROI
-    image: img1,
+    image: img4,
     points: [
       "Real estate portfolio planning",
       "High-yield residential and commercial investment options",
