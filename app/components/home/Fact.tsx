@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ButtonFill from "../ButtonFill";
 
 const stats = [
   { value: 49, suffix: "+", label: "Completed projects" },
@@ -111,6 +112,10 @@ export default function FactsSection() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-10" data-aos="fade-up" data-aos-delay="300">
+              <ButtonFill text="View all properties" href="/buy-property" />
             </div>
           </div>
 
