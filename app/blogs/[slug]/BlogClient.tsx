@@ -18,12 +18,19 @@ interface BlogPost {
   slug: string;
 }
 
+interface RelatedBlog {
+  slug: string;
+  coverImage: string;
+  title: string;
+  datePublished: string | Date;
+}
+
 export default function BlogClient({
   blog,
   relatedBlogs,
 }: {
   blog: BlogPost;
-  relatedBlogs: BlogPost[];
+  relatedBlogs: RelatedBlog[];
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
