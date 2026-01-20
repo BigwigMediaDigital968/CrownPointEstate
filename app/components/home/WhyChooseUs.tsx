@@ -26,7 +26,7 @@ const features = [
     title: "Complete Property Solutions",
     desc: "Specialised advisory for fresh bookings, resale, and renting across both residential and commercial real estate markets.",
     icon: Home,
-    image: "/assets/Complete-Property-Solutions.svg",
+    image: "/assets/complete.png",
   },
   {
     title: "Strong Industry Network",

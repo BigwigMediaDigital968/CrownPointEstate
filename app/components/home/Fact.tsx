@@ -117,7 +117,7 @@ export default function FactsSection() {
 
           <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:hidden">
             <Image
-              src="/assets/the-fact.svg"
+              src="/assets/fact.svg"
               alt="Luxury residential entrance"
               fill
               sizes="(max-width: 1024px) 100vw"
@@ -136,7 +136,7 @@ export default function FactsSection() {
         data-aos-delay="300"
       >
         <Image
-          src="/assets/the-fact.svg"
+          src="assets/fact.svg"
           alt="Luxury residential entrance"
           fill
           sizes="45vw"
