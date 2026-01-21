@@ -132,15 +132,16 @@ const Navbar2 = () => {
         <nav className="flex z-20 items-center justify-between px-6 py-2 relative md:pt-10">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src={logo}
-              alt="Logo"
-              width={120}
-              height={45}
-              priority
-              className="logo-invert"
-            />
-          </Link>
+              <Image
+                src={logo}
+                alt="Logo"
+                width={120}
+                height={45}
+                priority
+                className="logo-invert"
+                style={{ height: "auto" }}
+              />
+            </Link>
 
           {/* ===== Desktop Menu ===== */}
           <ul className="hidden md:flex gap-8 font-bold tracking-widest">

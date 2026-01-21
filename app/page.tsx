@@ -34,6 +34,7 @@ import img13 from "./assets/client13.png"
 import img14 from "./assets/client14.png"
 import img15 from "./assets/client15.png"
 import img16 from "./assets/client16.png"
+import { propertyData } from "./data/propertyData";
 
 
 
@@ -41,46 +42,6 @@ const project1 = "/assets/projects/project_1.jpg";
 const project2 = "/assets/projects/project_2.jpg";
 const project3 = "/assets/projects/project_3.jpg";
 const project4 = "/assets/projects/project_4.jpg";
-const project5 = "/assets/projects/project_5.jpg";
-
-
-const projects = [
-  {
-    id: "01",
-    title: "New 4 BHK Builder Floor ",
-    location: "DLF Phase 2, Gurugram",
-    image: project1,
-    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
-  },
-  {
-    id: "02",
-    title: "Smart City",
-    location: "Oklahoma, USA",
-    image: project2,
-    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
-  },
-  {
-    id: "03",
-    title: "Centre Park",
-    location: "Tennessee, USA",
-    image: project3,
-    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
-  },
-  {
-    id: "04",
-    title: "ReHomes Gardenia",
-    location: "South Carolina, USA",
-    image: project4,
-    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
-  },
-  {
-    id: "05",
-    title: "Golden River",
-    location: "North Carolina, USA",
-    image: project5,
-    link: "/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram",
-  },
-];
 
 const clients = [
   { id: 1, logo: img1, name: "Client 1" },
@@ -133,8 +94,44 @@ const blogs = [
   },
 ];
 
+interface Property {
+  _id: string;
+  title: string;
+  slug: string;
+  location: string;
+  images: string[];
+  featuredThumbnail?: string;
+  createdAt?: string;
+}
+
 export default function Home() {
   const [openPopup, setOpenPopup] = useState(false);
+  const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`
+        );
+        const data = await res.json();
+        if (data.success && Array.isArray(data.properties)) {
+          // Sort by createdAt descending
+          const sorted = data.properties.sort((a: Property, b: Property) => {
+            return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+          });
+          setFeaturedProperties(sorted.slice(0, 5)); // Show top 5
+        }
+      } catch (error) {
+        console.error("Failed to fetch featured properties", error);
+      }
+    };
+
+    fetchProperties();
+  }, []);
+
+  console.log(featuredProperties);
+  
 
   useEffect(() => {
     AOS.init({
@@ -180,23 +177,25 @@ export default function Home() {
           </div>
 
           {/* GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:auto-rows-[280px]">
-            {projects.map((project, index) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 lg:auto-rows-[280px]">
+            {featuredProperties.map((project, index) => {
               const isTall = index === 0;
+              const displayId = (index + 1).toString().padStart(2, "0");
+              const imageUrl = project.featuredThumbnail || (project.images && project.images.length > 0 ? project.images[0] : "/assets/placeholder.jpg"); // Fallback image
 
               return (
                 <div
-                  key={project.id}
+                  key={project._id}
                   data-aos="fade-up"
                   data-aos-delay={index * 120}
-                  className={`group relative overflow-hidden rounded-md
+                  className={`group relative overflow-hidden rounded-md cursor-pointer
           ${isTall ? "lg:row-span-2" : ""}
         `}
                 >
-                  <Link href={project.link}>
+                  <Link href={`/buy-property/${project.slug}`} className="block h-full w-full">
                     {/* IMAGE */}
                     <Image
-                      src={project.image}
+                      src={imageUrl}
                       alt={project.title}
                       width={600}
                       height={400}
@@ -210,7 +209,7 @@ export default function Home() {
 
                     {/* HUGE NUMBER */}
                     <span className="absolute bottom-6 right-6 text-[100px] lg:text-[120px] font-heading text-white opacity-20 group-hover:opacity-60 transition duration-500 leading-none select-none">
-                      {project.id}
+                      {displayId}
                     </span>
 
                     {/* TEXT */}

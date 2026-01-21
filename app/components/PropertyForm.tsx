@@ -34,6 +34,7 @@ interface PropertyData {
   googleMapUrl: string;
   videoLink: string;
   instagramLink?: string; // ⭐ NEW
+  featuredThumbnail?: string; // ⭐ NEW
   images: string[];
   builder: string;
   metatitle?: string;
@@ -88,6 +89,8 @@ export default function PropertyForm({
   const [newImages, setNewImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false); // 🔹 loader
   const [brochureFile, setBrochureFile] = useState<File | null>(null);
+  const [featuredThumbnailFile, setFeaturedThumbnailFile] = useState<File | null>(null);
+  const [existingFeaturedThumbnail, setExistingFeaturedThumbnail] = useState<string | null>(null);
 
   useEffect(() => {
     if (property) {
@@ -117,6 +120,7 @@ export default function PropertyForm({
       });
 
       setExistingImages(property.images || []);
+      setExistingFeaturedThumbnail(property.featuredThumbnail || null);
     }
   }, [property]);
 
@@ -144,6 +148,12 @@ export default function PropertyForm({
   const handleBrochureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setBrochureFile(e.target.files[0]);
+    }
+  };
+
+  const handleFeaturedThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFeaturedThumbnailFile(e.target.files[0]);
     }
   };
 
@@ -180,6 +190,10 @@ export default function PropertyForm({
 
       if (brochureFile) {
         data.append("brochure", brochureFile); // <-- this was missing
+      }
+
+      if (featuredThumbnailFile) {
+        data.append("featuredThumbnail", featuredThumbnailFile);
       }
 
       if (property) {
@@ -459,6 +473,23 @@ export default function PropertyForm({
           type="file"
           accept="application/pdf"
           onChange={handleBrochureChange}
+          className="mt-2"
+        />
+      </div>
+
+      {/* Featured Thumbnail Upload */}
+      <div className="mt-4">
+        <label className="block font-medium mb-2">Featured Thumbnail</label>
+        {existingFeaturedThumbnail && (
+          <div className="mb-2">
+            <p className="text-sm text-gray-500 mb-1">Current Thumbnail:</p>
+            <img src={existingFeaturedThumbnail} alt="Featured Thumbnail" className="w-32 h-32 object-cover rounded-lg" />
+          </div>
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFeaturedThumbnailChange}
           className="mt-2"
         />
       </div>

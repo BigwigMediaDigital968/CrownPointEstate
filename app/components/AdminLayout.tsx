@@ -58,6 +58,7 @@ export default function AdminLayout({
             width={40}
             height={40}
             className="object-contain invert"
+            style={{ height: "auto" }}
           />
           <span className="text-lg font-semibold tracking-wide">Admin</span>
         </div>
@@ -77,12 +78,13 @@ export default function AdminLayout({
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800">
           <div className="flex items-center gap-2">
             <Image
-              src={logo}
-              alt="logo"
-              width={40}
-              height={40}
-              className="object-contain invert"
-            />
+            src={logo}
+            alt="logo"
+            width={40}
+            height={40}
+            className="object-contain invert"
+            style={{ height: "auto" }}
+          />
             <span className="text-lg font-semibold tracking-wide">Admin</span>
           </div>
           <button
@@ -131,6 +133,7 @@ export default function AdminLayout({
             width={140}
             height={100}
             className="object-contain invert"
+            style={{ height: "auto" }}
           />
         </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Plus, Pencil, Trash2, Eye, X } from "lucide-react";
 
 import PropertyForm from "../../components/PropertyForm";
@@ -45,17 +44,19 @@ export default function AllProperties() {
   const pageSize = 10; // Number of properties per page
   const fetchProperties = async (page: number) => {
     try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
-        {
-          params: { page, limit: pageSize },
-        }
+      const queryParams = new URLSearchParams({
+        page: page.toString(),
+        limit: pageSize.toString(),
+      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/property?${queryParams}`
       );
+      const data = await res.json();
 
-      if (res.data?.success) {
-        setProperties(res.data.properties || []);
-        setTotalPages(res.data.totalPages || 1);
-        setCurrentPage(res.data.currentPage || 1);
+      if (data?.success) {
+        setProperties(data.properties || []);
+        setTotalPages(data.totalPages || 1);
+        setCurrentPage(data.currentPage || 1);
       } else {
         setProperties([]);
         setTotalPages(1);
@@ -82,9 +83,9 @@ export default function AllProperties() {
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
-      await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`
-      );
+      await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`, {
+        method: "DELETE",
+      });
       fetchProperties(currentPage); // refetch after delete
     } catch (error) {
       console.error("Delete failed", error);

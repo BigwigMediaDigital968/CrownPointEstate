@@ -36,7 +36,7 @@ export default function Navbar() {
         <nav className="relative w-11/12 mx-auto flex items-center justify-between text-black py-1">
           {/* LEFT — LOGO */}
           <Link href="/" className="flex items-center">
-            <Image src={logo} alt="Logo" width={60} height={60} priority />
+            <Image src={logo} alt="Logo" width={60} height={60} priority style={{ height: "auto" }} />
           </Link>
 
           {/* CENTER — MENU */}
