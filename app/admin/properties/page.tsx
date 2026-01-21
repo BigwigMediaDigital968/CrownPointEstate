@@ -34,7 +34,7 @@ export default function AllProperties() {
   const router = useRouter();
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
-    null
+    null,
   );
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
@@ -49,7 +49,7 @@ export default function AllProperties() {
         `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
         {
           params: { page, limit: pageSize },
-        }
+        },
       );
 
       if (res.data?.success) {
@@ -83,7 +83,7 @@ export default function AllProperties() {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`,
       );
       fetchProperties(currentPage); // refetch after delete
     } catch (error) {

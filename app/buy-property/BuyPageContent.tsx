@@ -72,7 +72,7 @@ export default function BuyPageContent() {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
         );
 
         const data = await res.json();
@@ -89,7 +89,9 @@ export default function BuyPageContent() {
 
     fetchProperties();
   }, []);
-console.log(properties);
+
+  console.log(properties);
+
   /* ------------------ FILTER LOGIC ------------------ */
   const filteredProperties = properties
     // ✅ ONLY BUY PROPERTIES
@@ -107,14 +109,20 @@ console.log(properties);
             if (type === "Plot") {
               if (budget === "below-8cr") return property.price < 80000000;
               if (budget === "8cr-10cr")
-                return property.price >= 80000000 && property.price <= 100000000;
+                return (
+                  property.price >= 80000000 && property.price <= 100000000
+                );
               if (budget === "above-10cr") return property.price > 100000000;
             } else if (type === "Villa") {
               if (budget === "below-10cr") return property.price < 100000000;
               if (budget === "10cr-12cr")
-                return property.price >= 100000000 && property.price <= 120000000;
+                return (
+                  property.price >= 100000000 && property.price <= 120000000
+                );
               if (budget === "12cr-14cr")
-                return property.price >= 120000000 && property.price <= 140000000;
+                return (
+                  property.price >= 120000000 && property.price <= 140000000
+                );
               if (budget === "above-14cr") return property.price > 140000000;
             } else if (type === "Builder Floor") {
               //  for Builder Floor)
@@ -122,7 +130,7 @@ console.log(properties);
               if (budget === "4cr-6cr")
                 return property.price >= 40000000 && property.price <= 60000000;
               if (budget === "above-6cr") return property.price > 60000000;
-            }else if (type === "Apartment") {
+            } else if (type === "Apartment") {
               //  for types Apartment)
               if (budget === "below-4cr") return property.price < 40000000;
               if (budget === "4cr-6cr")
