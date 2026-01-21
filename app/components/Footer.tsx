@@ -83,11 +83,11 @@ export default function Footer() {
                     About
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/projects" className="hover:text-white">
                     Projects
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/blogs" className="hover:text-white">
                     Blog
@@ -105,22 +105,40 @@ export default function Footer() {
             <div className="lg:col-span-1">
               <h4 className="font-heading text-lg mb-4">Our Services</h4>
               <ul className="space-y-2 font-body text-sm text-gray-300">
-                <li>Residential Projects</li>
-                <li>Commercial Spaces</li>
-                <li>Luxury Apartments</li>
-                <li>Property Consulting</li>
+                <li>
+                  <Link href="/buy-property" className="hover:text-white">
+                    Buy Property
+                  </Link></li>
+                <li>
+                  <Link href="/sell-property" className="hover:text-white">
+                    Sell Property
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/lease-property" className="hover:text-white">
+                    Lease Property
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/rent-property" className="hover:text-white">
+                    Rent Property
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
         {/* ================= BOTTOM BAR ================= */}
-        <div className="w-11/12 md:w-5/6 mx-auto py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
-          <p>
+        <div className="w-11/12 md:w-5/6 mx-auto py-6 flex flex-col md:flex-row items-center justify-start text-sm text-gray-400 ">
+        <div>
+            <p >
             © {new Date().getFullYear()} Crownpoints Estates. All rights
             reserved.
           </p>
-          <p>
+        </div>
+        <div style={{marginLeft: "200px"}}>
+          <p >
             Designed & Developed by{" "}
             <span className="text-white">
               <Link href="https://www.bigwigmediadigital.com">
@@ -128,6 +146,9 @@ export default function Footer() {
               </Link>
             </span>
           </p>
+        </div>
+          
+          
         </div>
       </div>
     </footer>
