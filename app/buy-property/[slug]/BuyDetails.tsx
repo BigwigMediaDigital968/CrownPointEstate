@@ -104,7 +104,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(leadData),
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Failed to submit lead");
@@ -131,7 +131,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
         return `https://www.youtube.com/embed/${parsedUrl.pathname.slice(1)}`;
       } else if (parsedUrl.hostname.includes("youtube.com")) {
         return `https://www.youtube.com/embed/${parsedUrl.searchParams.get(
-          "v"
+          "v",
         )}`;
       }
       return null;

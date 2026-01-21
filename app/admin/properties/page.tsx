@@ -33,7 +33,7 @@ export default function AllProperties() {
   const router = useRouter();
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
-    null
+    null,
   );
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
@@ -44,12 +44,20 @@ export default function AllProperties() {
   const pageSize = 10; // Number of properties per page
   const fetchProperties = async (page: number) => {
     try {
+<<<<<<< HEAD
       const queryParams = new URLSearchParams({
         page: page.toString(),
         limit: pageSize.toString(),
       });
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE}/api/property?${queryParams}`
+=======
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+        {
+          params: { page, limit: pageSize },
+        },
+>>>>>>> 90a49867da604e9e383dd18489399ced20744fef
       );
       const data = await res.json();
 
@@ -83,9 +91,15 @@ export default function AllProperties() {
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
+<<<<<<< HEAD
       await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`, {
         method: "DELETE",
       });
+=======
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`,
+      );
+>>>>>>> 90a49867da604e9e383dd18489399ced20744fef
       fetchProperties(currentPage); // refetch after delete
     } catch (error) {
       console.error("Delete failed", error);
@@ -101,6 +115,8 @@ export default function AllProperties() {
     setEditProperty(property || null);
     setIsFormModalOpen(true);
   };
+
+  console.log(properties);
 
   return (
     <div className="p-6">
