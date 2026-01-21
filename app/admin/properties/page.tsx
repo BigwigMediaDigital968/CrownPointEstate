@@ -101,6 +101,8 @@ export default function AllProperties() {
     setIsFormModalOpen(true);
   };
 
+  console.log(properties);
+
   return (
     <div className="p-6">
       {/* Top Bar */}

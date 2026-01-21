@@ -148,7 +148,7 @@ export default function LeasePropertyPage() {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 h-full flex items-center">
-          <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
               <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4">
                 Lease Property
