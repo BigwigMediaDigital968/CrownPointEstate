@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   verification: {
     google: "Uei6zvpwBwT4gfafLKIu6BV1V0o1ruAGQ1MsetlXfPM",
   },
+  metadataBase: new URL("https://www.crownpointestates.com"),
 };
 
 export default function RootLayout({
