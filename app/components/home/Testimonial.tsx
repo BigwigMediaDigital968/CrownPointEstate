@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, TouchEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -53,6 +53,33 @@ const truncateText = (text: string, maxLength: number = 200) => {
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(2);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      goToNext();
+    }
+    if (isRightSwipe) {
+      goToPrevious();
+    }
+  };
 
   useEffect(() => {
     AOS.init({
@@ -66,8 +93,10 @@ export default function TestimonialSection() {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setItemsPerView(1);
+        setIsMobile(true);
       } else {
         setItemsPerView(2);
+        setIsMobile(false);
       }
     };
 
@@ -76,7 +105,7 @@ export default function TestimonialSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+  const maxIndex = isMobile ? testimonials.length - 1 : Math.max(0, testimonials.length - itemsPerView);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
@@ -86,7 +115,7 @@ export default function TestimonialSection() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  const visibleTestimonials = testimonials.slice(
+  const visibleTestimonials = isMobile ? testimonials : testimonials.slice(
     currentIndex,
     currentIndex + itemsPerView
   );
@@ -112,24 +141,29 @@ export default function TestimonialSection() {
           {/* LEFT ARROW */}
           <button
             onClick={goToPrevious}
-            className="flex-shrink-0 w-12 h-12 border border-gray-300 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-colors duration-200 z-10"
+            className="flex-shrink-0 w-12 h-12 border border-gray-300 hidden md:flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-colors duration-200 z-10"
             aria-label="Previous testimonials"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           {/* TESTIMONIALS GRID */}
-          <div className="flex-1 overflow-hidden">
+          <div
+            className="flex-1 overflow-hidden"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
             <div
-              className="flex gap-6 transition-transform duration-500 ease-in-out"
+              className={`flex gap-6 transition-transform duration-500 ease-in-out ${isMobile ? 'w-full' : ''}`}
               style={{
-                transform: `translateX(0)`,
+                transform: isMobile ? `translateX(calc(-1 * ${currentIndex} * (100% + 24px)))` : `translateX(0)`,
               }}
             >
               {visibleTestimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="flex-shrink-0 w-full md:w-[calc(50%-12px)] relative bg-[#faf9f7] rounded-lg p-6 md:p-8 shadow-sm min-h-[280px] border border-gray-100 flex flex-col justify-center"
+                  className={`flex-shrink-0 w-full md:w-[calc(50%-12px)] relative bg-[#faf9f7] rounded-lg md:rounded-lg p-6 md:p-8 shadow-md md:shadow-sm min-h-[280px] border border-gray-100 flex flex-col justify-center ${isMobile ? 'rounded-2xl shadow-lg' : ''}`}
                   data-aos="fade-up"
                 >
                   {/* QUOTATION MARK */}
@@ -170,11 +204,25 @@ export default function TestimonialSection() {
           {/* RIGHT ARROW */}
           <button
             onClick={goToNext}
-            className="flex-shrink-0 w-12 h-12 border border-gray-300 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-colors duration-200 z-10"
+            className="flex-shrink-0 w-12 h-12 border border-gray-300 hidden md:flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white hover:border-[var(--primary-color)] transition-colors duration-200 z-10"
             aria-label="Next testimonials"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
+        </div>
+
+        {/* MOBILE PAGINATION DOTS */}
+        <div className="flex justify-center gap-2 mt-6 md:hidden">
+          {testimonials.map((_, index) => (
+            <div
+              key={index}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "w-6 bg-[var(--primary-color)]"
+                  : "w-2 bg-gray-300"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

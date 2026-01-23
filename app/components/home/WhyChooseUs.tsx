@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, TouchEvent } from "react";
 import Image from "next/image";
 import {
   Building2,
@@ -57,22 +57,9 @@ const features = [
 export default function WhyChooseUs() {
   const [active, setActive] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const current = features[active];
   const Icon = current.icon;
-
-  const prev = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setActive((p) => (p === 0 ? features.length - 1 : p - 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
-  
-  const next = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setActive((p) => (p === features.length - 1 ? 0 : p + 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
 
   useEffect(() => {
     AOS.init({
@@ -81,7 +68,55 @@ export default function WhyChooseUs() {
       once: true,
       offset: 120,
     });
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      next();
+    }
+    if (isRightSwipe) {
+      prev();
+    }
+  };
+
+  const prev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setActive((p) => (p === 0 ? features.length - 1 : p - 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const next = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setActive((p) => (p === features.length - 1 ? 0 : p + 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
 
   return (
     <section className="relative py-16 overflow-hidden">
@@ -104,10 +139,15 @@ export default function WhyChooseUs() {
           data-aos-delay="150"
         />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-[640px] items-center">
+        <div 
+          className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-[640px] items-center"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {/* IMAGE with crossfade animation */}
           <div
-            className="relative z-10 h-[300px] sm:h-[350px] md:h-[420px] lg:h-[520px] xl:h-[600px] w-full"
+            className="relative z-10 h-[300px] sm:h-[350px] md:h-[420px] lg:h-[520px] xl:h-[600px] w-full hidden md:block"
             data-aos="zoom-in"
             data-aos-delay="200"
           >
@@ -135,13 +175,55 @@ export default function WhyChooseUs() {
 
           {/* CONTENT */}
           <div className="relative z-0 flex items-center">
+            
+            {/* MOBILE SLIDER */}
+            <div className="block md:hidden w-full overflow-hidden px-4">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(calc(-1 * ${active} * 100%))`,
+                }}
+              >
+                {features.map((feature, idx) => (
+                   <div 
+                    key={idx}
+                    className="w-full flex-shrink-0 px-2"
+                   >
+                     <div className="bg-[#faf9f7] rounded-2xl shadow-lg p-8 min-h-[250px] flex flex-col justify-center">
+                        <h3 className="font-heading text-2xl text-[var(--primary-bg)] mb-4 text-center">
+                          {feature.title}
+                        </h3>
+                        <p className="text-gray-600 leading-relaxed text-center">
+                          {feature.desc}
+                        </p>
+                     </div>
+                   </div>
+                ))}
+              </div>
+
+              {/* MOBILE PAGINATION DOTS */}
+              <div className="flex justify-center gap-2 mt-6">
+                {features.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === active
+                        ? "w-6 bg-[var(--primary-color)]"
+                        : "w-2 bg-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* DESKTOP CONTENT */}
             <div
-              className="px-8 md:px-14 py-20 max-w-lg"
+              className="hidden md:block px-8 md:px-14 py-10 md:py-20 max-w-lg"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div
-                className="mb-6 text-[var(--primary-color)]"
+                className="mb-6 text-[var(--primary-color)] hidden md:block"
                 data-aos="zoom-in"
                 data-aos-delay="400"
               >
@@ -158,7 +240,7 @@ export default function WhyChooseUs() {
 
               {/* CONTROLS */}
               <div
-                className="flex gap-4"
+                className="flex gap-4 hidden md:flex"
                 data-aos="zoom-in"
                 data-aos-delay="500"
               >
