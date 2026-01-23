@@ -6,7 +6,7 @@ import { Plus, Pencil, Trash2, Eye, X } from "lucide-react";
 import PropertyForm from "../../components/PropertyForm";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-
+// updated
 interface Property {
   builder: string;
   _id: string;
