@@ -21,19 +21,24 @@ export default function About() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden flex flex-col lg:block">
       {/* ================= TOP BG SECTION ================= */}
-      <div className="relative w-full lg:w-[60%] h-[260px] md:h-[260px] lg:h-[300px]">
-        <Image src={bgImg} alt="Background" fill className="object-cover" />
+      <div className="relative w-full lg:w-[60%] h-auto md:h-[260px] lg:h-[300px] order-2 lg:order-none">
+        <Image
+          src={bgImg}
+          alt="Background"
+          fill
+          className="object-cover hidden lg:block"
+        />
 
         {/* TEXT OVER BG */}
-        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto h-full flex items-center">
+        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto h-full flex items-center py-8 lg:py-0">
           <div className="max-w-xl" data-aos="fade-up" data-aos-delay="100">
             <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
               Who we are
             </p>
 
-            <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
+            <h2 className="font-heading text-2xl md:text-4xl leading-snug font-bold text-[#1e2d3b] lg:text-[var(--primary-bg)]">
               Trusted Real Estate Advisors with Over 15 Years of Experience
             </h2>
           </div>
@@ -42,19 +47,19 @@ export default function About() {
 
       {/* ================= MOBILE / TABLET SIMPLE IMAGE ================= */}
       <div
-        className="block lg:hidden w-full"
+        className="block lg:hidden w-full order-1"
         data-aos="zoom-in"
         data-aos-delay="150"
       >
         <Image
           src={leftImg}
           alt="Architecture"
-          className="w-full h-[280px] object-cover"
+          className="w-full h-auto object-cover"
         />
       </div>
 
       {/* ================= BOTTOM CONTENT SECTION ================= */}
-      <div className="relative bg-[#faf9f7] w-full lg:w-[90%]">
+      <div className="relative bg-[#faf9f7] w-full lg:w-[90%] order-3 lg:order-none">
         {/* LEFT EDGE IMAGE (DESKTOP ONLY) */}
         <div
           className="absolute left-0 top-0 h-full w-[42%] hidden lg:block"
@@ -70,14 +75,14 @@ export default function About() {
         </div>
 
         {/* CONTENT */}
-        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto py-16 md:py-20 lg:py-24">
+        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto py-8 md:py-20 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0">
             {/* EMPTY SPACE FOR LEFT IMAGE (DESKTOP) */}
             <div className="hidden lg:block" />
 
             {/* MISSION & VISION */}
             <div
-              className="max-w-md space-y-10 -ml-14"
+              className="max-w-md space-y-10 ml-0 lg:-ml-14"
               data-aos="fade-up"
               data-aos-delay="250"
             >
@@ -104,11 +109,12 @@ export default function About() {
                   value for communities and investments.
                 </p>
               </div>
-              <Link href="/about">
+              <Link href="/about" className="block w-full md:w-fit">
                 <ButtonFill
                   data-aos="zoom-in"
                   data-aos-delay="450"
                   text="MORE ABOUT US →"
+                  className="w-full md:w-auto min-h-[44px]"
                 />
               </Link>
             </div>
