@@ -20,7 +20,7 @@ export default function Footer() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[var(--primary-bg)]/50" />
+        <div className="absolute inset-0 bg-(--primary-bg)/50" />
       </div>
 
       {/* CONTENT */}
