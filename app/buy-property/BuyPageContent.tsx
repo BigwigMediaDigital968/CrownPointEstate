@@ -37,37 +37,39 @@ interface Property {
   bedrooms?: string;
   bathrooms?: string;
   areaSqft?: string;
+  builder?: string;
 }
 
-const staticLocations = [
-  "Select Location",
-  "DLF Phase 1",
-  "DLF Phase 2",
-  "DLF Phase 3",
-  "DLF Phase 4",
-  "DLF Phase 5",
-  "Sushant Lok 1",
-  "Sushant Lok 2",
-  "Sushant Lok 3",
-  "Sushant Lok 4",
-  "Sushant Lok 5",
-  "MG Road",
-  "Golf Course Road",
-  "Golf Course Ext. Road",
-  "Sector 77 Gurugram Haryana",
-  "Sector 76 Gurugram Haryana",
-  "Sector 102 Gurugram Haryana",
-  "Sector 59 Gurugram Haryana",
-];
+// const staticLocations = [
+//   "Select Location",
+//   "DLF Phase 1",
+//   "DLF Phase 2",
+//   "DLF Phase 3",
+//   "DLF Phase 4",
+//   "DLF Phase 5",
+//   "Sushant Lok 1",
+//   "Sushant Lok 2",
+//   "Sushant Lok 3",
+//   "Sushant Lok 4",
+//   "Sushant Lok 5",
+//   "MG Road",
+//   "Golf Course Road",
+//   "Golf Course Ext. Road",
+//   "Sector 77 Gurugram Haryana",
+//   "Sector 76 Gurugram Haryana",
+//   "Sector 102 Gurugram Haryana",
+//   "Sector 59 Gurugram Haryana",
+// ];
 
 export default function BuyPageContent() {
-  const [location, setLocation] = useState("");
+  const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [budget, setBudget] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Data fetching on component mount
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -93,55 +95,62 @@ export default function BuyPageContent() {
   console.log(properties);
 
   /* ------------------ FILTER LOGIC ------------------ */
+  //
+
   const filteredProperties = properties
     // ✅ ONLY BUY PROPERTIES
     .filter((property) => property.purpose === "Buy")
-    // ✅ APPLY FILTERS
-    .filter((property) => {
-      const matchLocation = location
-        ? property.location.includes(location)
-        : true;
 
+    // 🔍 SEARCH FILTER
+    .filter((property) => {
+      if (!search) return true;
+
+      const query = search.toLowerCase();
+
+      return (
+        property.location?.toLowerCase().includes(query) ||
+        property.title?.toLowerCase().includes(query) ||
+        property.type?.toLowerCase().includes(query) ||
+        property.builder?.toLowerCase().includes(query)
+      );
+    })
+
+    // 🏠 TYPE + 💰 BUDGET FILTER
+    .filter((property) => {
       const matchType = type ? property.type === type : true;
 
       const matchBudget = budget
         ? (() => {
+            const price = property.price ?? 0;
+
             if (type === "Plot") {
-              if (budget === "below-8cr") return property.price < 80000000;
+              if (budget === "below-8cr") return price < 80000000;
               if (budget === "8cr-10cr")
-                return (
-                  property.price >= 80000000 && property.price <= 100000000
-                );
-              if (budget === "above-10cr") return property.price > 100000000;
-            } else if (type === "Villa") {
-              if (budget === "below-10cr") return property.price < 100000000;
-              if (budget === "10cr-12cr")
-                return (
-                  property.price >= 100000000 && property.price <= 120000000
-                );
-              if (budget === "12cr-14cr")
-                return (
-                  property.price >= 120000000 && property.price <= 140000000
-                );
-              if (budget === "above-14cr") return property.price > 140000000;
-            } else if (type === "Builder Floor") {
-              //  for Builder Floor)
-              if (budget === "below-4cr") return property.price < 40000000;
-              if (budget === "4cr-6cr")
-                return property.price >= 40000000 && property.price <= 60000000;
-              if (budget === "above-6cr") return property.price > 60000000;
-            } else if (type === "Apartment") {
-              //  for types Apartment)
-              if (budget === "below-4cr") return property.price < 40000000;
-              if (budget === "4cr-6cr")
-                return property.price >= 40000000 && property.price <= 60000000;
-              if (budget === "above-6cr") return property.price > 60000000;
+                return price >= 80000000 && price <= 100000000;
+              if (budget === "above-10cr") return price > 100000000;
             }
+
+            if (type === "Villa") {
+              if (budget === "below-10cr") return price < 100000000;
+              if (budget === "10cr-12cr")
+                return price >= 100000000 && price <= 120000000;
+              if (budget === "12cr-14cr")
+                return price >= 120000000 && price <= 140000000;
+              if (budget === "above-14cr") return price > 140000000;
+            }
+
+            if (type === "Apartment" || type === "Builder Floor") {
+              if (budget === "below-4cr") return price < 40000000;
+              if (budget === "4cr-6cr")
+                return price >= 40000000 && price <= 60000000;
+              if (budget === "above-6cr") return price > 60000000;
+            }
+
             return true;
           })()
         : true;
 
-      return matchLocation && matchType && matchBudget;
+      return matchType && matchBudget;
     });
 
   useEffect(() => {
@@ -208,7 +217,7 @@ export default function BuyPageContent() {
       {/* FILTER SECTION */}
       <section className="py-10 bg-gray-50">
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
-          <select
+          {/* <select
             className="border rounded-xl px-4 py-3 w-full"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
@@ -218,7 +227,16 @@ export default function BuyPageContent() {
                 {loc}
               </option>
             ))}
-          </select>
+          </select> */}
+
+          {/* 🔍 SEARCH BAR */}
+          <input
+            type="text"
+            placeholder="Search by location, title, builder..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border rounded-xl px-4 py-3 w-full"
+          />
 
           <select
             className="border rounded-xl px-4 py-3"
@@ -280,7 +298,7 @@ export default function BuyPageContent() {
 
           <ButtonFill
             onClick={() => {
-              setLocation("");
+              setSearch("");
               setType("");
               setBudget("");
             }}

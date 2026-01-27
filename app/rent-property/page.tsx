@@ -36,32 +36,33 @@ interface Property {
   bedrooms?: string;
   bathrooms?: string;
   areaSqft?: string;
+  builder?: string;
 }
 
 /* ---------------- STATIC LOCATIONS ---------------- */
-const staticLocations = [
-  "Select Location",
-  "DLF Phase 1",
-  "DLF Phase 2",
-  "DLF Phase 3",
-  "DLF Phase 4",
-  "DLF Phase 5",
-  "Sushant Lok 1",
-  "Sushant Lok 2",
-  "Sushant Lok 3",
-  "Sushant Lok 4",
-  "Sushant Lok 5",
-  "MG Road",
-  "Golf Course Road",
-  "Golf Course Ext. Road",
-  "Sector 77 Gurugram Haryana",
-  "Sector 76 Gurugram Haryana",
-  "Sector 102 Gurugram Haryana",
-  "Sector 59 Gurugram Haryana",
-];
+// const staticLocations = [
+//   "Select Location",
+//   "DLF Phase 1",
+//   "DLF Phase 2",
+//   "DLF Phase 3",
+//   "DLF Phase 4",
+//   "DLF Phase 5",
+//   "Sushant Lok 1",
+//   "Sushant Lok 2",
+//   "Sushant Lok 3",
+//   "Sushant Lok 4",
+//   "Sushant Lok 5",
+//   "MG Road",
+//   "Golf Course Road",
+//   "Golf Course Ext. Road",
+//   "Sector 77 Gurugram Haryana",
+//   "Sector 76 Gurugram Haryana",
+//   "Sector 102 Gurugram Haryana",
+//   "Sector 59 Gurugram Haryana",
+// ];
 
 export default function RentPropertyPage() {
-  const [location, setLocation] = useState("");
+  const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [budget, setBudget] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
@@ -92,31 +93,73 @@ export default function RentPropertyPage() {
   }, []);
 
   /* ---------------- FILTER LOGIC ---------------- */
+  // const filteredProperties = properties
+  //   // ✅ ONLY RENT PROPERTIES
+  //   .filter((property) => property.purpose === "Rent")
+  //   // ✅ APPLY UI FILTERS
+  //   .filter((property) => {
+  //     const matchLocation = location
+  //       ? property.location.includes(location)
+  //       : true;
+
+  //     const matchType = type ? property.type === type : true;
+
+  //     const matchBudget =
+  //       budget && typeof property.price === "number"
+  //         ? (() => {
+  //             if (budget === "50k-1L")
+  //               return property.price >= 50000 && property.price <= 100000;
+  //             if (budget === "1L-2L")
+  //               return property.price > 100000 && property.price <= 200000;
+  //             if (budget === "above-2L") return property.price > 200000;
+  //             return true;
+  //           })()
+  //         : true;
+
+  //     return matchLocation && matchType && matchBudget;
+  //   });
+
   const filteredProperties = properties
-    // ✅ ONLY RENT PROPERTIES
-    .filter((property) => property.purpose === "Rent")
-    // ✅ APPLY UI FILTERS
-    .filter((property) => {
-      const matchLocation = location
-        ? property.location.includes(location)
+  // ✅ ONLY RENT PROPERTIES
+  .filter((property) => property.purpose === "Rent")
+
+  // 🔍 SEARCH FILTER
+  .filter((property) => {
+    if (!search) return true;
+
+    const query = search.toLowerCase();
+
+    return (
+      property.location?.toLowerCase().includes(query) ||
+      property.title?.toLowerCase().includes(query) ||
+      property.type?.toLowerCase().includes(query) ||
+      property.builder?.toLowerCase().includes(query)
+    );
+  })
+
+  // 🏠 TYPE + 💰 BUDGET FILTER
+  .filter((property) => {
+    const matchType = type ? property.type === type : true;
+
+    const matchBudget =
+      budget && typeof property.price === "number"
+        ? (() => {
+            if (budget === "50k-1L")
+              return property.price >= 50000 && property.price <= 100000;
+
+            if (budget === "1L-2L")
+              return property.price > 100000 && property.price <= 200000;
+
+            if (budget === "above-2L")
+              return property.price > 200000;
+
+            return true;
+          })()
         : true;
 
-      const matchType = type ? property.type === type : true;
+    return matchType && matchBudget;
+  });
 
-      const matchBudget =
-        budget && typeof property.price === "number"
-          ? (() => {
-              if (budget === "50k-1L")
-                return property.price >= 50000 && property.price <= 100000;
-              if (budget === "1L-2L")
-                return property.price > 100000 && property.price <= 200000;
-              if (budget === "above-2L") return property.price > 200000;
-              return true;
-            })()
-          : true;
-
-      return matchLocation && matchType && matchBudget;
-    });
 
   /* RESET BUDGET WHEN TYPE CHANGES */
   useEffect(() => {
@@ -174,7 +217,7 @@ export default function RentPropertyPage() {
       {/* FILTERS */}
       <section className="py-10 bg-gray-50">
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
-          <select
+          {/* <select
             className="border rounded-xl px-4 py-3"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
@@ -184,7 +227,16 @@ export default function RentPropertyPage() {
                 {loc}
               </option>
             ))}
-          </select>
+          </select> */}
+
+          {/* 🔍 SEARCH BAR */}
+          <input
+            type="text"
+            placeholder="Search by location, title, builder..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border rounded-xl px-4 py-3 w-full"
+          />
 
           <select
             className="border rounded-xl px-4 py-3"
@@ -215,7 +267,7 @@ export default function RentPropertyPage() {
           <ButtonFill
             text="Reset Filters"
             onClick={() => {
-              setLocation("");
+              setSearch("");
               setType("");
               setBudget("");
             }}
