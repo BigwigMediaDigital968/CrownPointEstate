@@ -227,7 +227,7 @@ export default function LeasePropertyPage() {
           {/* 🔍 SEARCH BAR */}
           <input
             type="text"
-            placeholder="Search by location, title, builder..."
+            placeholder="Search location"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="border rounded-xl px-4 py-3 w-full"
