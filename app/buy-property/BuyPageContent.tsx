@@ -159,7 +159,7 @@ export default function BuyPageContent() {
 
   const PageLoader = () => {
     return (
-      <div className="col-span-full flex items-center justify-center min-h-[300px]">
+      <div className="col-span-full flex items-center justify-center min-h-75">
         <div className="flex flex-col items-center gap-4">
           <Loader className="h-10 w-10 animate-spin text-gray-800" />
           <p className="text-sm text-gray-600 tracking-wide">
