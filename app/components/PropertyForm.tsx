@@ -33,6 +33,7 @@ interface PropertyData {
   extraHighlights: string[];
   googleMapUrl: string;
   videoLink: string;
+  brochure?: string;
   instagramLink?: string; // ⭐ NEW
   featuredThumbnail?: string; // ⭐ NEW
   images: string[];
@@ -469,6 +470,19 @@ export default function PropertyForm({
       {/* Brochure Upload */}
       <div className="mt-4">
         <label className="block font-medium mb-2">Upload Brochure (PDF)</label>
+        {property?.brochure && (
+          <p className="text-sm text-gray-400 mb-2">
+            Existing brochure:{" "}
+            <a
+              href={property.brochure}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 underline"
+            >
+              View / Download
+            </a>
+          </p>
+        )}
         <input
           type="file"
           accept="application/pdf"

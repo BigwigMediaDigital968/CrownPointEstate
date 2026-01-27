@@ -24,6 +24,7 @@ interface Property {
   featuresAmenities: string[];
   nearby: string[];
   googleMapUrl: string;
+  brochure?: string;
   videoLink: string;
   extraHighlights: string[];
   images: string[];
@@ -210,8 +211,7 @@ export default function AllProperties() {
                   <strong>Bedrooms:</strong> {selectedProperty.bedrooms ?? "—"}
                 </p>
                 <p>
-                  <strong>Bathrooms:</strong>{" "}
-                  {selectedProperty.bathrooms ?? "—"}
+                  <strong>Bathrooms:</strong> {selectedProperty.bathrooms ?? "—"}
                 </p>
                 <p>
                   <strong>Area (sqft):</strong>{" "}
@@ -273,6 +273,23 @@ export default function AllProperties() {
                   className="rounded-lg w-full h-40 object-cover"
                 />
               ))}
+            </div>
+
+            {/* Brochure */}
+            <div className="mt-6">
+              <strong>Brochure:</strong>{" "}
+              {selectedProperty.brochure ? (
+                <a
+                  href={selectedProperty.brochure}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 underline"
+                >
+                  View / Download
+                </a>
+              ) : (
+                <span className="text-gray-400">No brochure uploaded</span>
+              )}
             </div>
           </div>
         </div>
