@@ -90,8 +90,12 @@ export default function PropertyForm({
   const [newImages, setNewImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false); // 🔹 loader
   const [brochureFile, setBrochureFile] = useState<File | null>(null);
-  const [featuredThumbnailFile, setFeaturedThumbnailFile] = useState<File | null>(null);
-  const [existingFeaturedThumbnail, setExistingFeaturedThumbnail] = useState<string | null>(null);
+  const [removeBrochure, setRemoveBrochure] = useState(false);
+  const [featuredThumbnailFile, setFeaturedThumbnailFile] =
+    useState<File | null>(null);
+  const [existingFeaturedThumbnail, setExistingFeaturedThumbnail] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     if (property) {
@@ -122,13 +126,15 @@ export default function PropertyForm({
 
       setExistingImages(property.images || []);
       setExistingFeaturedThumbnail(property.featuredThumbnail || null);
+      setBrochureFile(null);
+      setRemoveBrochure(false);
     }
   }, [property]);
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -149,10 +155,14 @@ export default function PropertyForm({
   const handleBrochureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setBrochureFile(e.target.files[0]);
+      // If user selects a new brochure, do not mark the old one for removal explicitly
+      setRemoveBrochure(false);
     }
   };
 
-  const handleFeaturedThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFeaturedThumbnailChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     if (e.target.files && e.target.files[0]) {
       setFeaturedThumbnailFile(e.target.files[0]);
     }
@@ -191,6 +201,12 @@ export default function PropertyForm({
 
       if (brochureFile) {
         data.append("brochure", brochureFile); // <-- this was missing
+      } else if (property && !brochureFile && removeBrochure) {
+        // Signal backend to remove existing brochure when updating without a new file
+        data.append("removeBrochure", "true");
+        // Many backends only clear fields if the field itself is sent.
+        // Send brochure as empty string to force clearing.
+        data.append("brochure", "");
       }
 
       if (featuredThumbnailFile) {
@@ -203,7 +219,7 @@ export default function PropertyForm({
           data,
           {
             headers: { "Content-Type": "multipart/form-data" },
-          }
+          },
         );
       } else {
         await axios.post(
@@ -211,7 +227,7 @@ export default function PropertyForm({
           data,
           {
             headers: { "Content-Type": "multipart/form-data" },
-          }
+          },
         );
       }
 
@@ -352,7 +368,7 @@ export default function PropertyForm({
                 const reordered = reorder(
                   existingImages,
                   result.source.index,
-                  result.destination.index
+                  result.destination.index,
                 );
                 setExistingImages(reordered);
               }}
@@ -470,17 +486,34 @@ export default function PropertyForm({
       {/* Brochure Upload */}
       <div className="mt-4">
         <label className="block font-medium mb-2">Upload Brochure (PDF)</label>
-        {property?.brochure && (
-          <p className="text-sm text-gray-400 mb-2">
-            Existing brochure:{" "}
-            <a
-              href={property.brochure}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 underline"
+        {property?.brochure && !removeBrochure && (
+          <div className="flex items-center gap-3 text-sm text-gray-400 mb-2">
+            <span>
+              Existing brochure:{" "}
+              <a
+                href={property.brochure}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline"
+              >
+                View / Download
+              </a>
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setRemoveBrochure(true);
+                setBrochureFile(null);
+              }}
+              className="px-2 py-1 text-xs rounded bg-red-600 text-white hover:bg-red-700"
             >
-              View / Download
-            </a>
+              Delete brochure
+            </button>
+          </div>
+        )}
+        {property?.brochure && removeBrochure && (
+          <p className="text-xs text-red-400 mb-2">
+            Brochure will be removed when you update this property.
           </p>
         )}
         <input
@@ -497,7 +530,11 @@ export default function PropertyForm({
         {existingFeaturedThumbnail && (
           <div className="mb-2">
             <p className="text-sm text-gray-500 mb-1">Current Thumbnail:</p>
-            <img src={existingFeaturedThumbnail} alt="Featured Thumbnail" className="w-32 h-32 object-cover rounded-lg" />
+            <img
+              src={existingFeaturedThumbnail}
+              alt="Featured Thumbnail"
+              className="w-32 h-32 object-cover rounded-lg"
+            />
           </div>
         )}
         <input

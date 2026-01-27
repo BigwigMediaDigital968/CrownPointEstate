@@ -81,6 +81,14 @@ export default function AllProperties() {
     fetchProperties(currentPage);
   }, [currentPage, router]);
 
+  // Keep the view-details modal in sync after edits/refetches
+  const selectedId = selectedProperty?._id;
+  useEffect(() => {
+    if (!selectedId) return;
+    const updated = properties.find((p) => p._id === selectedId);
+    if (updated) setSelectedProperty(updated);
+  }, [properties, selectedId]);
+
   const handleDelete = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
