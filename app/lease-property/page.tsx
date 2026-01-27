@@ -245,21 +245,23 @@ export default function LeasePropertyPage() {
             <option value="Plot">Plot</option>
           </select>
 
-          <select
-            className={`border rounded-xl px-4 py-3 ${
-              !type ? "bg-gray-100 cursor-not-allowed" : ""
-            }`}
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            disabled={!type}
-          >
-            <option value="">
-              {type ? "Select Budget" : "Select Property Type First"}
-            </option>
-            <option value="below-2cr">Below ₹2 Cr</option>
-            <option value="2cr-5cr">₹2 Cr – ₹5 Cr</option>
-            <option value="above-5cr">Above ₹5 Cr</option>
-          </select>
+          {type === "Apartment" && (
+            <select
+              className={`border rounded-xl px-4 py-3 ${
+                !type ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              disabled={!type}
+            >
+              <option value="">
+                {type ? "Select Budget" : "Select Property Type First"}
+              </option>
+              <option value="below-2cr">Below ₹2 Cr</option>
+              <option value="2cr-5cr">₹2 Cr – ₹5 Cr</option>
+              <option value="above-5cr">Above ₹5 Cr</option>
+            </select>
+          )}
 
           <ButtonFill
             text="Reset Filters"

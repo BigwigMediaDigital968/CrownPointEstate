@@ -250,51 +250,28 @@ export default function BuyPageContent() {
             <option value="Plot">Plot</option>
           </select>
 
-          <select
-            className={`border rounded-xl px-4 py-3 ${
-              !type ? "bg-gray-100 cursor-not-allowed" : ""
-            }`}
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            disabled={!type}
-          >
-            <option value="">
-              {type ? "Select Budget" : "Select Property Type First"}
-            </option>
+          {type === "Apartment" && (
+            <select
+              className={`border rounded-xl px-4 py-3 ${
+                !type ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              disabled={!type}
+            >
+              <option value="">
+                {type ? "Select Budget" : "Select Property Type First"}
+              </option>
 
-            {type === "Plot" && (
-              <>
-                <option value="below-8cr">Below ₹8 Cr</option>
-                <option value="8cr-10cr">₹8 Cr – ₹10 Cr</option>
-                <option value="above-10cr">Above ₹10 Cr</option>
-              </>
-            )}
-
-            {type === "Villa" && (
-              <>
-                <option value="below-10cr">Below ₹10 Cr</option>
-                <option value="10cr-12cr">₹10 Cr – ₹12 Cr</option>
-                <option value="12cr-14cr">₹12 Cr – ₹14 Cr</option>
-                <option value="above-14cr">Above ₹14 Cr</option>
-              </>
-            )}
-
-            {type === "Apartment" && (
-              <>
-                <option value="below-4cr">Below ₹4 Cr</option>
-                <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
-                <option value="above-6cr">Above ₹6 Cr</option>
-              </>
-            )}
-
-            {type === "Builder Floor" && (
-              <>
-                <option value="below-4cr">Below ₹4 Cr</option>
-                <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
-                <option value="above-6cr">Above ₹6 Cr</option>
-              </>
-            )}
-          </select>
+              {type === "Apartment" && (
+                <>
+                  <option value="below-4cr">Below ₹4 Cr</option>
+                  <option value="4cr-6cr">₹4 Cr – ₹6 Cr</option>
+                  <option value="above-6cr">Above ₹6 Cr</option>
+                </>
+              )}
+            </select>
+          )}
 
           <ButtonFill
             onClick={() => {

@@ -250,19 +250,23 @@ export default function RentPropertyPage() {
             <option value="Plot">Plot</option>
           </select>
 
-          <select
-            className={`border rounded-xl px-4 py-3 ${!type ? "bg-gray-100 cursor-not-allowed" : ""}`}
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            disabled={!type}
-          >
-            <option value="">
-              {type ? "Select Budget" : "Select Property Type First"}
-            </option>
-            <option value="50k-1L">₹50k – ₹1 Lakh</option>
-            <option value="1L-2L">₹1 – ₹2 Lakh</option>
-            <option value="above-2L">Above ₹2 Lakh</option>
-          </select>
+          {type === "Apartment" && (
+            <select
+              className={`border rounded-xl px-4 py-3 ${
+                !type ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              disabled={!type}
+            >
+              <option value="">
+                {type ? "Select Budget" : "Select Property Type First"}
+              </option>
+              <option value="50k-1L">₹50k – ₹1 Lakh</option>
+              <option value="1L-2L">₹1 – ₹2 Lakh</option>
+              <option value="above-2L">Above ₹2 Lakh</option>
+            </select>
+          )}
 
           <ButtonFill
             text="Reset Filters"
