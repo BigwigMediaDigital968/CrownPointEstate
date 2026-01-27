@@ -13,13 +13,16 @@ const stats = [
   { value: 115, suffix: "", label: "Joint ventures completed" },
 ];
 
-export default function FactsSection() {
+export default function Fact() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [startCount, setStartCount] = useState(false);
   const [counts, setCounts] = useState(stats.map(() => 0));
 
-  // ✅ AOS Init
+  /* ================= AOS INIT (DESKTOP ONLY) ================= */
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth < 768) return;
+
     AOS.init({
       duration: 1000,
       easing: "ease-out-cubic",
@@ -28,7 +31,7 @@ export default function FactsSection() {
     });
   }, []);
 
-  // ✅ Detect when section enters viewport
+  /* ================= INTERSECTION OBSERVER ================= */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,11 +44,10 @@ export default function FactsSection() {
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-
     return () => observer.disconnect();
   }, []);
 
-  // ✅ Count Up Animation
+  /* ================= COUNT UP ANIMATION ================= */
   useEffect(() => {
     if (!startCount) return;
 
@@ -73,67 +75,69 @@ export default function FactsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 bg-white overflow-hidden"
+      className="relative py-10 md:py-14 lg:py-16 bg-white overflow-hidden"
     >
-      {/* LEFT CONTENT */}
       <div className="w-11/12 md:w-5/6 mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* TEXT */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+
+          {/* ================= TEXT CONTENT ================= */}
           <div data-aos="fade-up">
-            <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
+            <p className="uppercase tracking-widest text-xs md:text-sm text-[var(--primary-color)] mb-3 font-heading">
               The fact
             </p>
 
-            <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)] mb-6">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--primary-bg)] mb-4">
               One of the leading real estate companies
             </h2>
 
-            <p className="text-gray-600 max-w-lg mb-8 leading-relaxed">
+            <p className="text-gray-600 text-sm md:text-base max-w-lg mb-6 leading-relaxed">
               Our mission is to engage in issues that are of concern to
               individuals, families and communities through an uncompromising
               commitment to create outstanding living, work and leisure
               environments.
             </p>
 
-            {/* STATS */}
+            {/* ================= MOBILE IMAGE ================= */}
+          <div className="relative w-full h-[260px] sm:h-[320px] lg:hidden overflow-hidden">
+            <Image
+              src="/assets/fact.svg"
+              alt="Luxury residential entrance"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+              quality={85}
+            />
+          </div>
+
+            {/* ================= STATS ================= */}
             <div
-              className="grid grid-cols-2 gap-y-12 gap-x-16 max-w-md"
+              className="grid grid-cols-2 sm:grid-cols-2 gap-y-6 gap-x-10 max-w-md p-5"
               data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos-delay="150"
             >
               {stats.map((stat, i) => (
                 <div key={stat.label}>
-                  <h3 className="font-heading text-4xl text-[var(--primary-color)] mb-2">
+                  <h3 className="font-heading text-2xl md:text-3xl lg:text-4xl text-[var(--primary-color)] mb-1">
                     {counts[i]}
                     {stat.suffix}
                   </h3>
-                  <p className="text-sm text-[var(--primary-bg)] font-medium">
+                  <p className="text-xs md:text-sm text-[var(--primary-bg)] font-medium">
                     {stat.label}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-10" data-aos="fade-up" data-aos-delay="300">
+            <div className="mt-2 md:mt-10" data-aos="fade-up" data-aos-delay="200">
               <ButtonFill text="View all properties" href="/buy-property" />
             </div>
           </div>
 
-          <div className="h-[300px] sm:h-[400px] md:h-[500px] lg:hidden">
-            <Image
-              src="/assets/fact.svg"
-              alt="Luxury residential entrance"
-              fill
-              sizes="(max-width: 1024px) 100vw"
-              className="object-cover object-center"
-              quality={90}
-              priority
-            />
-          </div>
+          
         </div>
       </div>
 
-      {/* RIGHT IMAGE - Desktop */}
+      {/* ================= DESKTOP IMAGE ================= */}
       <div
         className="hidden lg:block absolute top-0 right-0 h-full w-[45vw]"
         data-aos="zoom-in"
