@@ -121,7 +121,7 @@ export default function TestimonialSection() {
   );
 
   return (
-    <section className="relative py-16 overflow-hidden bg-white">
+    <section className="relative md:py-16 overflow-hidden bg-white">
       {/* HEADER */}
       <div
         className="w-11/12 md:w-5/6 mx-auto mb-8 lg:mb-12"
