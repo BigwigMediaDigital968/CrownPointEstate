@@ -35,9 +35,9 @@ interface Property {
   areaSqft?: number | null;
   images: string[];
   description: string;
-  highlights?: string[];
-  nearby?: string[];
-  featuresAmenities?: string[];
+  highlights: string[];
+  nearby: string[];
+  featuresAmenities: string[];
   videoLink?: string;
   googleMapUrl?: string;
   brochure?: string;
@@ -226,6 +226,23 @@ export default function RentDetailsClient({
             {property.description}
           </p>
 
+          {/* Highlights */}
+          {property?.highlights?.length > 0 && (
+            <>
+              <h3 className="text-lg font-semibold mt-6">Highlights</h3>
+              <div className="flex flex-wrap gap-3">
+                {property.highlights.map((h: string, idx: number) => (
+                  <span
+                    key={idx}
+                    className="px-4 py-2 bg-[var(--featured)] rounded-full shadow text-sm text-[var(--text)]"
+                  >
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+
           {/* BROCHURE */}
           {property.brochure && (
             <section className="pt-4">
@@ -255,6 +272,40 @@ export default function RentDetailsClient({
               height="100%"
               allowFullScreen
             />
+          </div>
+        </section>
+      )}
+
+      {/* Features & Amenities */}
+      {property?.featuresAmenities?.length > 0 && (
+        <section className="w-11/12 md:w-5/6 mx-auto py-12">
+          <h2 className="text-3xl font-semibold mb-6">Features & Amenities</h2>
+          <div className="flex flex-wrap gap-3">
+            {property.featuresAmenities.map((f: string, idx: number) => (
+              <div
+                key={idx}
+                className="px-4 py-2 bg-[var(--featured)] rounded-full shadow text-sm"
+              >
+                {f}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Nearby Places */}
+      {property?.nearby?.length > 0 && (
+        <section className="w-11/12 md:w-5/6 mx-auto py-12">
+          <h2 className="text-3xl font-semibold mb-6">Nearby Places</h2>
+          <div className="flex flex-wrap gap-3">
+            {property.nearby.map((n: string, idx: number) => (
+              <span
+                key={idx}
+                className="px-5 py-2 bg-[var(--featured)] rounded-full"
+              >
+                {n}
+              </span>
+            ))}
           </div>
         </section>
       )}
