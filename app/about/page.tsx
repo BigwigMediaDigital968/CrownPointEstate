@@ -123,7 +123,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
       <meta property="og:site_name" content="Crownpoint Estates" />
       <meta property="og:locale" content="en_IN" />
 
-      {/* <!--- Twitter Card Meta Tags --->
+      {/* <!-- Twitter Card Meta Tags -->
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:title"
