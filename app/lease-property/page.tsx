@@ -119,42 +119,40 @@ export default function LeasePropertyPage() {
   //   });
 
   const filteredProperties = properties
-  // ✅ ONLY LEASE PROPERTIES
-  .filter((property) => property.purpose === "Lease")
+    // ✅ ONLY LEASE PROPERTIES
+    .filter((property) => property.purpose === "Lease")
 
-  // 🔍 SEARCH FILTER
-  .filter((property) => {
-    if (!search) return true;
+    // 🔍 SEARCH FILTER
+    .filter((property) => {
+      if (!search) return true;
 
-    const query = search.toLowerCase();
+      const query = search.toLowerCase();
 
-    return (
-      property.location?.toLowerCase().includes(query) ||
-      property.title?.toLowerCase().includes(query) ||
-      property.type?.toLowerCase().includes(query) ||
-      property.builder?.toLowerCase().includes(query)
-    );
-  })
+      return (
+        property.location?.toLowerCase().includes(query) ||
+        property.title?.toLowerCase().includes(query) ||
+        property.type?.toLowerCase().includes(query) ||
+        property.builder?.toLowerCase().includes(query)
+      );
+    })
 
-  // 🏠 TYPE + 💰 BUDGET FILTER
-  .filter((property) => {
-    const matchType = type ? property.type === type : true;
+    // 🏠 TYPE + 💰 BUDGET FILTER
+    .filter((property) => {
+      const matchType = type ? property.type === type : true;
 
-    const matchBudget =
-      budget && typeof property.price === "number"
-        ? (() => {
-            if (budget === "below-2cr") return property.price < 20000000;
-            if (budget === "2cr-5cr")
-              return property.price >= 20000000 &&
-                     property.price <= 50000000;
-            if (budget === "above-5cr") return property.price > 50000000;
-            return true;
-          })()
-        : true;
+      const matchBudget =
+        budget && typeof property.price === "number"
+          ? (() => {
+              if (budget === "below-2cr") return property.price < 20000000;
+              if (budget === "2cr-5cr")
+                return property.price >= 20000000 && property.price <= 50000000;
+              if (budget === "above-5cr") return property.price > 50000000;
+              return true;
+            })()
+          : true;
 
-    return matchType && matchBudget;
-  });
-
+      return matchType && matchBudget;
+    });
 
   /* RESET BUDGET WHEN TYPE CHANGES */
   useEffect(() => {
@@ -172,7 +170,77 @@ export default function LeasePropertyPage() {
   );
 
   return (
-    <div>
+    <>
+      {/* SEO Meta Tags */}
+
+      {/* <!-- Primary Meta Tags --> */}
+      <title>
+        Commercial Property for Lease in Gurgaon | Crownpoint Estates
+      </title>
+      <meta
+        name="title"
+        content="Commercial Property for Lease in Gurgaon | Crownpoint Estates"
+      />
+      <meta
+        name="description"
+        content="Lease commercial property in Gurgaon with expert support from Crownpoint Estates. Offices, retail & corporate leasing solutions across Gurugram and Delhi NCR."
+      />
+      {/* <meta
+        name="keywords"
+        content="property dealer in gurugram, real estate agent in gurgaon, commercial property gurgaon, residential property gurgaon, buy property gurgaon, sell property gurgaon, crownpoint estates"
+      /> */}
+      {/* <meta name="author" content="Crownpoint Estates" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
+
+      {/* <!-- Canonical URL --> */}
+      <link
+        rel="canonical"
+        href="https://www.crownpointestates.com/lease-property"
+      />
+
+      {/* <!-- Open Graph Meta Tags --> */}
+      <meta
+        property="og:title"
+        content="Commercial Property for Lease in Gurgaon | Crownpoint
+Estates"
+      />
+      <meta
+        property="og:description"
+        content="Lease commercial property in Gurgaon with
+expert support from Crownpoint Estates. Offices, retail & corporate leasing solutions across
+Gurugram and Delhi NCR."
+      />
+      <meta
+        property="og:image"
+        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
+a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+      />
+      <meta
+        property="og:url"
+        content="http://crownpointestates.com/lease-property"
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Crownpoint Estates" />
+      <meta property="og:locale" content="en_IN" />
+
+      {/* <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="Property Dealer in Gurugram | Crownpoint Estates"
+      />
+      <meta
+        name="twitter:description"
+        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+      />
+      <meta
+        name="twitter:image"
+        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
+      /> */}
+
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <Navbar />
 
       {/* HERO SECTION */}
@@ -368,6 +436,6 @@ export default function LeasePropertyPage() {
 
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
       <Footer />
-    </div>
+    </>
   );
 }

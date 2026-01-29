@@ -44,7 +44,7 @@ export default function BuyProperty() {
             expectedPrice: Number(formData.expectedPrice),
             areaSqft: Number(formData.areaSqft),
           }),
-        }
+        },
       );
 
       const data = await res.json();
@@ -70,7 +70,78 @@ export default function BuyProperty() {
     }
   };
   return (
-    <div>
+    <>
+      {/* SEO Meta Tags */}
+
+      {/* <!-- Primary Meta Tags --> */}
+      <title>
+        Sell Property in Gurgaon | Trusted Property Dealers in Gurugram
+      </title>
+      <meta
+        name="title"
+        content="Sell Property in Gurgaon | Trusted Property Dealers in Gurugram"
+      />
+      <meta
+        name="description"
+        content="Sell your property in Gurgaon with Crownpoint Estates. Get the right valuation, genuine buyers, and transparent processes from experienced real estate consultants in Gurugram."
+      />
+      {/* <meta
+        name="keywords"
+        content="property dealer in gurugram, real estate agent in gurgaon, commercial property gurgaon, residential property gurgaon, buy property gurgaon, sell property gurgaon, crownpoint estates"
+      /> */}
+      {/* <meta name="author" content="Crownpoint Estates" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
+
+      {/* <!-- Canonical URL --> */}
+      <link
+        rel="canonical"
+        href="https://www.crownpointestates.com/sell-property"
+      />
+
+      {/* <!-- Open Graph Meta Tags --> */}
+
+      <meta
+        property="og:title"
+        content="Sell Property in Gurgaon | Trusted Property Dealers in
+Gurugram"
+      />
+      <meta
+        property="og:description"
+        content="Sell your property in Gurgaon with Crownpoint
+Estates. Get the right valuation, genuine buyers, and transparent processes from
+experienced real estate consultants in Gurugram."
+      />
+      <meta
+        property="og:image"
+        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
+a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+      />
+      <meta
+        property="og:url"
+        content="https://www.crownpointestates.com/sell-property"
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Crownpoint Estates" />
+      <meta property="og:locale" content="en_IN" />
+
+      {/* <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="Property Dealer in Gurugram | Crownpoint Estates"
+      />
+      <meta
+        name="twitter:description"
+        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+      />
+      <meta
+        name="twitter:image"
+        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
+      /> */}
+
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <Navbar />
 
       {/* HERO SECTION */}
@@ -380,6 +451,6 @@ export default function BuyProperty() {
       </section>
 
       <Footer />
-    </div>
+    </>
   );
 }

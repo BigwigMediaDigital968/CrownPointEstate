@@ -37,7 +37,7 @@ const Blogs = () => {
     setLoading(true);
     try {
       const res = await axios.get<BlogPost[]>(
-        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`,
       );
       setBlogs(res.data);
       setFilteredBlogs(res.data);
@@ -75,157 +75,227 @@ const Blogs = () => {
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <Navbar />
-      <section className="relative h-[50vh] md:h-[60vh] lg:h-[90vh] overflow-hidden">
-        {/* BACKGROUND IMAGE */}
-        <Image
-          src={heroImg}
-          alt="About Us"
-          fill
-          priority
-          className="object-cover"
-        />
+    <>
+      {/* SEO Meta Tags */}
 
-        {/* DARK OVERLAY (OPTIONAL – improves contrast) */}
-        <div className="absolute inset-0 bg-black/40" />
+      {/* <!-- Primary Meta Tags --> */}
+      <title>
+        Real Estate Blogs & Property Insights | Crownpoint Estates Gurgaon
+      </title>
+      <meta
+        name="title"
+        content="Real Estate Blogs & Property Insights | Crownpoint Estates Gurgaon"
+      />
+      <meta
+        name="description"
+        content="Read expert real estate blogs by Crownpoint Estates covering property trends, investment tips, and market insights in Gurugram and Delhi NCR."
+      />
+      {/* <meta
+        name="keywords"
+        content="property dealer in gurugram, real estate agent in gurgaon, commercial property gurgaon, residential property gurgaon, buy property gurgaon, sell property gurgaon, crownpoint estates"
+      /> */}
+      {/* <meta name="author" content="Crownpoint Estates" />
+      <meta name="robots" content="index, follow" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
 
-        {/* CONTENT */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            {/* LEFT CONTENT */}
-            <div>
-              <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4">
-                Blogs
-              </h1>
+      {/* <!-- Canonical URL --> */}
+      <link rel="canonical" href="https://www.crownpointestates.com/blogs" />
 
-              <p className="text-sm tracking-widest text-white/80 uppercase">
-                <Link href="/" className="hover:text-white">
-                  Home
-                </Link>
-                <span className="mx-2">›</span>
-                <span className="text-white">Blogs</span>
-              </p>
-            </div>
+      {/* <!-- Open Graph Meta Tags --> */}
+      <meta
+        property="og:title"
+        content="Real Estate Blogs & Property Insights | Crownpoint
+Estates Gurgaon"
+      />
+      <meta
+        property="og:description"
+        content="Read expert real estate blogs by Crownpoint
+Estates covering property trends, investment tips, and market insights in Gurugram and
+Delhi NCR."
+      />
+      <meta
+        property="og:image"
+        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
+a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+      />
+      <meta
+        property="og:url"
+        content="https://www.crownpointestates.com/blogs"
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Crownpoint Estates" />
+      <meta property="og:locale" content="en_IN" />
 
-            {/* RIGHT SIDE – QUICK ENQUIRY */}
-            <div className="hidden lg:flex justify-end">
-              <QuickEnquiry />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:title"
+        content="Property Dealer in Gurugram | Crownpoint Estates"
+      />
+      <meta
+        name="twitter:description"
+        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+      />
+      <meta
+        name="twitter:image"
+        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
+      /> */}
 
-      <div className="w-11/12 md:w-5/6 mx-auto flex flex-col gap-8 py-[40px]">
-        {/* Search Bar */}
-        <div className="sticky top-[80px] z-10 bg-white py-2">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="🔍 Search blogs by title or author"
-            className="w-full p-3 border border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <div className="min-h-screen bg-white text-black">
+        <Navbar />
+        <section className="relative h-[50vh] md:h-[60vh] lg:h-[90vh] overflow-hidden">
+          {/* BACKGROUND IMAGE */}
+          <Image
+            src={heroImg}
+            alt="About Us"
+            fill
+            priority
+            className="object-cover"
           />
-        </div>
 
-        {loading ? (
-          /* 🔄 LOADER */
-          <div className="flex flex-col justify-center items-center min-h-[50vh]">
-            <div className="w-12 h-12 border-4 border-[var(--primary-color)] border-t-transparent rounded-full animate-spin mb-4" />
-            <p className="text-gray-600 text-lg">Loading blogs...</p>
-          </div>
-        ) : currentBlogs.length === 0 ? (
-          /* ❌ NO DATA STATE */
-          <div className="flex justify-center items-center min-h-[50vh]">
-            <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-10 max-w-xl w-full text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-                📄
+          {/* DARK OVERLAY (OPTIONAL – improves contrast) */}
+          <div className="absolute inset-0 bg-black/40" />
+
+          {/* CONTENT */}
+          <div className="relative z-10 h-full flex items-center">
+            <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              {/* LEFT CONTENT */}
+              <div>
+                <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4">
+                  Blogs
+                </h1>
+
+                <p className="text-sm tracking-widest text-white/80 uppercase">
+                  <Link href="/" className="hover:text-white">
+                    Home
+                  </Link>
+                  <span className="mx-2">›</span>
+                  <span className="text-white">Blogs</span>
+                </p>
               </div>
 
-              <h3 className="text-2xl font-semibold mb-3 text-gray-900">
-                No Blogs Available
-              </h3>
-
-              <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                We don’t have any blogs matching your search right now. If
-                you’re looking for expert real estate advice, our team is happy
-                to help.
-              </p>
-
-              <button
-                onClick={() => setIsPopupOpen(true)}
-                className="bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
-              >
-                Talk to Our Expert
-              </button>
+              {/* RIGHT SIDE – QUICK ENQUIRY */}
+              <div className="hidden lg:flex justify-end">
+                <QuickEnquiry />
+              </div>
             </div>
           </div>
-        ) : (
-          /* ✅ BLOG GRID */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentBlogs.map((blog) => (
-              <Link
-                key={blog._id}
-                href={`/blogs/${blog.slug}`}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer group border border-gray-200"
-              >
-                {/* Image */}
-                <div className="relative w-full h-56 overflow-hidden">
-                  <Image
-                    src={blog.coverImage}
-                    alt={blog.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+        </section>
+
+        <div className="w-11/12 md:w-5/6 mx-auto flex flex-col gap-8 py-[40px]">
+          {/* Search Bar */}
+          <div className="sticky top-[80px] z-10 bg-white py-2">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="🔍 Search blogs by title or author"
+              className="w-full p-3 border border-gray-300 rounded-lg bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+            />
+          </div>
+
+          {loading ? (
+            /* 🔄 LOADER */
+            <div className="flex flex-col justify-center items-center min-h-[50vh]">
+              <div className="w-12 h-12 border-4 border-[var(--primary-color)] border-t-transparent rounded-full animate-spin mb-4" />
+              <p className="text-gray-600 text-lg">Loading blogs...</p>
+            </div>
+          ) : currentBlogs.length === 0 ? (
+            /* ❌ NO DATA STATE */
+            <div className="flex justify-center items-center min-h-[50vh]">
+              <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-10 max-w-xl w-full text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                  📄
                 </div>
 
-                {/* Content */}
-                <div className="p-5 flex flex-col justify-between h-[180px]">
-                  <div>
-                    <h2 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-[var(--primary-color)] transition-colors">
-                      {blog.title}
-                    </h2>
-                    <p className="text-gray-600 text-sm mb-1">
-                      {new Date(blog.datePublished).toLocaleDateString()}
-                    </p>
-                    <p className="text-gray-800 text-sm">
-                      By <span className="font-medium">{blog.author}</span>
-                    </p>
+                <h3 className="text-2xl font-semibold mb-3 text-gray-900">
+                  No Blogs Available
+                </h3>
+
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  We don’t have any blogs matching your search right now. If
+                  you’re looking for expert real estate advice, our team is
+                  happy to help.
+                </p>
+
+                <button
+                  onClick={() => setIsPopupOpen(true)}
+                  className="bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                >
+                  Talk to Our Expert
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* ✅ BLOG GRID */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {currentBlogs.map((blog) => (
+                <Link
+                  key={blog._id}
+                  href={`/blogs/${blog.slug}`}
+                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer group border border-gray-200"
+                >
+                  {/* Image */}
+                  <div className="relative w-full h-56 overflow-hidden">
+                    <Image
+                      src={blog.coverImage}
+                      alt={blog.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  <span className="mt-4 self-start text-[var(--primary-color)] font-semibold group-hover:underline transition">
-                    Read More →
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+                  {/* Content */}
+                  <div className="p-5 flex flex-col justify-between h-[180px]">
+                    <div>
+                      <h2 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-[var(--primary-color)] transition-colors">
+                        {blog.title}
+                      </h2>
+                      <p className="text-gray-600 text-sm mb-1">
+                        {new Date(blog.datePublished).toLocaleDateString()}
+                      </p>
+                      <p className="text-gray-800 text-sm">
+                        By <span className="font-medium">{blog.author}</span>
+                      </p>
+                    </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center mt-8 space-x-2 flex-wrap gap-2">
-            {[...Array(totalPages)].map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentPage(idx + 1)}
-                className={`px-4 py-2 rounded-lg border font-medium transition-colors duration-200 ${
-                  currentPage === idx + 1
-                    ? "bg-[var(--primary-color)] text-white border-[var(--primary-color)]"
-                    : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
-                }`}
-              >
-                {idx + 1}
-              </button>
-            ))}
-          </div>
-        )}
+                    <span className="mt-4 self-start text-[var(--primary-color)] font-semibold group-hover:underline transition">
+                      Read More →
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-2 flex-wrap gap-2">
+              {[...Array(totalPages)].map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentPage(idx + 1)}
+                  className={`px-4 py-2 rounded-lg border font-medium transition-colors duration-200 ${
+                    currentPage === idx + 1
+                      ? "bg-[var(--primary-color)] text-white border-[var(--primary-color)]"
+                      : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                  }`}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <PopupForm open={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
+
+        <Footer />
       </div>
-
-      <PopupForm open={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
-
-      <Footer />
-    </div>
+    </>
   );
 };
 

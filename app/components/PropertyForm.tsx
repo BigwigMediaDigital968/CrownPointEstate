@@ -146,9 +146,21 @@ export default function PropertyForm({
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-    setNewImages((prev) => [...prev, ...Array.from(files)]);
+    if (!e.target.files) return;
+
+    const filesArray = Array.from(e.target.files);
+
+    setNewImages((prev) => {
+      // Prevent exact duplicates (same name + size)
+      const existing = new Set(prev.map((f) => `${f.name}-${f.size}`));
+      const filtered = filesArray.filter(
+        (f) => !existing.has(`${f.name}-${f.size}`),
+      );
+      return [...prev, ...filtered];
+    });
+
+    // ✅ VERY IMPORTANT: reset input
+    e.target.value = "";
   };
 
   // Add this handler
@@ -176,67 +188,131 @@ export default function PropertyForm({
     setNewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true); // 🔹 start loader
+  //   try {
+  //     const data = new FormData();
+
+  //     Object.entries(formData).forEach(([key, value]) => {
+  //       if (value !== undefined && value !== null && value !== "") {
+  //         data.append(key, value.toString());
+  //       }
+  //     });
+
+  //     (Object.keys(arrayInputs) as ArrayFields[]).forEach((key) => {
+  //       const arr = arrayInputs[key]
+  //         .split(",")
+  //         .map((i) => i.trim())
+  //         .filter(Boolean);
+  //       data.append(key, JSON.stringify(arr));
+  //     });
+
+  //     newImages.forEach((file) => data.append("images", file));
+  //     data.append("existingImages", JSON.stringify(existingImages));
+
+  //     if (brochureFile) {
+  //       data.append("brochure", brochureFile); // <-- this was missing
+  //     } else if (property && !brochureFile && removeBrochure) {
+  //       // Signal backend to remove existing brochure when updating without a new file
+  //       data.append("removeBrochure", "true");
+  //       // Many backends only clear fields if the field itself is sent.
+  //       // Send brochure as empty string to force clearing.
+  //       data.append("brochure", "");
+  //     }
+
+  //     if (featuredThumbnailFile) {
+  //       data.append("featuredThumbnail", featuredThumbnailFile);
+  //     }
+
+  //     if (property) {
+  //       await axios.put(
+  //         `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`,
+  //         data,
+  //         {
+  //           headers: { "Content-Type": "multipart/form-data" },
+  //         },
+  //       );
+  //     } else {
+  //       await axios.post(
+  //         `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+  //         data,
+  //         {
+  //           headers: { "Content-Type": "multipart/form-data" },
+  //         },
+  //       );
+  //     }
+
+  //     onSuccess();
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Failed to submit property", error);
+  //   } finally {
+  //     setLoading(false); // 🔹 stop loader
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); // 🔹 start loader
+    setLoading(true);
+
     try {
       const data = new FormData();
 
+      // 🔹 Basic fields
       Object.entries(formData).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
-          data.append(key, value.toString());
+          data.append(key, String(value));
         }
       });
 
+      // 🔹 Array fields
       (Object.keys(arrayInputs) as ArrayFields[]).forEach((key) => {
         const arr = arrayInputs[key]
           .split(",")
           .map((i) => i.trim())
           .filter(Boolean);
+
         data.append(key, JSON.stringify(arr));
       });
 
-      newImages.forEach((file) => data.append("images", file));
+      // 🔹 Images
+      newImages.forEach((file) => {
+        data.append("images", file);
+      });
+
       data.append("existingImages", JSON.stringify(existingImages));
 
+      // 🔹 Brochure logic
       if (brochureFile) {
-        data.append("brochure", brochureFile); // <-- this was missing
-      } else if (property && !brochureFile && removeBrochure) {
-        // Signal backend to remove existing brochure when updating without a new file
+        data.append("brochure", brochureFile);
+      } else if (property && removeBrochure) {
         data.append("removeBrochure", "true");
-        // Many backends only clear fields if the field itself is sent.
-        // Send brochure as empty string to force clearing.
         data.append("brochure", "");
       }
 
+      // 🔹 Featured thumbnail
       if (featuredThumbnailFile) {
         data.append("featuredThumbnail", featuredThumbnailFile);
       }
 
+      const url = property
+        ? `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`
+        : `${process.env.NEXT_PUBLIC_API_BASE}/api/property`;
+
+      // ❌ DO NOT set multipart headers manually
       if (property) {
-        await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`,
-          data,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          },
-        );
+        await axios.put(url, data);
       } else {
-        await axios.post(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
-          data,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          },
-        );
+        await axios.post(url, data);
       }
 
       onSuccess();
       onClose();
     } catch (error) {
-      console.error("Failed to submit property", error);
+      console.error("❌ Failed to submit property:", error);
     } finally {
-      setLoading(false); // 🔹 stop loader
+      setLoading(false);
     }
   };
 
@@ -381,7 +457,7 @@ export default function PropertyForm({
                     className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
                   >
                     {existingImages.map((url, idx) => (
-                      <Draggable key={url} draggableId={url} index={idx}>
+                      <Draggable key={idx} draggableId={url} index={idx}>
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
@@ -427,6 +503,7 @@ export default function PropertyForm({
           multiple
           onChange={handleFileChange}
           className="mt-2"
+          accept="image/*"
         />
         <div className="grid grid-cols-4 gap-3 mt-3">
           {newImages.map((file, idx) => (
