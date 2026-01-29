@@ -154,7 +154,7 @@ export default function Home() {
 
       {/* <!-- Primary Meta Tags --> */}
       <title>
-        Crownpoint Estates | Property Dealer in Gurugram – Crownpoint Estates
+        Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE
       </title>
       <meta
         name="title"
