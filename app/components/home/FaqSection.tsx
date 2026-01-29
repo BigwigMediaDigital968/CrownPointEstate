@@ -80,9 +80,9 @@ export default function FaqSection() {
                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                     aria-expanded={openIndex === index}
                   >
-                    <span className={`font-semibold text-lg ${openIndex === index ? "text-[var(--primary-color)]" : "text-[var(--primary-bg)]"}`}>
+                    <h3 className={`font-semibold text-lg ${openIndex === index ? "text-[var(--primary-color)]" : "text-[var(--primary-bg)]"}`}>
                       {faq.question}
-                    </span>
+                    </h3>
                     <span className={`ml-4 flex-shrink-0 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}>
                       {openIndex === index ? (
                         <Minus className="w-5 h-5 text-[var(--primary-color)]" />

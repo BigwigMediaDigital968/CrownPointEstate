@@ -39,7 +39,7 @@ export default function About() {
             </p>
 
             <h1 className="font-heading text-2xl md:text-4xl leading-snug font-bold text-[#1e2d3b] lg:text-[var(--primary-bg)]">
-              Trusted Real Estate Advisors with Over 15 Years of Experience
+              Trusted Property Dealer in Gurugram with Over 15 Years of Experience
             </h1>
           </div>
         </div>

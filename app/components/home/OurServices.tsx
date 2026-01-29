@@ -1,16 +1,10 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-// Import assets
-import buyIcon from "../../assets/hero/buy-property.svg";
-import sellIcon from "../../assets/hero/for-sell.svg";
-import leaseIcon from "../../assets/hero/for-lease.svg";
-import rentIcon from "../../assets/hero/rent-property.svg";
+import { House, TrendingUp, FileSignature, Key } from "lucide-react";
 
 const services = [
   {
@@ -19,15 +13,15 @@ const services = [
     description:
       "Looking to buy residential or commercial property? Crownpoint Estates is a trusted property dealer in Gurugram, helping homebuyers and investors find the right property at the best market price. From luxury apartments and builder floors to office spaces and retail units, we provide expert guidance, verified listings, and end-to-end support to ensure a smooth and secure buying experience.",
     link: "/buy-property",
-    icon: buyIcon,
+    icon: House,
   },
   {
     id: 2,
     title: "Sell Property",
     description:
       "If you want to sell your property quickly and at the right value, partner with an experienced property dealer in Gurugram. At Crownpoint Estates, we use strong market insights, an active buyer network, and strategic marketing to attract genuine buyers. From pricing and promotion to negotiation and documentation, we manage the entire selling process professionally and transparently.",
-    link: "/sell-property", // Assuming this route exists or will be created/redirected
-    icon: sellIcon,
+    link: "/sell-property",
+    icon: TrendingUp,
   },
   {
     id: 3,
@@ -35,7 +29,7 @@ const services = [
     description:
       "As a reliable property dealer in Gurugram, we help property owners lease residential and commercial spaces to verified tenants. Whether it’s office leasing, retail space, or residential leasing, our team ensures maximum rental value, minimal vacancy, and complete legal assistance, making the leasing process hassle-free for landlords.",
     link: "/lease-property",
-    icon: leaseIcon,
+    icon: FileSignature,
   },
   {
     id: 4,
@@ -43,7 +37,7 @@ const services = [
     description:
       "Searching for a rental home or commercial space? Crownpoint Estates, a trusted property dealer in Gurugram, offers a wide range of rental options across prime locations. We help tenants find suitable properties based on budget, location, and requirements while ensuring clear agreements and smooth move-in support.",
     link: "/rent-property",
-    icon: rentIcon,
+    icon: Key,
   },
 ];
 
@@ -83,12 +77,8 @@ export default function OurServices() {
               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-transparent hover:border-[var(--primary-color)]/20 relative overflow-hidden">
                 
                 {/* Icon Container */}
-                <div className="mb-6 relative w-16 h-16 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center group-hover:bg-[var(--primary-color)] group-hover:text-white transition-colors duration-300">
-                  <Image
-                    src={service.icon}
-                    alt={service.title}
-                    className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
+                <div className="mb-6 relative w-16 h-16 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center text-[var(--primary-color)] group-hover:bg-[var(--primary-color)] group-hover:text-white transition-colors duration-300">
+                  <service.icon className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" />
                 </div>
 
                 {/* Content */}
