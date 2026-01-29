@@ -38,9 +38,9 @@ export default function About() {
               Who we are
             </p>
 
-            <h2 className="font-heading text-2xl md:text-4xl leading-snug font-bold text-[#1e2d3b] lg:text-[var(--primary-bg)]">
+            <h1 className="font-heading text-2xl md:text-4xl leading-snug font-bold text-[#1e2d3b] lg:text-[var(--primary-bg)]">
               Trusted Real Estate Advisors with Over 15 Years of Experience
-            </h2>
+            </h1>
           </div>
         </div>
       </div>
@@ -87,21 +87,18 @@ export default function About() {
               data-aos-delay="250"
             >
               <div>
-                <h4 className="text-lg font-semibold text-[#1e2d3b] mb-3">
+                <h2 className="text-lg font-semibold text-[#1e2d3b] mb-3">
                   Our mission
-                </h4>
+                </h2>
                 <p className="text-gray-600 text-justify">
-                  To deliver exceptional real estate services through
-                  personalised guidance, ethical practices, and in-depth market
-                  expertise, empowering clients to make confident, informed, and
-                  rewarding property decisions across Gurugram and Delhi NCR.
+                  To deliver exceptional real estate services through personalised guidance, ethical practices, and in-depth market expertise, empowering clients to make confident, informed, and rewarding property decisions across Gurugram and Delhi NCR.
                 </p>
               </div>
 
               <div data-aos="fade-up" data-aos-delay="350">
-                <h4 className="text-lg font-semibold text-[#1e2d3b] mb-3">
+                <h2 className="text-lg font-semibold text-[#1e2d3b] mb-3">
                   Our vision
-                </h4>
+                </h2>
                 <p className="text-gray-600 text-justify">
                   To be a leading real estate consultancy recognized for
                   professionalism, transparency, and customer satisfaction,

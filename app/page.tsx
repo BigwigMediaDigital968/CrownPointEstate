@@ -4,10 +4,11 @@ import Navbar from "./components/Navbar";
 import HeroSlider from "./components/Hero";
 import About from "./components/home/About";
 import Footer from "./components/Footer";
-import QuickEnquiry from "./components/QuickEnquiry";
 import WhyChooseUs from "./components/home/WhyChooseUs";
 import FactsSection from "./components/home/Fact";
 import TestimonialSection from "./components/home/Testimonial";
+import OurServices from "./components/home/OurServices";
+import FaqSection from "./components/home/FaqSection";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -34,7 +35,6 @@ import img13 from "./assets/client13.png";
 import img14 from "./assets/client14.png";
 import img15 from "./assets/client15.png";
 import img16 from "./assets/client16.png";
-import { propertyData } from "./data/propertyData";
 
 const project1 = "/assets/projects/project_1.jpg";
 const project2 = "/assets/projects/project_2.jpg";
@@ -152,6 +152,7 @@ export default function Home() {
       <Navbar />
       <HeroSlider />
       <About />
+      <OurServices />
 
       {/* Featured Properties */}
       <section className="py-16">
@@ -238,6 +239,7 @@ export default function Home() {
       <WhyChooseUs />
       <FactsSection />
       <TestimonialSection />
+      
       <section className="py-16">
         <div className="w-11/12 md:w-5/6 mx-auto">
           <div className="mb-8" data-aos="fade-up">
@@ -367,6 +369,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <FaqSection />
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
       <Footer />
     </div>
