@@ -362,7 +362,7 @@ properties in Gurgaon & Delhi NCR."
             </div>
 
             <a
-              href="/blog"
+              href="/blogs"
               className="hidden md:block text-sm tracking-widest text-[var(--primary-color)] hover:underline"
               data-aos="zoom-in"
               data-aos-delay="150"

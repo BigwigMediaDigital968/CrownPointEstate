@@ -95,5 +95,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       lastModified: today,
     },
+    {
+      url: `${SITE_URL}/blogs/crown-point-estates-best-property-dealer-in-gurugram`,
+      priority: 0.7,
+      changeFrequency: "weekly",
+      lastModified: today,
+    },
+
   ];
 }
