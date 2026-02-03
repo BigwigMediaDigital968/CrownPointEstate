@@ -30,6 +30,7 @@ async function getBlog(slug: string): Promise<BlogType> {
 
   const blogs: BlogType[] = await res.json();
   const found = blogs.find((b) => b.slug === slug);
+
   if (!found) throw new Error("Blog not found");
 
   return found;
@@ -38,7 +39,7 @@ async function getBlog(slug: string): Promise<BlogType> {
 async function getRelatedBlogs(slug: string): Promise<RelatedBlogType[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE}/blog/related/${slug}`,
-    { cache: "no-store" }
+    { cache: "no-store" },
   );
 
   if (!res.ok) return [];
@@ -54,11 +55,37 @@ export async function generateMetadata({
   const { slug } = await params;
   const blog = await getBlog(slug);
 
+  console.log(blog);
+
   return {
     title: blog.title,
     description: blog.excerpt,
     alternates: {
-      canonical: `https://www.khalsapropertydealers.com/blogs/${blog.slug}`,
+      canonical: `https://www.crownpointestates.com/blogs/${blog.slug}`,
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpt,
+      url: `https://www.crownpointestates.com/blogs/${blog.slug}`,
+      siteName: "CROWNPOINT ESTATES",
+      type: "article",
+      locale: "en_IN",
+
+      images: [
+        {
+          url: blog.coverImage,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.excerpt,
+      images: [blog.coverImage],
     },
   };
 }

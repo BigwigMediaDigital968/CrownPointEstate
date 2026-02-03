@@ -153,9 +153,6 @@ export default function Home() {
       {/* SEO Meta Tags */}
 
       {/* <!-- Primary Meta Tags --> */}
-      <title>
-        Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE
-      </title>
       <meta
         name="title"
         content="Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE"
@@ -188,8 +185,7 @@ properties in Gurgaon & Delhi NCR."
       />
       <meta
         property="og:image"
-        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
-a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg"
       />
       <meta property="og:url" content="https://www.crownpointestates.com/" />
       <meta property="og:type" content="website" />
@@ -304,7 +300,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
       <WhyChooseUs />
       <FactsSection />
       <TestimonialSection />
-      
+
       <section className="py-16">
         <div className="w-11/12 md:w-5/6 mx-auto">
           <div className="mb-8" data-aos="fade-up">

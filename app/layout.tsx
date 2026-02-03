@@ -24,7 +24,7 @@ const CLARITY_ID = "v5wccw4r82";
 
 /* ================== METADATA ================== */
 export const metadata: Metadata = {
-  title: "Crownpoint Estates",
+  title: "Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE",
   verification: {
     google: "Uei6zvpwBwT4gfafLKIu6BV1V0o1ruAGQ1MsetlXfPM",
   },
@@ -92,7 +92,7 @@ export default function RootLayout({
             description:
               "Crownpoint Estates is a trusted real estate consultancy firm with over 15 years of experience delivering residential and commercial property solutions across Gurugram and Delhi NCR.",
             image:
-              "https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcpe-logo.56cc1d43.png&w=64&q=75",
+              "https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg",
             url: "https://www.crownpointestates.com/",
             telephone: "+91 98115 56625, +91 98107 86375, +91 99990 19763",
             email: "sales@crownpointestates.com",
@@ -132,7 +132,7 @@ export default function RootLayout({
             "@type": "Organization",
             name: "Crownpoint Estate",
             url: "https://www.crownpointestates.com/",
-            logo: "https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcpe-logo.56cc1d43.png&w=64&q=75",
+            logo: "https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg",
             contactPoint: [
               {
                 "@type": "ContactPoint",
