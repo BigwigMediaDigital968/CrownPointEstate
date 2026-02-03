@@ -366,7 +366,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
             </div>
 
             <a
-              href="/blog"
+              href="/blogs"
               className="hidden md:block text-sm tracking-widest text-[var(--primary-color)] hover:underline"
               data-aos="zoom-in"
               data-aos-delay="150"
