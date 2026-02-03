@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import SidebarSimpleForm from "./SidebarForm";
-
+// import SidebarSimpleForm from "./SidebarForm";
+import EnquiryForm from "./EnquiryForm";
 interface RelatedBlog {
   slug: string;
   coverImage: string;
@@ -24,7 +24,8 @@ export default function BlogSidebar({ relatedBlogs = [] }: BlogSidebarProps) {
           Share your details & get expert assistance
         </p>
 
-        <SidebarSimpleForm />
+        {/* <SidebarSimpleForm /> */}
+        <EnquiryForm variant="default" btnText="Request Call Back" />
       </div>
 
       {/* ===== RELATED BLOGS ===== */}
