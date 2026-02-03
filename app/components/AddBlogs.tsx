@@ -66,7 +66,7 @@ const AddBlog = ({
   ];
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -120,7 +120,7 @@ const AddBlog = ({
         {
           method: existingBlog ? "PUT" : "POST",
           body: blogData,
-        }
+        },
       );
 
       const data = await res.json();

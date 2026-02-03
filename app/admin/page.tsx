@@ -14,63 +14,72 @@ const Dashboard = () => {
     plots: 0,
     sellPropertiesRequests: 0,
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ✅ Check login status
     const loggedIn = localStorage.getItem("isAdmin");
     if (loggedIn !== "true") {
-      router.push("/login"); // redirect if not logged in
+      router.push("/login");
       return;
     }
 
-    // ✅ Fetch data only if logged in
-    Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/lead/all`).then((r) =>
-        r.json()
-      ),
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/brochure-leads`).then((r) =>
-        r.json()
-      ),
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`).then((r) =>
-        r.json()
-      ),
-      fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/property?page=1&limit=10000`
-      ).then((r) => r.json()),
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/plot/all`).then((r) =>
-        r.json()
-      ),
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/viewsell`).then(
-        (r) => r.json()
-      ),
-    ])
-      .then(
-        ([
+    const fetchData = async () => {
+      try {
+        const responses = await Promise.allSettled([
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/lead/all`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/brochure-leads`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/property`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/plot/all`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/sellproperty/all`),
+        ]);
+
+        // Helper to safely parse JSON
+        const safeJsonParse = async (response: Response) => {
+          if (!response.ok) return null;
+          const text = await response.text();
+          try {
+            return JSON.parse(text);
+          } catch {
+            console.error(`Invalid JSON response: ${text.substring(0, 100)}`);
+            return null;
+          }
+        };
+
+        const [
           leads,
           brochureLead,
           blogs,
           properties,
           plots,
           sellPropertiesRequests,
-        ]) => {
-          setCounts({
-            leads: Array.isArray(leads) ? leads.length : 0,
-            brochureLead: Array.isArray(brochureLead) ? brochureLead.length : 0,
-            blogs: Array.isArray(blogs) ? blogs.length : 0,
-            properties: Array.isArray(properties.properties)
-              ? properties.properties.length
-              : 0,
-            plots: Array.isArray(plots.data) ? plots.data.length : 0,
-            sellPropertiesRequests: Array.isArray(sellPropertiesRequests)
-              ? sellPropertiesRequests.length
-              : 0,
-          });
-        }
-      )
+        ] = await Promise.all(
+          responses.map(async (result) => {
+            if (result.status === "fulfilled") {
+              return await safeJsonParse(result.value);
+            }
+            return null;
+          }),
+        );
 
-      .catch((error) => {
+        setCounts({
+          leads: Array.isArray(leads) ? leads.length : 0,
+          brochureLead: Array.isArray(brochureLead) ? brochureLead.length : 0,
+          blogs: Array.isArray(blogs) ? blogs.length : 0,
+          properties: properties?.properties ? properties.properties.length : 0,
+          plots: plots?.data ? plots.data.length : 0,
+          sellPropertiesRequests: Array.isArray(sellPropertiesRequests)
+            ? sellPropertiesRequests.length
+            : 0,
+        });
+      } catch (error) {
         console.error("Error loading dashboard data:", error);
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [router]);
 
   const cards = [
@@ -86,13 +95,20 @@ const Dashboard = () => {
     },
   ];
 
+  if (loading) {
+    return (
+      <section className="px-4 py-8 flex items-center justify-center min-h-[400px]">
+        <div className="text-gray-400">Loading dashboard...</div>
+      </section>
+    );
+  }
+
   return (
     <section className="px-4 py-8 space-y-10">
       <h2 className="text-2xl font-bold text-center text-gray-200">
         Admin Dashboard
       </h2>
 
-      {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
         {cards.map((card) => (
           <StatCard key={card.title} {...card} />

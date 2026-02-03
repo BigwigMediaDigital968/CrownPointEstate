@@ -94,8 +94,7 @@ export default function RootLayout({
             image:
               "https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcpe-logo.56cc1d43.png&w=64&q=75",
             url: "https://www.crownpointestates.com/",
-            telephone:
-              "+91 98115 56625, +91 98107 86375, +91 99990 19763",
+            telephone: "+91 98115 56625, +91 98107 86375, +91 99990 19763",
             email: "sales@crownpointestates.com",
             address: {
               "@type": "PostalAddress",
@@ -133,8 +132,7 @@ export default function RootLayout({
             "@type": "Organization",
             name: "Crownpoint Estate",
             url: "https://www.crownpointestates.com/",
-            logo:
-              "https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcpe-logo.56cc1d43.png&w=64&q=75",
+            logo: "https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcpe-logo.56cc1d43.png&w=64&q=75",
             contactPoint: [
               {
                 "@type": "ContactPoint",

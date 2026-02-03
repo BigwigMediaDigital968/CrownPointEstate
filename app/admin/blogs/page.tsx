@@ -45,7 +45,7 @@ export default function AdminBlogsPage() {
     setLoading(true);
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`,
       );
       const data = await res.json();
       setBlogs(data);
@@ -75,7 +75,7 @@ export default function AdminBlogsPage() {
         `${process.env.NEXT_PUBLIC_API_BASE}/blog/${slug}`,
         {
           method: "DELETE",
-        }
+        },
       );
       const json = await res.json();
       if (res.ok) {
@@ -101,7 +101,7 @@ export default function AdminBlogsPage() {
         {
           method: "PATCH",
           body: formData,
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Failed to update image");
@@ -143,7 +143,7 @@ export default function AdminBlogsPage() {
   const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
   const paginatedBlogs = filteredBlogs.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   return (
@@ -274,7 +274,7 @@ export default function AdminBlogsPage() {
                   >
                     {num}
                   </button>
-                )
+                ),
               )}
               <button
                 onClick={() =>
@@ -325,7 +325,7 @@ export default function AdminBlogsPage() {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ content: htmlContent }),
-                      }
+                      },
                     );
                     if (!res.ok) throw new Error("Failed to update blog");
                     alert("Blog updated successfully");
