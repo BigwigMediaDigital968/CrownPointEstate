@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 interface BlogPost {
   _id?: string;
   title: string;
@@ -12,6 +17,7 @@ interface BlogPost {
   tags?: string;
   coverImage?: string;
   schemaMarkup?: string[]; // ✅ add this
+  faqs?: FAQItem[];
 }
 
 const AddBlog = ({
@@ -32,9 +38,11 @@ const AddBlog = ({
     tags: "",
     coverImage: null as File | null,
     schemaMarkup: [""], // initialize with one field
+    faqs: [{ question: "", answer: "" }], // ✅ NEW
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
 
   useEffect(() => {
     if (existingBlog) {
@@ -48,9 +56,14 @@ const AddBlog = ({
         coverImage: null,
 
         schemaMarkup:
-          existingBlog?.schemaMarkup && existingBlog.schemaMarkup.length > 0
+          existingBlog.schemaMarkup && existingBlog.schemaMarkup.length > 0
             ? existingBlog.schemaMarkup
             : [""],
+
+        faqs:
+          existingBlog.faqs && existingBlog.faqs.length > 0
+            ? existingBlog.faqs
+            : [{ question: "", answer: "" }],
       });
     }
   }, [existingBlog]);
@@ -88,6 +101,16 @@ const AddBlog = ({
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
     if (e.target.files && e.target.files.length > 0) {
       setFormData((prev) => ({ ...prev, coverImage: e.target.files![0] }));
     }
@@ -112,6 +135,12 @@ const AddBlog = ({
       formData.schemaMarkup.forEach((schema) => {
         blogData.append("schemaMarkup", schema);
       });
+
+      const cleanedFaqs = formData.faqs.filter(
+        (f) => f.question.trim() && f.answer.trim(),
+      );
+
+      blogData.append("faqs", JSON.stringify(cleanedFaqs));
 
       const res = await fetch(
         existingBlog
@@ -210,13 +239,35 @@ const AddBlog = ({
             value={formData.tags}
             onChange={handleChange}
           />
-          <input
+          {/* <input
             type="file"
             accept="image/*"
             className="w-full"
             onChange={handleImageChange}
             required={!existingBlog}
-          />
+          /> */}
+          <div className="space-y-3">
+            {/* Image Preview */}
+            {preview && (
+              <div className="relative w-full h-48 rounded-lg overflow-hidden border">
+                <img
+                  src={preview}
+                  alt="Selected image preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+
+            {/* File Input */}
+            <input
+              type="file"
+              accept="image/*"
+              className="w-full text-sm"
+              onChange={handleImageChange}
+              required={!existingBlog}
+            />
+          </div>
+
           <div>
             <label className="block font-medium mb-2">
               Schema Markup (JSON-LD)
@@ -256,6 +307,68 @@ const AddBlog = ({
                     setFormData((prev) => ({
                       ...prev,
                       schemaMarkup: prev.schemaMarkup.slice(0, -1),
+                    }))
+                  }
+                >
+                  – Remove Last
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label className="block font-medium mb-2">FAQs</label>
+
+            {formData.faqs.map((faq, index) => (
+              <div key={index} className="border p-3 rounded mb-3">
+                <input
+                  type="text"
+                  placeholder={`Question ${index + 1}`}
+                  className="w-full p-2 border mb-2"
+                  value={faq.question}
+                  onChange={(e) => {
+                    const updated = [...formData.faqs];
+                    updated[index].question = e.target.value;
+                    setFormData((prev) => ({ ...prev, faqs: updated }));
+                  }}
+                />
+
+                <textarea
+                  placeholder="Answer"
+                  rows={3}
+                  className="w-full p-2 border"
+                  value={faq.answer}
+                  onChange={(e) => {
+                    const updated = [...formData.faqs];
+                    updated[index].answer = e.target.value;
+                    setFormData((prev) => ({ ...prev, faqs: updated }));
+                  }}
+                />
+              </div>
+            ))}
+
+            <div className="flex gap-4">
+              <button
+                type="button"
+                className="px-3 py-1 bg-green-600 text-white rounded"
+                onClick={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    faqs: [...prev.faqs, { question: "", answer: "" }],
+                  }))
+                }
+              >
+                + Add FAQ
+              </button>
+
+              {formData.faqs.length > 1 && (
+                <button
+                  type="button"
+                  className="px-3 py-1 bg-red-500 text-white rounded"
+                  onClick={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      faqs: prev.faqs.slice(0, -1),
                     }))
                   }
                 >

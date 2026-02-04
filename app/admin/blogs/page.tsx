@@ -57,6 +57,8 @@ export default function AdminBlogsPage() {
     }
   };
 
+  console.log(blogs);
+
   useEffect(() => {
     // ✅ Check login status
     const loggedIn = localStorage.getItem("isAdmin");

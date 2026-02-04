@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 // import SidebarSimpleForm from "./SidebarForm";
+import { formatDate } from "@/app/utils/formatDate";
+
 import EnquiryForm from "./EnquiryForm";
 interface RelatedBlog {
   slug: string;
   coverImage: string;
   title: string;
-  datePublished: string | number | Date;
+  datePublished: string | Date;
 }
 
 interface BlogSidebarProps {
@@ -54,7 +56,7 @@ export default function BlogSidebar({ relatedBlogs = [] }: BlogSidebarProps) {
                     {blog.title}
                   </h4>
                   <p className="text-xs text-gray-500 mt-1">
-                    {new Date(blog.datePublished).toLocaleDateString()}
+                    {formatDate(blog.datePublished)}
                   </p>
                 </div>
               </a>
