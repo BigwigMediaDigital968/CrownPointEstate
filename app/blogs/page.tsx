@@ -115,8 +115,7 @@ Delhi NCR."
       />
       <meta
         property="og:image"
-        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
-a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1769074373/CPE_LOGO_FINAL__wb2eiw.png"
       />
       <meta
         property="og:url"

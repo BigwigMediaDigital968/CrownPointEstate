@@ -101,6 +101,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       lastModified: today,
     },
-
+    {
+      url: `${SITE_URL}/blogs/builder-floor-for-sale-in-dlf-phase-2`,
+      priority: 0.7,
+      changeFrequency: "weekly",
+      lastModified: today,
+    },
   ];
 }
