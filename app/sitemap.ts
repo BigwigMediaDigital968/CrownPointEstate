@@ -107,7 +107,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       lastModified: today,
     },
-    
+    {
+      url: `${SITE_URL}/blogs/commercial-plots-for-sale-in-gurgaon`,
+      priority: 0.7,
+      changeFrequency: "weekly",
+      lastModified: today,
+    },
 
   ];
 }
