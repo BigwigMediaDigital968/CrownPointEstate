@@ -329,7 +329,7 @@ export default function PropertyForm({
         />
 
         <div>
-          <label className="block font-medium mb-1">Description</label>
+          <label className="block font-medium mb-1">Description hello</label>
           <textarea
             name="description"
             value={formData.description || ""}

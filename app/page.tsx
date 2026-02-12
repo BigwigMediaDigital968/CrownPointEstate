@@ -12,6 +12,8 @@ import FaqSection from "./components/home/FaqSection";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import PropertyTypes from "./components/home/PropertyTypes";
+import Areas from "./components/home/Areas";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
@@ -35,6 +37,8 @@ import img13 from "./assets/client13.png";
 import img14 from "./assets/client14.png";
 import img15 from "./assets/client15.png";
 import img16 from "./assets/client16.png";
+import ComparisonTable from "./components/home/ComparisonTable";
+import ContactCTA from "./components/home/ContactCTA";
 
 const project1 = "/assets/projects/project_1.jpg";
 const project2 = "/assets/projects/project_2.jpg";
@@ -90,6 +94,18 @@ const blogs = [
     image: project4,
   },
 ];
+
+interface BlogPost {
+  _id: string;
+  title: string;
+  slug: string;
+  coverImage: string;
+  author: string;
+  datePublished: string;
+}
+
+
+
 
 interface Property {
   _id: string;
@@ -299,6 +315,9 @@ properties in Gurgaon & Delhi NCR."
 
       <WhyChooseUs />
       <FactsSection />
+       <PropertyTypes />
+       <Areas/>
+       <ComparisonTable />
       <TestimonialSection />
 
       <section className="py-16">
@@ -344,7 +363,7 @@ properties in Gurgaon & Delhi NCR."
         </div>
       </section>
 
-      {/* <QuickEnquiry /> */}
+     
       <section className="py-16 bg-white overflow-hidden">
         <div className="w-11/12 md:w-5/6 mx-auto">
           {/* HEADER */}
@@ -430,6 +449,7 @@ properties in Gurgaon & Delhi NCR."
           </div>
         </div>
       </section>
+      <ContactCTA />
       <FaqSection />
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
       <Footer />

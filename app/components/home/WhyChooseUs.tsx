@@ -17,41 +17,41 @@ import "aos/dist/aos.css";
 
 const features = [
   {
-    title: "15+ Years of Industry Experience",
-    desc: "Over 15 years of proven real estate expertise in Gurugram, backed by deep local market knowledge and long-term client trust.",
+    title: "10+ Years Experience in Gurgaon Real Estate Market",
+    desc: "With over a decade of experience in the Gurgaon property market, we understand micro-markets, price appreciation trends, and high-growth investment zones.",
     icon: Building2,
     image: "/assets/15years.webp",
   },
   {
-    title: "Complete Property Solutions",
-    desc: "Specialised advisory for fresh bookings, resale, and renting across both residential and commercial real estate markets.",
+    title: "End-to-End Property Assistance (Site Visit to Registration)",
+    desc: " From property shortlisting, site inspections, price negotiation, agreement drafting, stamp duty, and final registration—we handle the entire real estate transaction process.",
     icon: Home,
     image: "/assets/complete.png",
   },
   {
-    title: "Strong Industry Network",
-    desc: "Well-established relationships with leading developers, property owners, and corporate clients for better opportunities.",
+    title: "RERA Registered Property Dealer in Gurugram",
+    desc: " We follow all regulatory guidelines and ensure complete legal due diligence. Every property listing is verified for ownership, approvals, and compliance, minimizing risks for buyers and investors.",
     icon: Network,
     image: "/assets/network.svg",
   },
-  {
-    title: "Transparent & Ethical Practices",
-    desc: "Clear communication, honest advice, and professional service at every stage of the property transaction.",
-    icon: ShieldCheck,
-    image: "/assets/Centric-Approach.webp",
-  },
-  {
-    title: "Client-Centric Approach",
-    desc: "Tailor-made solutions designed around individual needs, investment goals, and long-term value creation.",
-    icon: Users,
-    image: "/assets/cl1.webp",
-  },
-  {
-    title: "End-to-End Dedicated Support",
-    desc: "Comprehensive assistance from property search and negotiations to documentation and successful closure.",
-    icon: FileCheck,
-    image: "/assets/End-to-End.webp",
-  },
+  //{
+  //   title: "Transparent & Ethical Practices",
+  //   desc: "Clear communication, honest advice, and professional service at every stage of the property transaction.",
+  //   icon: ShieldCheck,
+  //   image: "/assets/Centric-Approach.webp",
+  // },
+  // {
+  //   title: "Client-Centric Approach",
+  //   desc: "Tailor-made solutions designed around individual needs, investment goals, and long-term value creation.",
+  //   icon: Users,
+  //   image: "/assets/cl1.webp",
+  // },
+  // {
+  //   title: "End-to-End Dedicated Support",
+  //   desc: "Comprehensive assistance from property search and negotiations to documentation and successful closure.",
+  //   icon: FileCheck,
+  //   image: "/assets/End-to-End.webp",
+  // },
 ];
 
 export default function WhyChooseUs() {
@@ -126,7 +126,7 @@ export default function WhyChooseUs() {
           Why choose us
         </p>
         <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-          Making living spaces affordable
+          Why Choose the Best Property Dealer in Gurgaon for Your Investment
         </h2>
       </div>
 

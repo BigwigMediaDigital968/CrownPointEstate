@@ -100,7 +100,7 @@ export default function Fact() {
             {/* ================= MOBILE IMAGE ================= */}
           <div className="relative w-full h-[260px] sm:h-[320px] lg:hidden overflow-hidden">
             <Image
-              src="/assets/fact.svg"
+              src="/assets/fact.png"
               alt="Luxury residential entrance"
               fill
               sizes="100vw"
@@ -135,7 +135,7 @@ export default function Fact() {
 
           
         </div>
-      </div>
+              </div>
 
       {/* ================= DESKTOP IMAGE ================= */}
       <div
@@ -144,7 +144,7 @@ export default function Fact() {
         data-aos-delay="300"
       >
         <Image
-          src="/assets/fact.svg"
+          src="/assets/fact.PNG"
           alt="Luxury residential entrance"
           fill
           sizes="45vw"

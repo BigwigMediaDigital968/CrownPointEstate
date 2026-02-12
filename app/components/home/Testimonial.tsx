@@ -131,8 +131,20 @@ export default function TestimonialSection() {
           Testimonials
         </p>
         <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-          What Our Clients Say
+          Why We Are the Best Property Dealer in Gurgaon
         </h2>
+        {/* <div className="pt-9 text-left max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            Our clients appreciate our transparent approach, professional advice,
+            and commitment to delivering value.
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed mt-2">
+            Positive testimonials highlight our reputation as a reliable real estate
+            broker in Gurugram.
+          </p>
+        </div> */}
+
+
       </div>
 
       {/* CAROUSEL CONTAINER */}
@@ -216,11 +228,10 @@ export default function TestimonialSection() {
           {testimonials.map((_, index) => (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? "w-6 bg-[var(--primary-color)]"
-                  : "w-2 bg-gray-300"
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                ? "w-6 bg-[var(--primary-color)]"
+                : "w-2 bg-gray-300"
+                }`}
             />
           ))}
         </div>

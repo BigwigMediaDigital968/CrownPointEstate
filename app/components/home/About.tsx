@@ -3,7 +3,6 @@
 import Image from "next/image";
 import bgImg from "../../assets/about/bg-pattern.png";
 import leftImg from "../../assets/about/about-left.png";
-import rightImg from "../../assets/about/about-right.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -21,116 +20,100 @@ export default function About() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden flex flex-col lg:block">
-      {/* ================= TOP BG SECTION ================= */}
-      <div className="relative w-full lg:w-[60%] h-auto md:h-[260px] lg:h-[300px] order-2 lg:order-none">
-        <Image
-          src={bgImg}
-          alt="Background"
-          fill
-          className="object-cover hidden lg:block"
-        />
+    <section className="relative overflow-hidden bg-[#faf9f7] pt-20 md:pt-28">
 
-        {/* TEXT OVER BG */}
-        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto h-full flex items-center py-8 lg:py-0">
-          <div className="max-w-xl" data-aos="fade-up" data-aos-delay="100">
-            <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
-              Who we are
-            </p>
+      {/* ================= HERO IMAGE WITH OVERLAY ================= */}
+      <div className="relative w-full py-10 md:py-14 px-6">
 
-            <h1 className="font-heading text-2xl md:text-4xl leading-snug font-bold text-[#1e2d3b] lg:text-[var(--primary-bg)]">
-              Trusted Property Dealer in Gurugram with Over 15 Years of Experience
-            </h1>
-          </div>
-        </div>
-      </div>
+        <div className="relative w-full h-full rounded-2xl overflow-hidden">
 
-      {/* ================= MOBILE / TABLET SIMPLE IMAGE ================= */}
-      <div
-        className="block lg:hidden w-full order-1"
-        data-aos="zoom-in"
-        data-aos-delay="150"
-      >
-        <Image
-          src={leftImg}
-          alt="Architecture"
-          className="w-full h-auto object-cover"
-        />
-      </div>
-
-      {/* ================= BOTTOM CONTENT SECTION ================= */}
-      <div className="relative bg-[#faf9f7] w-full lg:w-[90%] order-3 lg:order-none">
-        {/* LEFT EDGE IMAGE (DESKTOP ONLY) */}
-        <div
-          className="absolute left-0 top-0 h-full w-[42%] hidden lg:block"
-          data-aos="fade-right"
-          data-aos-delay="200"
-        >
-          <Image
+          {/* Background Image */}
+          {/* <Image
             src={leftImg}
-            alt="Architecture"
+            alt="Real Estate Architecture"
             fill
+            priority
             className="object-cover"
+          /> */}
+
+          {/* Dark Gradient Overlay */}
+          <div className="absolute inset-0 backdrop-blur-[2px]" />
+
+          {/* Subtle Pattern */}
+          <Image
+            src={bgImg}
+            alt="Pattern"
+            fill
+            className="object-cover opacity-10 mix-blend-overlay"
           />
+
         </div>
+      </div>
 
-        {/* CONTENT */}
-        <div className="relative z-10 w-11/12 md:w-5/6 mx-auto py-8 md:py-20 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0">
-            {/* EMPTY SPACE FOR LEFT IMAGE (DESKTOP) */}
-            <div className="hidden lg:block" />
+      {/* ================= FLOATING WHITE BLOCK ================= */}
+      <div className="relative -mt-24 md:-mt-28 z-20">
+        <div className="w-[80vw] mx-auto px-6">
 
-            {/* MISSION & VISION */}
-            <div
-              className="max-w-md space-y-10 ml-0 lg:-ml-14"
-              data-aos="fade-up"
-              data-aos-delay="250"
-            >
-              <div>
-                <h2 className="text-lg font-semibold text-[#1e2d3b] mb-3">
-                  Our mission
-                </h2>
-                <p className="text-gray-600 text-justify">
-                  To deliver exceptional real estate services through personalised guidance, ethical practices, and in-depth market expertise, empowering clients to make confident, informed, and rewarding property decisions across Gurugram and Delhi NCR.
-                </p>
-              </div>
+          <div
+            className="bg-white/95 backdrop-blur-lg shadow-2xl rounded-2xl p-8 md:p-14 border border-gray-100"
+            data-aos="fade-up"
+          >
+            {/* ===== TITLE ===== */}
 
-              <div data-aos="fade-up" data-aos-delay="350">
-                <h2 className="text-lg font-semibold text-[#1e2d3b] mb-3">
-                  Our vision
-                </h2>
-                <p className="text-gray-600 text-justify">
-                  To be a leading real estate consultancy recognized for
-                  professionalism, transparency, and customer satisfaction,
-                  offering innovative property solutions that create long-term
-                  value for communities and investments.
-                </p>
-              </div>
-              <Link href="/about" className="block w-full md:w-fit">
-                <ButtonFill
-                  data-aos="zoom-in"
-                  data-aos-delay="450"
-                  text="MORE ABOUT US →"
-                  className="w-full md:w-auto min-h-[44px]"
+
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+
+              {/* Left Image */}
+              <div
+                className="relative h-[360px] md:h-[720px] rounded-xl overflow-hidden"
+                data-aos="zoom-in"
+              >
+                <Image
+                  src={leftImg}
+                  alt="Luxury Property"
+                  fill
+                  className="object-cover hover:scale-105 transition duration-700"
                 />
-              </Link>
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+
+              {/* Right Content */}
+              <div className="space-y-6" data-aos="fade-left">
+
+                <h2 className="font-heading text-2xl md:text-2xl leading-snug font-bold text-[var(--primary-bg)]  mb-8 ">
+                  Property Dealer in Gurugram – Trusted Real Estate Experts <br className="hidden md:block" />
+                  for Residential & Commercial Properties
+                </h2>
+
+                <p className="text-gray-600 text-justify leading-relaxed">
+                  Looking for a reliable property dealer in Gurugram who
+                  understands the local real estate ecosystem? We are trusted
+                  real estate consultants in Gurgaon offering expert guidance
+                  for residential and commercial properties.
+                </p>
+
+                <p className="text-gray-600 text-justify leading-relaxed">
+                  With in-depth knowledge of the Gurgaon real estate market,
+                  we help homebuyers, investors, NRIs, and businesses find
+                  verified properties with complete transparency, legal clarity,
+                  and long-term value.
+                </p>
+
+                <Link href="/about">
+                  <ButtonFill
+                    text="MORE ABOUT US →"
+                    className="mt-4 min-h-[44px]"
+                  />
+                </Link>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* ================= RIGHT FLOAT IMAGE (DESKTOP ONLY) ================= */}
-      <div
-        className="absolute right-0 top-28 hidden xl:block"
-        data-aos="zoom-in"
-        data-aos-delay="400"
-      >
-        <Image
-          src={rightImg}
-          alt="Luxury Building"
-          className="w-[360px] h-[600px] shadow-xl"
-        />
-      </div>
+      <div className="h-24 md:h-32" />
     </section>
   );
 }
