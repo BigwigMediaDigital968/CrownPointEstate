@@ -40,7 +40,7 @@ export default function Fact() {
           observer.disconnect();
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -79,7 +79,6 @@ export default function Fact() {
     >
       <div className="w-11/12 md:w-5/6 mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-
           {/* ================= TEXT CONTENT ================= */}
           <div data-aos="fade-up">
             <p className="uppercase tracking-widest text-xs md:text-sm text-[var(--primary-color)] mb-3 font-heading">
@@ -98,16 +97,16 @@ export default function Fact() {
             </p>
 
             {/* ================= MOBILE IMAGE ================= */}
-          <div className="relative w-full h-[260px] sm:h-[320px] lg:hidden overflow-hidden">
-            <Image
-              src="/assets/fact.png"
-              alt="Luxury residential entrance"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-              quality={85}
-            />
-          </div>
+            <div className="relative w-full h-[260px] sm:h-[320px] lg:hidden overflow-hidden">
+              <Image
+                src="/assets/fact.png"
+                alt="Luxury residential entrance"
+                fill
+                sizes="100vw"
+                className="object-cover object-center"
+                quality={85}
+              />
+            </div>
 
             {/* ================= STATS ================= */}
             <div
@@ -128,14 +127,16 @@ export default function Fact() {
               ))}
             </div>
 
-            <div className="mt-2 md:mt-10" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="mt-2 md:mt-10"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <ButtonFill text="View all properties" href="/buy-property" />
             </div>
           </div>
-
-          
         </div>
-              </div>
+      </div>
 
       {/* ================= DESKTOP IMAGE ================= */}
       <div
@@ -144,7 +145,7 @@ export default function Fact() {
         data-aos-delay="300"
       >
         <Image
-          src="/assets/fact.PNG"
+          src="/assets/fact.png"
           alt="Luxury residential entrance"
           fill
           sizes="45vw"

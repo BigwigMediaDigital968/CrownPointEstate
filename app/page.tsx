@@ -104,9 +104,6 @@ interface BlogPost {
   datePublished: string;
 }
 
-
-
-
 interface Property {
   _id: string;
   title: string;
@@ -315,9 +312,9 @@ properties in Gurgaon & Delhi NCR."
 
       <WhyChooseUs />
       <FactsSection />
-       <PropertyTypes />
-       <Areas/>
-       <ComparisonTable />
+      <PropertyTypes />
+      <Areas />
+      <ComparisonTable />
       <TestimonialSection />
 
       <section className="py-16">
@@ -363,7 +360,6 @@ properties in Gurgaon & Delhi NCR."
         </div>
       </section>
 
-     
       <section className="py-16 bg-white overflow-hidden">
         <div className="w-11/12 md:w-5/6 mx-auto">
           {/* HEADER */}
