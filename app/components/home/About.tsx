@@ -52,7 +52,8 @@ export default function About() {
 
       {/* ================= FLOATING WHITE BLOCK ================= */}
       <div className="relative -mt-24 md:-mt-28 z-20">
-        <div className="w-[80vw] mx-auto px-6">
+        <div className="w-[92%] sm:w-[88%] md:w-[80vw] mx-auto px-4 sm:px-6">
+
 
           <div
             className="bg-white/95 backdrop-blur-lg shadow-2xl rounded-2xl p-8 md:p-14 border border-gray-100"
