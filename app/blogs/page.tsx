@@ -55,6 +55,8 @@ const Blogs = () => {
     fetchBlogs();
   }, []);
 
+  console.log(blogs);
+
   useEffect(() => {
     if (!searchTerm.trim()) {
       setFilteredBlogs(blogs);
