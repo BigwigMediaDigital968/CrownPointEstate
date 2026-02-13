@@ -113,6 +113,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       lastModified: today,
     },
+    {
+      url: `${SITE_URL}/blogs/smart-investments-for-real-estate-with-high-roi`,
+      priority: 0.7,
+      changeFrequency: "weekly",
+      lastModified: today,
+    },
 
   ];
 }
