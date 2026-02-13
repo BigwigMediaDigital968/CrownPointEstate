@@ -39,8 +39,16 @@ const Blogs = () => {
       const res = await axios.get<BlogPost[]>(
         `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`,
       );
-      setBlogs(res.data);
-      setFilteredBlogs(res.data);
+
+      // 🔽 Sort latest first (descending by date)
+      const sortedBlogs = [...res.data].sort(
+        (a, b) =>
+          new Date(b.datePublished).getTime() -
+          new Date(a.datePublished).getTime(),
+      );
+
+      setBlogs(sortedBlogs);
+      setFilteredBlogs(sortedBlogs);
       setCurrentPage(1);
     } catch (err) {
       console.error("Failed to fetch blogs", err);
