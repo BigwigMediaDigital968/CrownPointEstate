@@ -158,7 +158,7 @@ Delhi NCR."
         <section className="relative h-[50vh] md:h-[60vh] lg:h-[90vh] overflow-hidden">
           {/* BACKGROUND IMAGE */}
           <Image
-            src={heroImg}
+            src="/assets/blog-image-hero.png"
             alt="About Us"
             fill
             priority
