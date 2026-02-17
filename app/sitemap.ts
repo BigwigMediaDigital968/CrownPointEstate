@@ -2,10 +2,38 @@ import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://www.crownpointestates.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const today = new Date().toISOString().split("T")[0];
+interface BlogType {
+  slug: string;
+  datePublished: string;
+}
 
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const today = new Date().toISOString();
+
+  /* -----------------------------
+     Fetch Blogs Dynamically
+  ----------------------------- */
+  let blogs: BlogType[] = [];
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`,
+      {
+        next: { revalidate: 3600 }, // regenerate every 1 hour
+      },
+    );
+
+    if (res.ok) {
+      blogs = await res.json();
+    }
+  } catch (error) {
+    console.error("Sitemap blog fetch error:", error);
+  }
+
+  /* -----------------------------
+     Static Pages
+  ----------------------------- */
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}/`,
       priority: 1.0,
@@ -31,7 +59,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: today,
     },
     {
-      // Fixed from http -> https (recommended for production sitemap)
       url: `${SITE_URL}/lease-property`,
       priority: 0.7,
       changeFrequency: "weekly",
@@ -55,70 +82,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       lastModified: today,
     },
-
-    // Buy property detail pages
-    {
-      url: `${SITE_URL}/buy-property/m3m-residences-by-elie-saab`,
-      priority: 0.8,
-      changeFrequency: "monthly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/buy-property/smartworld-elie-saab-noida`,
-      priority: 0.8,
-      changeFrequency: "monthly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/buy-property/premium-builder-floor-for-sale-in-dlf-phase-2`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/buy-property/new-4-bhk-builder-floor-for-sale-in-dlf-phase-2-gurugram`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-
-    // Rent property detail pages
-    {
-      url: `${SITE_URL}/rent-property/b-block-300-sq-yards-premium-residential-options`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/rent-property/semi-furnished-31-bhk-for-rent-in-sushant-lok-1-gurugram`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/blogs/crown-point-estates-best-property-dealer-in-gurugram`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/blogs/builder-floor-for-sale-in-dlf-phase-2`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/blogs/commercial-plots-for-sale-in-gurgaon`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-    {
-      url: `${SITE_URL}/blogs/smart-investments-for-real-estate-with-high-roi`,
-      priority: 0.7,
-      changeFrequency: "weekly",
-      lastModified: today,
-    },
-
   ];
+
+  /* -----------------------------
+     Blog Pages (Auto Generated)
+  ----------------------------- */
+  const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
+    url: `${SITE_URL}/blogs/${blog.slug}`,
+    priority: 0.7,
+    changeFrequency: "weekly" as const,
+    lastModified: blog.datePublished ? new Date(blog.datePublished) : today,
+  }));
+
+  return [...staticPages, ...blogPages];
 }
