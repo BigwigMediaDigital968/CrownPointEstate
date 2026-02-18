@@ -7,9 +7,12 @@ const SITE_URL = "https://www.crownpointestates.com";
 
 async function getProperty(slug: string) {
   try {
-    const res = await fetch(`${process.env.API_BASE}/api/property/${slug}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`,
+      {
+        cache: "no-store",
+      },
+    );
 
     if (!res.ok) return notFound();
 
