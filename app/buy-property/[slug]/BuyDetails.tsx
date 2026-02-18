@@ -51,6 +51,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
   //   const { slug } = useParams();
   //   const [property, setProperty] = useState<Property | null>(null);
   //   const [loading, setLoading] = useState(true);
+  console.log(property);
 
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leadData, setLeadData] = useState({
@@ -142,7 +143,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
   }
 
   return (
-    <div className="   transition-colors duration-300">
+    <div className="transition-colors duration-300">
       <Navbar />
 
       {/* Hero with overlay */}
@@ -219,11 +220,11 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
 
           {/* Badges */}
           <div className="flex flex-wrap gap-3">
-            {/* {property.purpose && (
+            {property.purpose && (
               <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
                 <Home size={18} /> {property.purpose}
               </span>
-            )} */}
+            )}
             {property.bedrooms && (
               <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
                 <BedDouble size={18} /> {property.bedrooms} Beds
@@ -236,7 +237,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
             )}
             {property.areaSqft && (
               <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
-                📐 {property.areaSqft} Sqft
+                📐 {property.areaSqft}
               </span>
             )}
           </div>

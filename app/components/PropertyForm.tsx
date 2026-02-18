@@ -188,70 +188,6 @@ export default function PropertyForm({
     setNewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setLoading(true); // 🔹 start loader
-  //   try {
-  //     const data = new FormData();
-
-  //     Object.entries(formData).forEach(([key, value]) => {
-  //       if (value !== undefined && value !== null && value !== "") {
-  //         data.append(key, value.toString());
-  //       }
-  //     });
-
-  //     (Object.keys(arrayInputs) as ArrayFields[]).forEach((key) => {
-  //       const arr = arrayInputs[key]
-  //         .split(",")
-  //         .map((i) => i.trim())
-  //         .filter(Boolean);
-  //       data.append(key, JSON.stringify(arr));
-  //     });
-
-  //     newImages.forEach((file) => data.append("images", file));
-  //     data.append("existingImages", JSON.stringify(existingImages));
-
-  //     if (brochureFile) {
-  //       data.append("brochure", brochureFile); // <-- this was missing
-  //     } else if (property && !brochureFile && removeBrochure) {
-  //       // Signal backend to remove existing brochure when updating without a new file
-  //       data.append("removeBrochure", "true");
-  //       // Many backends only clear fields if the field itself is sent.
-  //       // Send brochure as empty string to force clearing.
-  //       data.append("brochure", "");
-  //     }
-
-  //     if (featuredThumbnailFile) {
-  //       data.append("featuredThumbnail", featuredThumbnailFile);
-  //     }
-
-  //     if (property) {
-  //       await axios.put(
-  //         `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`,
-  //         data,
-  //         {
-  //           headers: { "Content-Type": "multipart/form-data" },
-  //         },
-  //       );
-  //     } else {
-  //       await axios.post(
-  //         `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
-  //         data,
-  //         {
-  //           headers: { "Content-Type": "multipart/form-data" },
-  //         },
-  //       );
-  //     }
-
-  //     onSuccess();
-  //     onClose();
-  //   } catch (error) {
-  //     console.error("Failed to submit property", error);
-  //   } finally {
-  //     setLoading(false); // 🔹 stop loader
-  //   }
-  // };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -419,7 +355,7 @@ export default function PropertyForm({
         />
         <InputField
           name="areaSqft"
-          placeholder="Area (sqft)"
+          placeholder="Area (include with Sq. Yards or Sq. Feet)"
           value={formData.areaSqft || ""}
           onChange={handleChange}
         />

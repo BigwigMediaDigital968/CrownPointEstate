@@ -404,7 +404,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
                       </div>
                     )}
                     <div className="flex items-center gap-2">
-                      <Ruler size={16} /> {property.areaSqft} Sqft
+                      <Ruler size={16} /> {property.areaSqft}
                     </div>
                   </div>
 

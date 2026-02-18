@@ -22,6 +22,7 @@ import {
   Ruler,
   IndianRupee,
   Phone,
+  Home,
 } from "lucide-react";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 
@@ -204,7 +205,7 @@ export default function RentDetailsClient({
               <span className="text-base text-gray-500">/ month</span>
             </p>
           )}
-
+          {/* 
           <div className="flex flex-wrap gap-3">
             {property.bedrooms && (
               <span className="badge">
@@ -218,7 +219,31 @@ export default function RentDetailsClient({
             )}
             {property.areaSqft && (
               <span className="badge">
-                <Ruler size={16} /> {property.areaSqft} Sqft
+                <Ruler size={16} /> {property.areaSqft}
+              </span>
+            )}
+          </div> */}
+
+          {/* Badges */}
+          <div className="flex flex-wrap gap-3">
+            {property.purpose && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                <Home size={18} /> {property.purpose}
+              </span>
+            )}
+            {property.bedrooms && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                <BedDouble size={18} /> {property.bedrooms} Beds
+              </span>
+            )}
+            {property.bathrooms && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                🛁 {property.bathrooms} Baths
+              </span>
+            )}
+            {property.areaSqft && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                📐 {property.areaSqft}
               </span>
             )}
           </div>

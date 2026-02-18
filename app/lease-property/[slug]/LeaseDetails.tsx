@@ -25,6 +25,7 @@ import {
   Ruler,
   IndianRupee,
   Phone,
+  Home,
 } from "lucide-react";
 
 /* ---------------- TYPES ---------------- */
@@ -205,7 +206,7 @@ export default function LeaseDetailsClient({
             {property.price?.toLocaleString() || "On Request"}
           </p>
 
-          <div className="flex flex-wrap gap-3">
+          {/* <div className="flex flex-wrap gap-3">
             {property.bedrooms && (
               <span className="badge">
                 <BedDouble size={16} /> {property.bedrooms} Beds
@@ -218,7 +219,31 @@ export default function LeaseDetailsClient({
             )}
             {property.areaSqft && (
               <span className="badge">
-                <Ruler size={16} /> {property.areaSqft} Sqft
+                <Ruler size={16} /> {property.areaSqft} 
+              </span>
+            )}
+          </div> */}
+
+          {/* Badges */}
+          <div className="flex flex-wrap gap-3">
+            {property.purpose && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                <Home size={18} /> {property.purpose}
+              </span>
+            )}
+            {property.bedrooms && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                <BedDouble size={18} /> {property.bedrooms} Beds
+              </span>
+            )}
+            {property.bathrooms && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                🛁 {property.bathrooms} Baths
+              </span>
+            )}
+            {property.areaSqft && (
+              <span className="px-4 py-2 bg-gray-100  rounded-lg shadow flex items-center gap-2 text-gray-800">
+                📐 {property.areaSqft}
               </span>
             )}
           </div>

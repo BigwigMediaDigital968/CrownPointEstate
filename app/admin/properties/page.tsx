@@ -69,6 +69,8 @@ export default function AllProperties() {
     }
   };
 
+  // console.log(properties);
+
   // ✅ Check login and fetch properties
   useEffect(() => {
     const loggedIn = localStorage.getItem("isAdmin");
@@ -219,11 +221,11 @@ export default function AllProperties() {
                   <strong>Bedrooms:</strong> {selectedProperty.bedrooms ?? "—"}
                 </p>
                 <p>
-                  <strong>Bathrooms:</strong> {selectedProperty.bathrooms ?? "—"}
+                  <strong>Bathrooms:</strong>{" "}
+                  {selectedProperty.bathrooms ?? "—"}
                 </p>
                 <p>
-                  <strong>Area (sqft):</strong>{" "}
-                  {selectedProperty.areaSqft ?? "—"}
+                  <strong>Area:</strong> {selectedProperty.areaSqft ?? "—"}
                 </p>
                 <p>
                   <strong>Builder:</strong> {selectedProperty.builder ?? "—"}
