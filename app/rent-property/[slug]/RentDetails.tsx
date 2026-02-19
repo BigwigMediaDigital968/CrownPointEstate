@@ -44,6 +44,11 @@ interface Property {
   videoLink?: string;
   googleMapUrl?: string;
   brochure?: string;
+  extraDetails?: string;
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export default function RentDetailsClient({
@@ -53,6 +58,7 @@ export default function RentDetailsClient({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [visibleParagraphs, setVisibleParagraphs] = useState(2);
 
   // Brochure lead state
   const [leadSubmitted, setLeadSubmitted] = useState(false);
@@ -333,6 +339,76 @@ export default function RentDetailsClient({
                 {n}
               </span>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Extra Details */}
+
+      {/* Extra Details */}
+      {property.extraDetails && (
+        <section className="py-16 border-t">
+          <div className="w-11/12 md:w-5/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-6">Property Description</h2>
+
+            {(() => {
+              const paragraphs = property.extraDetails
+                .split("</p>")
+                .filter((p) => p.trim() !== "");
+
+              const visibleContent =
+                paragraphs.slice(0, visibleParagraphs).join("</p>") + "</p>";
+
+              return (
+                <>
+                  <div
+                    className="prose max-w-none prose-headings:font-semibold prose-p:text-gray-700"
+                    dangerouslySetInnerHTML={{ __html: visibleContent }}
+                  />
+
+                  {visibleParagraphs < paragraphs.length && (
+                    <div className="mt-6">
+                      <button
+                        onClick={() => setVisibleParagraphs((prev) => prev + 2)}
+                        className="text-(--primary-color) font-semibold hover:underline"
+                      >
+                        Read More
+                      </button>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
+          </div>
+        </section>
+      )}
+
+      {/* Faqs */}
+      {/* FAQs */}
+      {property.faqs && property.faqs.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="w-11/12 md:w-4/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              {property.faqs.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group border rounded-xl p-5 bg-white shadow-sm"
+                >
+                  <summary className="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                    {faq.question}
+                    <span className="transition group-open:rotate-180">⌄</span>
+                  </summary>
+
+                  <div className="mt-3 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       )}

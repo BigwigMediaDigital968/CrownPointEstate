@@ -45,6 +45,11 @@ interface Property {
   brochure?: string;
   metatitle: string;
   metadescription: string;
+  extraDetails?: string;
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export default function BuyDetailsClient({ property }: { property: Property }) {
@@ -62,6 +67,7 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
   const [loadingLead, setLoadingLead] = useState(false);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [visibleParagraphs, setVisibleParagraphs] = useState(2); // show first 2 paragraphs initially
 
   useEffect(() => {
     const submitted = sessionStorage.getItem("brochureLeadSubmitted");
@@ -351,6 +357,81 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
                 {n}
               </span>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Extra Details */}
+
+      {property.extraDetails && (
+        <section className="py-16 border-t">
+          <div className="w-11/12 md:w-5/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-6">Property Description</h2>
+
+            {(() => {
+              const paragraphs = property.extraDetails
+                .split("</p>")
+                .filter((p) => p.trim() !== "");
+
+              const visibleContent =
+                paragraphs.slice(0, visibleParagraphs).join("</p>") + "</p>";
+
+              return (
+                <>
+                  <div className="relative">
+                    <div
+                      className="prose max-w-none prose-headings:font-semibold prose-p:text-gray-700"
+                      dangerouslySetInnerHTML={{ __html: visibleContent }}
+                    />
+
+                    {visibleParagraphs < paragraphs.length && (
+                      <>
+                        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+                        <div className="mt-6 relative">
+                          <button
+                            onClick={() =>
+                              setVisibleParagraphs((prev) => prev + 2)
+                            }
+                            className="text-[var(--primary-color)] font-semibold hover:underline"
+                          >
+                            Read More
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </section>
+      )}
+
+      {/* FAQs section */}
+      {property.faqs && property.faqs.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="w-11/12 md:w-4/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              {property.faqs.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group border rounded-xl p-5 bg-white shadow-sm"
+                >
+                  <summary className="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                    {faq.question}
+                    <span className="transition group-open:rotate-180">⌄</span>
+                  </summary>
+
+                  <div className="mt-3 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       )}

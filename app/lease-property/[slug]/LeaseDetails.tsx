@@ -49,6 +49,11 @@ interface Property {
   videoLink: string;
   googleMapUrl?: string;
   brochure?: string;
+  extraDetails?: string;
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export default function LeaseDetailsClient({
@@ -58,6 +63,7 @@ export default function LeaseDetailsClient({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [visibleParagraphs, setVisibleParagraphs] = useState(2);
 
   /* Brochure lead state (same as Buy) */
   const [leadSubmitted, setLeadSubmitted] = useState(false);
@@ -261,7 +267,7 @@ export default function LeaseDetailsClient({
                 {property.highlights.map((h, i) => (
                   <span
                     key={i}
-                    className="px-4 py-2 bg-[var(--featured)] rounded-full text-sm"
+                    className="px-4 py-2 bg-(--featured) rounded-full text-sm"
                   >
                     {h}
                   </span>
@@ -288,7 +294,7 @@ export default function LeaseDetailsClient({
       {property.videoLink && (
         <section className="w-11/12 md:w-5/6 mx-auto py-12">
           <h2 className="text-3xl font-semibold mb-6">Virtual Tour</h2>
-          <div className="h-[450px] rounded-xl overflow-hidden">
+          <div className="h-112.5 rounded-xl overflow-hidden">
             <iframe
               src={getYouTubeEmbedUrl(property.videoLink)!}
               width="100%"
@@ -304,10 +310,7 @@ export default function LeaseDetailsClient({
           <h2 className="text-3xl font-semibold mb-6">Features & Amenities</h2>
           <div className="flex flex-wrap gap-3">
             {property.featuresAmenities.map((f, i) => (
-              <span
-                key={i}
-                className="px-4 py-2 bg-[var(--featured)] rounded-full"
-              >
+              <span key={i} className="px-4 py-2 bg-(--featured) rounded-full">
                 {f}
               </span>
             ))}
@@ -321,13 +324,78 @@ export default function LeaseDetailsClient({
           <h2 className="text-3xl font-semibold mb-6">Nearby Places</h2>
           <div className="flex flex-wrap gap-3">
             {property.nearby.map((n, i) => (
-              <span
-                key={i}
-                className="px-5 py-2 bg-[var(--featured)] rounded-full"
-              >
+              <span key={i} className="px-5 py-2 bg-(--featured) rounded-full">
                 {n}
               </span>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Extra Details */}
+      {property.extraDetails && (
+        <section className="py-16 border-t">
+          <div className="w-11/12 md:w-5/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-6">Property Description</h2>
+
+            {(() => {
+              const paragraphs = property.extraDetails
+                .split("</p>")
+                .filter((p) => p.trim() !== "");
+
+              const visibleContent =
+                paragraphs.slice(0, visibleParagraphs).join("</p>") + "</p>";
+
+              return (
+                <>
+                  <div
+                    className="prose max-w-none prose-headings:font-semibold prose-p:text-gray-700"
+                    dangerouslySetInnerHTML={{ __html: visibleContent }}
+                  />
+
+                  {visibleParagraphs < paragraphs.length && (
+                    <div className="mt-6">
+                      <button
+                        onClick={() => setVisibleParagraphs((prev) => prev + 2)}
+                        className="text-(--primary-color) font-semibold hover:underline"
+                      >
+                        Read More
+                      </button>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
+          </div>
+        </section>
+      )}
+
+      {/* Faqs */}
+      {/* FAQs */}
+      {property.faqs && property.faqs.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="w-11/12 md:w-4/6 mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              {property.faqs.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group border rounded-xl p-5 bg-white shadow-sm"
+                >
+                  <summary className="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                    {faq.question}
+                    <span className="transition group-open:rotate-180">⌄</span>
+                  </summary>
+
+                  <div className="mt-3 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       )}
@@ -346,7 +414,7 @@ export default function LeaseDetailsClient({
       )}
 
       <Link href="tel:919999000183">
-        <div className="fixed bottom-6 right-6 bg-[var(--primary-color)] p-4 rounded-full shadow-xl">
+        <div className="fixed bottom-6 right-6 bg-(--primary-color) p-4 rounded-full shadow-xl">
           <Phone />
         </div>
       </Link>

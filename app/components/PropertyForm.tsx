@@ -3,6 +3,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+});
+
 const reorder = <T,>(list: T[], startIndex: number, endIndex: number): T[] => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -14,6 +21,11 @@ interface PropertyFormProps {
   property?: PropertyData;
   onClose: () => void;
   onSuccess: () => void;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
 }
 
 interface PropertyData {
@@ -40,6 +52,8 @@ interface PropertyData {
   builder: string;
   metatitle?: string;
   metadescription?: string;
+  extraDetails?: string;
+  faqs?: FAQItem[];
 }
 
 type ArrayFields =
@@ -78,6 +92,9 @@ export default function PropertyForm({
     metatitle: "", // ✅ initialize
     metadescription: "",
   });
+
+  const [extraDetails, setExtraDetails] = useState<string>("");
+  const [faqs, setFaqs] = useState<FAQItem[]>([]);
 
   const [arrayInputs, setArrayInputs] = useState<Record<ArrayFields, string>>({
     highlights: "",
@@ -123,6 +140,9 @@ export default function PropertyForm({
         nearby: property.nearby.join(", "),
         extraHighlights: property.extraHighlights.join(", "),
       });
+
+      setExtraDetails(property.extraDetails || "");
+      setFaqs(property.faqs || []);
 
       setExistingImages(property.images || []);
       setExistingFeaturedThumbnail(property.featuredThumbnail || null);
@@ -188,6 +208,31 @@ export default function PropertyForm({
     setNewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleFAQChange = (
+    index: number,
+    field: "question" | "answer",
+    value: string,
+  ) => {
+    const updated = [...faqs];
+    updated[index][field] = value;
+    setFaqs(updated);
+  };
+
+  const addFAQ = () => {
+    setFaqs([...faqs, { question: "", answer: "" }]);
+  };
+
+  const removeFAQ = (index: number) => {
+    setFaqs(faqs.filter((_, i) => i !== index));
+  };
+
+  const cleanHTML = (html: string) => {
+    return html
+      .replace(/&nbsp;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -232,6 +277,12 @@ export default function PropertyForm({
         data.append("featuredThumbnail", featuredThumbnailFile);
       }
 
+      if (extraDetails) {
+        data.append("extraDetails", cleanHTML(extraDetails));
+      }
+
+      data.append("faqs", JSON.stringify(faqs));
+
       const url = property
         ? `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`
         : `${process.env.NEXT_PUBLIC_API_BASE}/api/property`;
@@ -252,6 +303,16 @@ export default function PropertyForm({
     }
   };
 
+  const quillModules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 rounded-lg shadow p-6 ">
       {/* Title & Description */}
@@ -265,7 +326,7 @@ export default function PropertyForm({
         />
 
         <div>
-          <label className="block font-medium mb-1">Description hello</label>
+          <label className="block font-medium mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description || ""}
@@ -537,6 +598,80 @@ export default function PropertyForm({
         />
       </div>
 
+      {/* Extra Details */}
+      <div>
+        <label className="block font-medium mb-2">Extra Details</label>
+        {/* Extra Details - Rich Text */}
+        <div className="mt-6">
+          <label className="block font-medium mb-2 text-lg">
+            Extra Details
+          </label>
+
+          <div className="bg-white text-black rounded-lg">
+            <ReactQuill
+              theme="snow"
+              value={extraDetails}
+              onChange={setExtraDetails}
+              className="min-h-[200px]"
+              modules={quillModules}
+            />
+          </div>
+
+          <p className="text-sm text-gray-400 mt-2">
+            💡 You can format text, add headings, lists, bold, links, etc.
+          </p>
+        </div>
+      </div>
+
+      {/* FAQs Section */}
+      <div className="mt-6">
+        <div className="flex justify-between items-center mb-3">
+          <label className="font-medium text-lg">FAQs</label>
+          <button
+            type="button"
+            onClick={addFAQ}
+            className="px-3 py-1 bg-green-600 text-white rounded text-sm"
+          >
+            + Add FAQ
+          </button>
+        </div>
+
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            className="border border-gray-600 rounded-lg p-4 mb-4 space-y-3"
+          >
+            <input
+              type="text"
+              placeholder="Question"
+              value={faq.question}
+              onChange={(e) =>
+                handleFAQChange(index, "question", e.target.value)
+              }
+              className="w-full rounded-lg p-3 border border-gray-300 focus:ring text-white"
+            />
+
+            <textarea
+              placeholder="Answer"
+              value={faq.answer}
+              onChange={(e) => handleFAQChange(index, "answer", e.target.value)}
+              rows={3}
+              className="w-full rounded-lg p-3 border border-gray-300 focus:ring text-white"
+            />
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => removeFAQ(index)}
+                className="text-red-500 text-sm"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Featured Thumbnail Upload */}
       <div className="mt-4">
         <label className="block font-medium mb-2">Featured Thumbnail</label>
@@ -557,6 +692,7 @@ export default function PropertyForm({
           className="mt-2"
         />
       </div>
+
       <InputField
         name="instagramLink"
         type="text"

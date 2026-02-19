@@ -79,16 +79,16 @@ export default function BuyProperty() {
       </title>
       <meta
         name="title"
-        content="Sell Property in Gurgaon | Trusted Property Dealers in Gurugram"
+        content="Sell Property in Gurgaon | Crownpoint Estates"
       />
       <meta
         name="description"
-        content="Sell your property in Gurgaon with Crownpoint Estates. Get the right valuation, genuine buyers, and transparent processes from experienced real estate consultants in Gurugram."
+        content="Sell property in Gurgaon faster with verified buyers, free valuation & legal support. List your property today with Crownpoint Estates."
       />
-      {/* <meta
+      <meta
         name="keywords"
-        content="property dealer in gurugram, real estate agent in gurgaon, commercial property gurgaon, residential property gurgaon, buy property gurgaon, sell property gurgaon, crownpoint estates"
-      /> */}
+        content="sell property in gurgaon, sell your property in gurgaon, list property in gurgaon, property for sale in gurgaon, sell house in gurgaon, sell flat in gurgaon, sell builder floor in gurgaon, property dealers in gurgaon, real estate agents in gurgaon, free property valuation gurgaon, sell commercial property in gurgaon, gurgaon real estate market, sell luxury property in gurgaon, sell property fast in gurgaon, crownpoint estates gurgaon"
+      />
       {/* <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
@@ -103,19 +103,15 @@ export default function BuyProperty() {
 
       <meta
         property="og:title"
-        content="Sell Property in Gurgaon | Trusted Property Dealers in
-Gurugram"
+        content="Sell Property in Gurgaon | Trusted Property Dealers in Gurugram"
       />
       <meta
         property="og:description"
-        content="Sell your property in Gurgaon with Crownpoint
-Estates. Get the right valuation, genuine buyers, and transparent processes from
-experienced real estate consultants in Gurugram."
+        content="Sell your property in Gurgaon with Crownpoint Estates. Get the right valuation, genuine buyers, and transparent processes from experienced real estate consultants in Gurugram."
       />
       <meta
         property="og:image"
-        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
-a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1770702902/Crown/images/lez0tetgjg23p3z9uq44.png"
       />
       <meta
         property="og:url"
@@ -125,20 +121,20 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
       <meta property="og:site_name" content="Crownpoint Estates" />
       <meta property="og:locale" content="en_IN" />
 
-      {/* <!-- Twitter Card Meta Tags -->
+      {/* <!-- Twitter Card Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:title"
-        content="Property Dealer in Gurugram | Crownpoint Estates"
+        content="Sell Property in Gurgaon | Trusted Property Dealers in Gurugram"
       />
       <meta
         name="twitter:description"
-        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+        content="Sell your property in Gurgaon with Crownpoint Estates. Get the right valuation, genuine buyers, and transparent processes from experienced real estate consultants in Gurugram."
       />
       <meta
         name="twitter:image"
-        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
-      /> */}
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1770702902/Crown/images/lez0tetgjg23p3z9uq44.png"
+      />
 
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -193,25 +189,40 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
               List Your Property
             </p>
             <h2 className="font-heading text-3xl leading-snug font-bold text-[var(--primary-bg)]">
-              Sell Your Property Faster & at the Right Price
+              Sell Property in Gurgaon | List Your Property with Crownpoint
+              Estates
             </h2>
 
             <p className="text-gray-600 mb-8 max-w-lg">
-              Get expert guidance, verified buyers, and end-to-end support to
-              sell your property without stress.
+              Looking to <b>sell property in Gurgaon</b> at the best price?
+              Crownpoint Estates helps property owners sell faster with verified
+              buyers, strategic marketing, and complete legal assistance.
+              Whether you own a builder floor, luxury apartment, independent
+              house, or commercial property, our experts ensure smooth and
+              profitable transactions. <br /> <br />
+              If you want to <b>sell your property in Gurgaon</b> without
+              delays, underpricing, or unnecessary stress, we are here to manage
+              everything for you.
             </p>
 
             <ul className="space-y-3 text-gray-700">
-              <li>✔ Free property valuation</li>
-              <li>✔ Professional marketing & promotion</li>
-              <li>✔ Verified & genuine buyers</li>
-              <li>✔ Complete legal & documentation support</li>
+              <li>✔ Free Property Valuation</li>
+              <li>✔ Professional Marketing & Promotion</li>
+              <li>✔ Verified & Genuine Buyers</li>
+              <li>✔ Legal & Documentation Support</li>
+              <li>✔ End-to-End Deal Management</li>
             </ul>
           </div>
 
           {/* RIGHT FORM */}
           <div className="bg-white rounded-3xl shadow-lg p-8">
-            <h3 className="text-xl font-semibold mb-6">List Your Property</h3>
+            <h3 className="text-xl font-semibold mb-6">
+              List Your Property Today
+            </h3>
+            <p className="mb-6">
+              Ready to sell property in Gurgaon? Share your details and our
+              experts will contact you for a free consultation.
+            </p>
 
             {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
             {success && (
@@ -288,9 +299,9 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[var(--primary-color)] text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
+                className="w-full bg-(--primary-color) text-white py-3 rounded-xl cursor-pointer font-semibold hover:opacity-90 transition"
               >
-                {loading ? "Submitting..." : "Get Free Consultation"}
+                {loading ? "Submitting..." : "👉 Get Free Consultation"}
               </button>
             </form>
 
@@ -306,12 +317,16 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
         <div className="w-11/12 md:w-5/6 mx-auto text-center">
           {/* Heading */}
           <h2 className="font-heading text-3xl leading-snug font-bold text-[var(--primary-bg)]">
-            Why Sell With Us
+            Why Choose Us to Sell Property in Gurgaon?
           </h2>
 
-          <p className="text-gray-600 mb-14 max-w-2xl mx-auto">
-            We combine deep local market expertise with powerful marketing
-            strategies to help you sell faster and at the right price.
+          <p className="text-gray-600 mb-14 pt-5 max-w-5xl mx-auto">
+            Selling property in Gurgaon requires strong local expertise and
+            market understanding. Gurgaon’s micro-markets like DLF Phase 1, DLF
+            Phase 2, Golf Course Road, Golf Course Extension Road, Sector 57,
+            Sector 67, Sushant Lok, and New Gurgaon all have different buyer
+            demands and pricing patterns. We combine data-driven pricing with
+            deep local knowledge to help you sell at the right value.
           </p>
 
           {/* Cards */}
@@ -319,22 +334,22 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
             {[
               {
                 title: "Verified Buyers Only",
-                desc: "We connect you only with genuine and verified buyers.",
+                desc: "We connect you with serious and financially verified buyers actively looking to buy property in Gurgaon.",
                 icon: "👥",
               },
               {
-                title: "Professional Photography",
-                desc: "High-quality visuals to showcase your property perfectly.",
+                title: "Professional Photography & Premium Listings",
+                desc: "High-quality visuals and compelling property descriptions increase visibility and attract better offers.",
                 icon: "📸",
               },
               {
-                title: "Market-Driven Pricing",
+                title: "Market-Driven Property Valuation",
                 desc: "Accurate pricing based on real-time market data.",
                 icon: "📊",
               },
               {
-                title: "End-to-End Support",
-                desc: "From listing to closure, we manage everything.",
+                title: "Complete End-to-End Support",
+                desc: "From listing and site visits to negotiations and registry, we handle everything professionally.",
                 icon: "🤝",
               },
             ].map((item, index) => (
@@ -368,30 +383,38 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
       {/* ================= HOW IT WORKS ================= */}
       <section className="py-12">
         <div className="w-11/12 md:w-5/6 mx-auto text-center">
-          <h2 className="font-heading text-3xl leading-snug font-bold text-[var(--primary-bg)]">
-            How It Works
+          <h2 className="font-heading text-3xl pb-12 leading-snug font-bold text-(--primary-bg)">
+            How to Sell Your Property in Gurgaon – Our Process
           </h2>
 
           <div className="relative">
             {/* CONNECTING LINE (DESKTOP) */}
-            <div className="hidden lg:block absolute top-8 left-0 right-0 h-[2px] bg-gray-200" />
+            <div className="hidden lg:block absolute top-8 left-0 right-0 h-0.5 bg-gray-200" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative">
               {[
                 {
                   title: "Submit Property Details",
+                  description:
+                    "Share your property information including location, size, and expected price.",
                   icon: "📝",
                 },
                 {
-                  title: "Free Price Evaluation",
+                  title: " Free Property Price Evaluation",
+                  description:
+                    "We conduct a detailed market assessment based on current Gurgaon real estate trends.",
                   icon: "💰",
                 },
                 {
-                  title: "Marketing & Site Visits",
+                  title: "Strategic Marketing & Site Visits",
+                  description:
+                    "Your property is promoted across premium property portals, digital platforms, and our verified buyer database.",
                   icon: "📢",
                 },
                 {
-                  title: "Deal Closure",
+                  title: "Negotiation & Deal Closure",
+                  description:
+                    "We assist with negotiations, paperwork, and final registration to ensure a smooth closing.",
                   icon: "🤝",
                 },
               ].map((step, index) => (
@@ -400,19 +423,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
                   className="group flex flex-col items-center text-center relative"
                 >
                   {/* STEP CIRCLE */}
-                  <div
-                    className="
-                w-16 h-16 rounded-full
-                flex items-center justify-center
-                bg-white border-2 border-[var(--primary-color)]
-                text-2xl
-                mb-6
-                relative z-10
-                transition-all duration-300
-                group-hover:bg-[var(--primary-color)]
-                group-hover:text-white
-              "
-                  >
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center bg-white border-2 border-[var(--primary-color)]text-2xl mb-6 relative z-10 transition-all duration-300group-hover:bg-[var(--primary-color)] group-hover:text-white">
                     {step.icon}
                   </div>
 
@@ -425,6 +436,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
                   <p className="font-medium text-gray-800 max-w-xs">
                     {step.title}
                   </p>
+                  <p className="text-sm py-2">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -432,21 +444,93 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
         </div>
       </section>
 
+      {/* ================= AREAS WE COVER - CREATIVE TABLE ================= */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Heading */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-[var(--primary)] mb-6">
+            Areas Where We Help You Sell Property in Gurgaon
+          </h2>
+
+          <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+            We actively deal in premium residential and commercial locations
+            across Gurgaon, helping property owners connect with verified buyers
+            and secure the best market value.
+          </p>
+
+          {/* Table */}
+          <div className="overflow-hidden rounded-2xl shadow-lg bg-white">
+            <table className="w-full text-left border-collapse">
+              {/* Table Header */}
+              <thead className="bg-[var(--primary-color)] text-white">
+                <tr>
+                  <th className="px-6 py-4 text-lg font-semibold">
+                    Residential Areas
+                  </th>
+                  <th className="px-6 py-4 text-lg font-semibold">
+                    Property Segments
+                  </th>
+                </tr>
+              </thead>
+
+              {/* Table Body */}
+              <tbody className="text-gray-700">
+                <tr className="border-b hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">DLF Phase 1, 2, 3, 4 & 5</td>
+                  <td className="px-6 py-4">Builder Floors</td>
+                </tr>
+
+                <tr className="border-b hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">Golf Course Road</td>
+                  <td className="px-6 py-4">Luxury Residences</td>
+                </tr>
+
+                <tr className="border-b hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">Golf Course Extension Road</td>
+                  <td className="px-6 py-4">Commercial Properties</td>
+                </tr>
+
+                <tr className="border-b hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">Sushant Lok 1, 2 & 3</td>
+                  <td className="px-6 py-4">Investment Properties</td>
+                </tr>
+
+                <tr className="hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">Sector 56, 57, 67 & New Gurgaon</td>
+                  <td className="px-6 py-4">
+                    Premium Residential & Commercial Assets
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Closing Line */}
+          <p className="text-center mt-10 text-gray-800 font-medium">
+            No matter the segment, we help you sell property in Gurgaon faster
+            and at the best possible price.
+          </p>
+        </div>
+      </section>
+
       {/* ================= FINAL CTA ================= */}
-      <section className="py-12 bg-[var(--primary-color)] text-white text-center">
+      <section className="py-12 bg-(--primary-color) text-white text-center">
         <h2 className="font-heading text-3xl leading-snug font-bold text-[var(--primary)] mb-5">
           Thinking of Selling Your Property?
         </h2>
 
-        <p className="mb-8 text-white/90">
-          Let our experts handle everything for you.
+        <p className="mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-10">
+          Gurgaon’s real estate market is competitive and fast-moving. Proper
+          pricing, targeted marketing, and verified buyer networks make all the
+          difference. Let Crownpoint Estates handle everything while you focus
+          on your next move.
         </p>
 
         <a
           href="tel:+911234567890"
-          className="inline-block bg-white text-black px-8 py-4 rounded-xl font-semibold"
+          className="inline-block bg-white text-black px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
         >
-          Talk to an Expert
+          👉 Talk to an Expert Today
         </a>
       </section>
 
