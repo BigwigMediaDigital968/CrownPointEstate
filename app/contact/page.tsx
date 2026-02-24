@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
-import heroImg from "../assets/hero/for-contact.svg";
+import heroImg from "../assets/crownpoint-estate-contact.png";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -96,7 +96,7 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
         <Navbar />
 
         {/* ================= HERO ================= */}
-        <section className="relative h-[50vh] md:h-[60vh] lg:h-[80vh] overflow-hidden">
+        <section className="relative h-[50vh] md:h-[70vh] lg:h-[90vh] overflow-hidden">
           <Image
             src={heroImg}
             alt="Contact Us"
