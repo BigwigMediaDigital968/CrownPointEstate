@@ -95,6 +95,53 @@ const blogs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why should I choose CrownPoint Estate as the Best Property Dealer in Gurugram?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CrownPoint Estate is considered one of the best property dealers in Gurugram because of transparent property deals, verified listings, and expert guidance for buyers and investors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of properties does the Best Property Dealer in Gurugram offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The best property dealer in Gurugram offers luxury apartments, builder floors, villas, commercial spaces, and investment properties in prime locations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can the Best Property Dealer in Gurugram help first-time buyers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They guide first-time buyers in property selection, legal verification, budget planning, and home loan assistance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Best Property Dealer in Gurugram provide verified property listings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, verified listings ensure safe and legally compliant real estate investments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which locations in Gurugram does CrownPoint Estate cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CrownPoint Estate deals in Golf Course Extension Road, Sector 63A, Sohna Road, Dwarka Expressway, and New Gurgaon."
+      }
+    }
+  ]
+};
+
 interface BlogPost {
   _id: string;
   title: string;
@@ -143,7 +190,7 @@ export default function Home() {
     fetchProperties();
   }, []);
 
-  console.log(featuredProperties);
+  // console.log(featuredProperties);
 
   useEffect(() => {
     AOS.init({
@@ -190,12 +237,12 @@ export default function Home() {
         property="og:title"
         content="Property Dealer in Gurugram – Crownpoint Estates"
       />
+
       <meta
         property="og:description"
-        content="Crownpoint Estates is a trusted property dealer in
-Gurugram with 15+ years of experience. Buy, sell, lease & rent residential and commercial
-properties in Gurgaon & Delhi NCR."
+        content="Crownpoint Estates is a trusted property dealer in Gurugram with 15+ years of experience. Buy, sell, lease & rent residential and commercial properties in Gurgaon & Delhi NCR."
       />
+
       <meta
         property="og:image"
         content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg"
@@ -222,6 +269,13 @@ properties in Gurgaon & Delhi NCR."
 
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
 
       <Navbar />
       <HeroSlider />

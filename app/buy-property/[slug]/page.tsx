@@ -87,7 +87,7 @@ export default async function BuyDetailsPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // ✅ MUST AWAIT
+  const { slug } = await params; 
 
   const property = await getProperty(slug);
 
@@ -114,10 +114,10 @@ export default async function BuyDetailsPage({
     },
     floorSize: areaValue
       ? {
-          "@type": "QuantitativeValue",
-          value: areaValue,
-          unitCode: "SQF",
-        }
+        "@type": "QuantitativeValue",
+        value: areaValue,
+        unitCode: "SQF",
+      }
       : undefined,
     numberOfRooms: property.bedrooms,
     numberOfBathroomsTotal: property.bathrooms,
@@ -135,12 +135,51 @@ export default async function BuyDetailsPage({
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Buy Property",
+        item: `${SITE_URL}/buy-property`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: property.location || "Gurugram",
+        item: `${SITE_URL}/buy-property?location=${encodeURIComponent(property.location || "gurugram")}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: property.title,
+        item: url,
+      },
+    ],
+  };
+
   return (
     <>
       <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schema),
+        }}
+      />
+
+      {/* Breadcrumb Schema */}
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
 
