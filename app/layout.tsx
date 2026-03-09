@@ -24,7 +24,7 @@ const CLARITY_ID = "v5wccw4r82";
 
 /* ================== METADATA ================== */
 export const metadata: Metadata = {
-  title: "Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE",
+  title: "Property Dealer in Gurgaon | Buy, Sell, Rent & Lease - CPE",
   verification: {
     google: "Uei6zvpwBwT4gfafLKIu6BV1V0o1ruAGQ1MsetlXfPM",
   },
@@ -90,7 +90,7 @@ export default function RootLayout({
             "@type": "RealEstateAgent",
             name: "Crownpoint Estates",
             description:
-              "Crownpoint Estates is a trusted real estate consultancy firm with over 15 years of experience delivering residential and commercial property solutions across Gurugram and Delhi NCR.",
+              "Crownpoint Estates is a trusted real estate consultancy firm with over 15 years of experience delivering residential and commercial property solutions across Gurgaon and Delhi NCR.",
             image:
               "https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg",
             url: "https://www.crownpointestates.com/",
@@ -100,7 +100,7 @@ export default function RootLayout({
               "@type": "PostalAddress",
               streetAddress:
                 "Lower Ground Floor, 65, Akashneem Marg, DLF Phase 2, Sector 25",
-              addressLocality: "Gurugram",
+              addressLocality: "Gurgaon ",
               addressRegion: "Haryana",
               postalCode: "122002",
               addressCountry: "IN",
