@@ -98,48 +98,48 @@ const blogs = [
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": "Why should I choose CrownPoint Estate as the Best Property Dealer in Gurugram?",
-      "acceptedAnswer": {
+      name: "Why should I choose CrownPoint Estate as the Best Property Dealer in Gurgaon ?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "CrownPoint Estate is considered one of the best property dealers in Gurugram because of transparent property deals, verified listings, and expert guidance for buyers and investors."
-      }
+        text: "CrownPoint Estate is considered one of the best property dealers in gurgaon  because of transparent property deals, verified listings, and expert guidance for buyers and investors.",
+      },
     },
     {
       "@type": "Question",
-      "name": "What types of properties does the Best Property Dealer in Gurugram offer?",
-      "acceptedAnswer": {
+      name: "What types of properties does the Best Property Dealer in gurgaon  offer?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "The best property dealer in Gurugram offers luxury apartments, builder floors, villas, commercial spaces, and investment properties in prime locations."
-      }
+        text: "The best property dealer in gurgaon  offers luxury apartments, builder floors, villas, commercial spaces, and investment properties in prime locations.",
+      },
     },
     {
       "@type": "Question",
-      "name": "How can the Best Property Dealer in Gurugram help first-time buyers?",
-      "acceptedAnswer": {
+      name: "How can the Best Property Dealer in gurgaon  help first-time buyers?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "They guide first-time buyers in property selection, legal verification, budget planning, and home loan assistance."
-      }
+        text: "They guide first-time buyers in property selection, legal verification, budget planning, and home loan assistance.",
+      },
     },
     {
       "@type": "Question",
-      "name": "Does the Best Property Dealer in Gurugram provide verified property listings?",
-      "acceptedAnswer": {
+      name: "Does the Best Property Dealer in gurgaon  provide verified property listings?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Yes, verified listings ensure safe and legally compliant real estate investments."
-      }
+        text: "Yes, verified listings ensure safe and legally compliant real estate investments.",
+      },
     },
     {
       "@type": "Question",
-      "name": "Which locations in Gurugram does CrownPoint Estate cover?",
-      "acceptedAnswer": {
+      name: "Which locations in gurgaon  does CrownPoint Estate cover?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "CrownPoint Estate deals in Golf Course Extension Road, Sector 63A, Sohna Road, Dwarka Expressway, and New Gurgaon."
-      }
-    }
-  ]
+        text: "CrownPoint Estate deals in Golf Course Extension Road, Sector 63A, Sohna Road, Dwarka Expressway, and New Gurgaon.",
+      },
+    },
+  ],
 };
 
 interface BlogPost {
@@ -215,15 +215,15 @@ export default function Home() {
       {/* <!-- Primary Meta Tags --> */}
       <meta
         name="title"
-        content="Property Dealer in Gurugram | Buy, Sell, Rent & Lease - CPE"
+        content="Property Dealer in Gurgaon  | Buy, Sell, Rent & Lease - CPE"
       />
       <meta
         name="description"
-        content="Buy, sell, rent or lease property with a trusted property dealer in Gurugram. Call +91 9811556625"
+        content="Buy, sell, rent or lease property with a trusted property dealer in gurgaon . Call +91 9811556625"
       />
       <meta
         name="keywords"
-        content="property dealer in gurugram, property dealer in gurgaon, real estate agent in gurgaon, commercial property dealer in gurgaon, residential property dealer in gurgaon, buy property in gurgaon, property for sale in gurgaon, residential property for sale in gurgaon, commercial property for sale in gurgaon, plot for sale in gurgaon, apartment for sale in gurgaon, flats for sale in gurgaon, highrise apartments in gurgaon, builder floor for sale in gurgaon, property for rent in gurgaon, property for lease in gurgaon, residential property for rent in gurgaon, commercial property for lease in gurgaon, office space for lease in gurgaon, flats for rent in gurgaon, builder floor in dlf phase 1, builder floor in dlf phase 2, builder floor in dlf phase 3, apartment in dlf phase 4, flats in dlf phase 5, property for sale in dlf gurgaon, property on golf course road gurgaon, apartments on golf course road, highrise apartments golf course road, builder floor golf course road, property on golf course extension road, flats on golf course extension road, highrise apartments golf course extension road, builder floor in sushant lok, apartment in sushant lok gurgaon, property for sale in sushant lok, property on mg road gurgaon, commercial property on mg road, office space mg road gurgaon, property on sohna road gurgaon, flats on sohna road, residential projects on sohna road, builder floor in nirvana country, property for sale in nirvana country, residential property nirvana country, builder floor in sun city gurgaon, property in sun city gurgaon, flats in sun city, commercial property in udyog vihar, office space in udyog vihar, industrial property udyog vihar, plot for sale in imt manesar, industrial plot imt manesar, commercial property imt manesar"
+        content="property dealer in gurgaon , property dealer in gurgaon, real estate agent in gurgaon, commercial property dealer in gurgaon, residential property dealer in gurgaon, buy property in gurgaon, property for sale in gurgaon, residential property for sale in gurgaon, commercial property for sale in gurgaon, plot for sale in gurgaon, apartment for sale in gurgaon, flats for sale in gurgaon, highrise apartments in gurgaon, builder floor for sale in gurgaon, property for rent in gurgaon, property for lease in gurgaon, residential property for rent in gurgaon, commercial property for lease in gurgaon, office space for lease in gurgaon, flats for rent in gurgaon, builder floor in dlf phase 1, builder floor in dlf phase 2, builder floor in dlf phase 3, apartment in dlf phase 4, flats in dlf phase 5, property for sale in dlf gurgaon, property on golf course road gurgaon, apartments on golf course road, highrise apartments golf course road, builder floor golf course road, property on golf course extension road, flats on golf course extension road, highrise apartments golf course extension road, builder floor in sushant lok, apartment in sushant lok gurgaon, property for sale in sushant lok, property on mg road gurgaon, commercial property on mg road, office space mg road gurgaon, property on sohna road gurgaon, flats on sohna road, residential projects on sohna road, builder floor in nirvana country, property for sale in nirvana country, residential property nirvana country, builder floor in sun city gurgaon, property in sun city gurgaon, flats in sun city, commercial property in udyog vihar, office space in udyog vihar, industrial property udyog vihar, plot for sale in imt manesar, industrial plot imt manesar, commercial property imt manesar"
       />
       {/* <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />
@@ -235,12 +235,12 @@ export default function Home() {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Property Dealer in Gurugram – Crownpoint Estates"
+        content="Property Dealer in Gurgaon  – Crownpoint Estates"
       />
 
       <meta
         property="og:description"
-        content="Crownpoint Estates is a trusted property dealer in Gurugram with 15+ years of experience. Buy, sell, lease & rent residential and commercial properties in Gurgaon & Delhi NCR."
+        content="Crownpoint Estates is a trusted property dealer in gurgaon  with 15+ years of experience. Buy, sell, lease & rent residential and commercial properties in Gurgaon & Delhi NCR."
       />
 
       <meta
@@ -256,11 +256,11 @@ export default function Home() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:title"
-        content="Property Dealer in Gurugram | Crownpoint Estates"
+        content="Property Dealer in gurgaon  | Crownpoint Estates"
       />
       <meta
         name="twitter:description"
-        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+        content="Buy, sell, lease & rent premium residential and commercial properties in gurgaon  and Delhi NCR with Crownpoint Estates."
       />
       <meta
         name="twitter:image"
