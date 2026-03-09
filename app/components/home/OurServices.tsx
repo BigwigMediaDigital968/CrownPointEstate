@@ -11,7 +11,7 @@ const services = [
     id: 1,
     title: "Buy Property",
     description:
-      "Looking to buy residential or commercial property? Crownpoint Estates is a trusted property dealer in Gurugram, helping homebuyers and investors find the right property at the best market price. From luxury apartments and builder floors to office spaces and retail units, we provide expert guidance, verified listings, and end-to-end support to ensure a smooth and secure buying experience.",
+      "Looking to buy residential or commercial property? Crownpoint Estates is a trusted property dealer in gurgaon , helping homebuyers and investors find the right property at the best market price. From luxury apartments and builder floors to office spaces and retail units, we provide expert guidance, verified listings, and end-to-end support to ensure a smooth and secure buying experience.",
     link: "/buy-property",
     icon: House,
   },
@@ -19,7 +19,7 @@ const services = [
     id: 2,
     title: "Sell Property",
     description:
-      "If you want to sell your property quickly and at the right value, partner with an experienced property dealer in Gurugram. At Crownpoint Estates, we use strong market insights, an active buyer network, and strategic marketing to attract genuine buyers. From pricing and promotion to negotiation and documentation, we manage the entire selling process professionally and transparently.",
+      "If you want to sell your property quickly and at the right value, partner with an experienced property dealer in gurgaon . At Crownpoint Estates, we use strong market insights, an active buyer network, and strategic marketing to attract genuine buyers. From pricing and promotion to negotiation and documentation, we manage the entire selling process professionally and transparently.",
     link: "/sell-property",
     icon: TrendingUp,
   },
@@ -27,7 +27,7 @@ const services = [
     id: 3,
     title: "Lease Property",
     description:
-      "As a reliable property dealer in Gurugram, we help property owners lease residential and commercial spaces to verified tenants. Whether it’s office leasing, retail space, or residential leasing, our team ensures maximum rental value, minimal vacancy, and complete legal assistance, making the leasing process hassle-free for landlords.",
+      "As a reliable property dealer in gurgaon , we help property owners lease residential and commercial spaces to verified tenants. Whether it’s office leasing, retail space, or residential leasing, our team ensures maximum rental value, minimal vacancy, and complete legal assistance, making the leasing process hassle-free for landlords.",
     link: "/lease-property",
     icon: FileSignature,
   },
@@ -35,7 +35,7 @@ const services = [
     id: 4,
     title: "Rent Property",
     description:
-      "Searching for a rental home or commercial space? Crownpoint Estates, a trusted property dealer in Gurugram, offers a wide range of rental options across prime locations. We help tenants find suitable properties based on budget, location, and requirements while ensuring clear agreements and smooth move-in support.",
+      "Searching for a rental home or commercial space? Crownpoint Estates, a trusted property dealer in Gurgaon , offers a wide range of rental options across prime locations. We help tenants find suitable properties based on budget, location, and requirements while ensuring clear agreements and smooth move-in support.",
     link: "/rent-property",
     icon: Key,
   },
@@ -60,12 +60,15 @@ export default function OurServices() {
             What We Do
           </p>
           <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-            Best Property Dealer in Gurgaon for Buying, Selling &
-            Leasing
+            Best Property Dealer in Gurgaon for Buying, Selling & Leasing
           </h2>
           <p className="mt-4 text-[var(--primary-bg)] text-base md:text-lg leading-relaxed">
-            As the best property dealer in Gurgaon, we provide end-to-end solutions for buying, 
-            selling, and leasing properties. Our services cover residential real estate, commercial real estate, and investment properties. Whether you are searching for a home, office space, retail shop, or rental income opportunity, our experienced property brokers in Gurugram ensure smooth and secure transactions.
+            As the best property dealer in Gurgaon, we provide end-to-end
+            solutions for buying, selling, and leasing properties. Our services
+            cover residential real estate, commercial real estate, and
+            investment properties. Whether you are searching for a home, office
+            space, retail shop, or rental income opportunity, our experienced
+            property brokers in gurgaon ensure smooth and secure transactions.
           </p>
         </div>
 
@@ -80,7 +83,6 @@ export default function OurServices() {
               data-aos-delay={index * 100}
             >
               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-transparent hover:border-[var(--primary-color)]/20 relative overflow-hidden">
-
                 {/* Icon Container */}
                 <div className="mb-6 relative w-16 h-16 bg-[var(--primary-color)]/10 rounded-full flex items-center justify-center text-[var(--primary-color)] group-hover:bg-[var(--primary-color)] group-hover:text-white transition-colors duration-300">
                   <service.icon className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" />
@@ -97,14 +99,21 @@ export default function OurServices() {
 
                 {/* Read More Indicator */}
                 <div className="mt-auto flex items-center text-[var(--primary-color)] text-sm font-semibold tracking-wide">
-                  <span className="group-hover:mr-2 transition-all">Learn More</span>
+                  <span className="group-hover:mr-2 transition-all">
+                    Learn More
+                  </span>
                   <svg
                     className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </div>
               </div>

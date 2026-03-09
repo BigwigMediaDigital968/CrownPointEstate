@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Phone,
-  Mail,
-  MapPin,
-} from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import footerBg from "../assets/footer-bg.jpg";
 
 export default function Footer() {
@@ -50,7 +46,7 @@ export default function Footer() {
               <p className="font-body text-sm text-gray-300 leading-relaxed">
                 Crownpoint Estates <br />
                 65, Lower Ground Floor, Akashneem Marg, <br />
-                DLF City Phase-2, Gurugram, <br />
+                DLF City Phase-2, Gurgaon, <br />
                 Haryana – 122002
               </p>
             </div>
@@ -67,7 +63,7 @@ export default function Footer() {
               <h4 className="font-heading text-lg mb-4">About Us</h4>
               <p className="font-body text-sm text-gray-300 leading-relaxed text-justify">
                 Crownpoint Estates is a trusted real estate consultancy based in
-                Gurugram, offering expert guidance in residential and commercial
+                Gurgaon , offering expert guidance in residential and commercial
                 properties across Delhi NCR. With over 15 years of experience,
                 we are known for transparency, integrity, and client-focused
                 service.
@@ -108,7 +104,8 @@ export default function Footer() {
                 <li>
                   <Link href="/buy-property" className="hover:text-white">
                     Buy Property
-                  </Link></li>
+                  </Link>
+                </li>
                 <li>
                   <Link href="/sell-property" className="hover:text-white">
                     Sell Property
@@ -131,24 +128,22 @@ export default function Footer() {
 
         {/* ================= BOTTOM BAR ================= */}
         <div className="w-11/12 md:w-5/6 mx-auto py-6 flex flex-col md:flex-row items-center justify-start text-sm text-gray-400 ">
-        <div>
-            <p >
-            © {new Date().getFullYear()} Crownpoints Estates. All rights
-            reserved.
-          </p>
-        </div>
-        <div style={{marginLeft: "200px"}}>
-          <p >
-            Designed & Developed by{" "}
-            <span className="text-white">
-              <Link href="https://www.bigwigmediadigital.com">
-                BigWig Media Digital
-              </Link>
-            </span>
-          </p>
-        </div>
-          
-          
+          <div>
+            <p>
+              © {new Date().getFullYear()} Crownpoints Estates. All rights
+              reserved.
+            </p>
+          </div>
+          <div style={{ marginLeft: "200px" }}>
+            <p>
+              Designed & Developed by{" "}
+              <span className="text-white">
+                <Link href="https://www.bigwigmediadigital.com">
+                  BigWig Media Digital
+                </Link>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

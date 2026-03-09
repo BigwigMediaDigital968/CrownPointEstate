@@ -10,25 +10,25 @@ const faqs = [
     id: 1,
     question: "Why is Gurgaon real estate so expensive?",
     answer:
-      "Gurugram real estate is expensive due to continuous government and private-sector investment, rapid infrastructure development, proximity to Delhi, and the presence of corporate hubs like Cyber City and Golf Course Road. High demand for quality housing and commercial spaces also drives property prices. Consulting an experienced property dealer in Gurugram helps buyers make informed and value-driven decisions.",
+      "Gurgaon real estate is expensive due to continuous government and private-sector investment, rapid infrastructure development, proximity to Delhi, and the presence of corporate hubs like Cyber City and Golf Course Road. High demand for quality housing and commercial spaces also drives property prices. Consulting an experienced property dealer in Gurgaon  helps buyers make informed and value-driven decisions.",
   },
   {
     id: 2,
-    question: "Does Crownpoint Estate help in buying residential in Gurugram?",
+    question: "Does Crownpoint Estate help in buying residential in Gurgaon ?",
     answer:
-      "Absolutely. As a professional property dealer in Gurugram, we assist clients in buying apartments, villas, and investment properties with complete support from site visits to documentation.",
+      "Absolutely. As a professional property dealer in Gurgaon , we assist clients in buying apartments, villas, and investment properties with complete support from site visits to documentation.",
   },
   {
     id: 3,
-    question: "Which locations in Gurugram do you deal in?",
+    question: "Which locations in Gurgaon  do you deal in?",
     answer:
       "We deal in all prime locations including DLF Phase 1–5, Golf Course Road, Golf Course Extension Road, Sohna Road, New Gurgaon, and major residential and commercial sectors.",
   },
   {
     id: 4,
-    question: "Is Gurugram a good location for property investment?",
+    question: "Is Gurgaon a good location for property investment?",
     answer:
-      "Yes, Gurugram is one of India’s fastest-growing real estate markets with strong infrastructure, corporate hubs, and high rental demand, making it ideal for long-term investments.",
+      "Yes, Gurgaon is one of India’s fastest-growing real estate markets with strong infrastructure, corporate hubs, and high rental demand, making it ideal for long-term investments.",
   },
 ];
 
@@ -61,7 +61,8 @@ export default function FaqSection() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 mb-8">
-              Find answers to common questions about buying, selling, and leasing property in Gurugram.
+              Find answers to common questions about buying, selling, and
+              leasing property in gurgaon .
             </p>
           </div>
 
@@ -80,10 +81,14 @@ export default function FaqSection() {
                     className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                     aria-expanded={openIndex === index}
                   >
-                    <h3 className={`font-semibold text-lg ${openIndex === index ? "text-[var(--primary-color)]" : "text-[var(--primary-bg)]"}`}>
+                    <h3
+                      className={`font-semibold text-lg ${openIndex === index ? "text-[var(--primary-color)]" : "text-[var(--primary-bg)]"}`}
+                    >
                       {faq.question}
                     </h3>
-                    <span className={`ml-4 flex-shrink-0 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}>
+                    <span
+                      className={`ml-4 flex-shrink-0 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}
+                    >
                       {openIndex === index ? (
                         <Minus className="w-5 h-5 text-[var(--primary-color)]" />
                       ) : (
@@ -91,7 +96,7 @@ export default function FaqSection() {
                       )}
                     </span>
                   </button>
-                  
+
                   <div
                     className={`grid transition-all duration-300 ease-in-out ${
                       openIndex === index

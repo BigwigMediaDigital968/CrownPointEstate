@@ -1,6 +1,6 @@
 export default function PropertyTypes() {
   const types = [
-    "Residential Properties in Gurugram",
+    "Residential Properties in Gurgaon ",
     "Commercial Properties in Gurgaon",
     "Affordable & Luxury Property Options",
   ];

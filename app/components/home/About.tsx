@@ -21,12 +21,9 @@ export default function About() {
 
   return (
     <section className="relative overflow-hidden bg-[#faf9f7] pt-20 md:pt-28">
-
       {/* ================= HERO IMAGE WITH OVERLAY ================= */}
       <div className="relative w-full py-10 md:py-14 px-6">
-
         <div className="relative w-full h-full rounded-2xl overflow-hidden">
-
           {/* Background Image */}
           {/* <Image
             src={leftImg}
@@ -46,24 +43,19 @@ export default function About() {
             fill
             className="object-cover opacity-10 mix-blend-overlay"
           />
-
         </div>
       </div>
 
       {/* ================= FLOATING WHITE BLOCK ================= */}
       <div className="relative -mt-24 md:-mt-28 z-20">
         <div className="w-[92%] sm:w-[88%] md:w-[80vw] mx-auto px-4 sm:px-6">
-
-
           <div
             className="bg-white/95 backdrop-blur-lg shadow-2xl rounded-2xl p-8 md:p-14 border border-gray-100"
             data-aos="fade-up"
           >
             {/* ===== TITLE ===== */}
 
-
             <div className="grid md:grid-cols-2 gap-10 items-center">
-
               {/* Left Image */}
               <div
                 className="relative h-[360px] md:h-[720px] rounded-xl overflow-hidden"
@@ -80,24 +72,24 @@ export default function About() {
 
               {/* Right Content */}
               <div className="space-y-6" data-aos="fade-left">
-
                 <h2 className="font-heading text-2xl md:text-2xl leading-snug font-bold text-[var(--primary-bg)]  mb-8 ">
-                  Property Dealer in Gurugram – Trusted Real Estate Experts <br className="hidden md:block" />
+                  Property Dealer in Gurgaon – Trusted Real Estate Experts{" "}
+                  <br className="hidden md:block" />
                   for Residential & Commercial Properties
                 </h2>
 
                 <p className="text-gray-600 text-justify leading-relaxed">
-                  Looking for a reliable property dealer in Gurugram who
+                  Looking for a reliable property dealer in gurgaon who
                   understands the local real estate ecosystem? We are trusted
                   real estate consultants in Gurgaon offering expert guidance
                   for residential and commercial properties.
                 </p>
 
                 <p className="text-gray-600 text-justify leading-relaxed">
-                  With in-depth knowledge of the Gurgaon real estate market,
-                  we help homebuyers, investors, NRIs, and businesses find
-                  verified properties with complete transparency, legal clarity,
-                  and long-term value.
+                  With in-depth knowledge of the Gurgaon real estate market, we
+                  help homebuyers, investors, NRIs, and businesses find verified
+                  properties with complete transparency, legal clarity, and
+                  long-term value.
                 </p>
 
                 <Link href="/about">
@@ -107,10 +99,8 @@ export default function About() {
                   />
                 </Link>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
 
