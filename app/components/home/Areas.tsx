@@ -14,6 +14,10 @@ export default function Areas() {
         <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--primary-bg)] mb-4">
           Areas We Serve in Gurgaon
         </h2>
+        <p className="text-sm sm:text-base text-gray-600">
+          These locations offer strong demand and excellent investment
+          potential.
+        </p>
 
         <ul className="pt-7 grid m:grid-cols-2 md:grid-cols-3 gap-4  ">
           {areas.map((area) => (

@@ -105,7 +105,9 @@ export default function TestimonialSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const maxIndex = isMobile ? testimonials.length - 1 : Math.max(0, testimonials.length - itemsPerView);
+  const maxIndex = isMobile
+    ? testimonials.length - 1
+    : Math.max(0, testimonials.length - itemsPerView);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
@@ -115,10 +117,9 @@ export default function TestimonialSection() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  const visibleTestimonials = isMobile ? testimonials : testimonials.slice(
-    currentIndex,
-    currentIndex + itemsPerView
-  );
+  const visibleTestimonials = isMobile
+    ? testimonials
+    : testimonials.slice(currentIndex, currentIndex + itemsPerView);
 
   return (
     <section className="relative md:py-16 overflow-hidden bg-white">
@@ -143,8 +144,6 @@ export default function TestimonialSection() {
             broker in Gurugram.
           </p>
         </div> */}
-
-
       </div>
 
       {/* CAROUSEL CONTAINER */}
@@ -167,15 +166,17 @@ export default function TestimonialSection() {
             onTouchEnd={onTouchEnd}
           >
             <div
-              className={`flex gap-6 transition-transform duration-500 ease-in-out ${isMobile ? 'w-full' : ''}`}
+              className={`flex gap-6 transition-transform duration-500 ease-in-out ${isMobile ? "w-full" : ""}`}
               style={{
-                transform: isMobile ? `translateX(calc(-1 * ${currentIndex} * (100% + 24px)))` : `translateX(0)`,
+                transform: isMobile
+                  ? `translateX(calc(-1 * ${currentIndex} * (100% + 24px)))`
+                  : `translateX(0)`,
               }}
             >
               {visibleTestimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className={`flex-shrink-0 w-full md:w-[calc(50%-12px)] relative bg-[#faf9f7] rounded-lg md:rounded-lg p-6 md:p-8 shadow-md md:shadow-sm min-h-[280px] border border-gray-100 flex flex-col justify-center ${isMobile ? 'rounded-2xl shadow-lg' : ''}`}
+                  className={`flex-shrink-0 w-full md:w-[calc(50%-12px)] relative bg-[#faf9f7] rounded-lg md:rounded-lg p-6 md:p-8 shadow-md md:shadow-sm min-h-[280px] border border-gray-100 flex flex-col justify-center ${isMobile ? "rounded-2xl shadow-lg" : ""}`}
                   data-aos="fade-up"
                 >
                   {/* QUOTATION MARK */}
@@ -228,10 +229,11 @@ export default function TestimonialSection() {
           {testimonials.map((_, index) => (
             <div
               key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                ? "w-6 bg-[var(--primary-color)]"
-                : "w-2 bg-gray-300"
-                }`}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "w-6 bg-[var(--primary-color)]"
+                  : "w-2 bg-gray-300"
+              }`}
             />
           ))}
         </div>

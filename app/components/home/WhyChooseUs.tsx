@@ -17,29 +17,36 @@ import "aos/dist/aos.css";
 
 const features = [
   {
-    title: "10+ Years Experience in Gurgaon Real Estate Market",
-    desc: "With over a decade of experience in the Gurgaon property market, we understand micro-markets, price appreciation trends, and high-growth investment zones.",
+    title: "10+ Years of Experience in Gurgaon Real Estate",
+    desc: "With over a decade of experience, we understand micro-markets, price trends, and high-growth investment zones.",
     icon: Building2,
     image: "/assets/15years.webp",
   },
   {
-    title: "End-to-End Property Assistance (Site Visit to Registration)",
-    desc: " From property shortlisting, site inspections, price negotiation, agreement drafting, stamp duty, and final registration—we handle the entire real estate transaction process.",
+    title: "End-to-End Property Assistance",
+    desc: "From property shortlisting and site visits to negotiation and final registration, we manage every step professionally.",
     icon: Home,
     image: "/assets/complete.png",
   },
   {
     title: "RERA Registered Property Dealer in Gurugram",
-    desc: " We follow all regulatory guidelines and ensure complete legal due diligence. Every property listing is verified for ownership, approvals, and compliance, minimizing risks for buyers and investors.",
+    desc: "We follow all regulatory guidelines and ensure complete legal due diligence for every transaction.",
     icon: Network,
     image: "/assets/network.svg",
   },
-  //{
-  //   title: "Transparent & Ethical Practices",
-  //   desc: "Clear communication, honest advice, and professional service at every stage of the property transaction.",
-  //   icon: ShieldCheck,
-  //   image: "/assets/Centric-Approach.webp",
-  // },
+  {
+    title: "Verified Listings & Strong Buyer Network",
+    desc: (
+      <>
+        <p>
+          As a trusted <b>property dealer in Gurugram</b>, we provide access to
+          genuine listings and serious buyers.
+        </p>
+      </>
+    ),
+    icon: ShieldCheck,
+    image: "/assets/Centric-Approach.webp",
+  },
   // {
   //   title: "Client-Centric Approach",
   //   desc: "Tailor-made solutions designed around individual needs, investment goals, and long-term value creation.",
@@ -68,7 +75,7 @@ export default function WhyChooseUs() {
       once: true,
       offset: 120,
     });
-    
+
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -125,9 +132,14 @@ export default function WhyChooseUs() {
         <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
           Why choose us
         </p>
-        <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-          Why Choose the Best Property Dealer in Gurgaon for Your Investment
+        <h2 className="font-heading text-3xl md:text-4xl mb-4 leading-snug font-bold text-[var(--primary-bg)]">
+          Why Choose Crownpoint Estates – Best Property Dealer in Gurgaon
         </h2>
+        <p className="tracking-widest text-sm font-heading md:pe-72">
+          Choosing the right <b>property dealer in Gurgaon</b> plays a crucial
+          role in your real estate journey. At Crownpoint Estates, we focus on
+          expertise, transparency, and results.
+        </p>
       </div>
 
       {/* LAYOUT */}
@@ -139,7 +151,7 @@ export default function WhyChooseUs() {
           data-aos-delay="150"
         />
 
-        <div 
+        <div
           className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-[640px] items-center"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -175,29 +187,25 @@ export default function WhyChooseUs() {
 
           {/* CONTENT */}
           <div className="relative z-0 flex items-center">
-            
             {/* MOBILE SLIDER */}
             <div className="block md:hidden w-full overflow-hidden px-4">
-              <div 
+              <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{
                   transform: `translateX(calc(-1 * ${active} * 100%))`,
                 }}
               >
                 {features.map((feature, idx) => (
-                   <div 
-                    key={idx}
-                    className="w-full flex-shrink-0 px-2"
-                   >
-                     <div className="bg-[#faf9f7] rounded-2xl shadow-lg p-8 min-h-[250px] flex flex-col justify-center">
-                        <h3 className="font-heading text-2xl text-[var(--primary-bg)] mb-4 text-center">
-                          {feature.title}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed text-center">
-                          {feature.desc}
-                        </p>
-                     </div>
-                   </div>
+                  <div key={idx} className="w-full flex-shrink-0 px-2">
+                    <div className="bg-[#faf9f7] rounded-2xl shadow-lg p-8 min-h-[250px] flex flex-col justify-center">
+                      <h3 className="font-heading text-2xl text-[var(--primary-bg)] mb-4 text-center">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-center">
+                        {feature.desc}
+                      </p>
+                    </div>
+                  </div>
                 ))}
               </div>
 

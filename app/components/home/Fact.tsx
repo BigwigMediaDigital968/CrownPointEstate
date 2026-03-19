@@ -86,14 +86,14 @@ export default function Fact() {
             </p>
 
             <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--primary-bg)] mb-4">
-              One of the leading real estate companies
+              Residential & Commercial Properties in Gurgaon
             </h2>
 
             <p className="text-gray-600 text-sm md:text-base max-w-lg mb-6 leading-relaxed">
-              Our mission is to engage in issues that are of concern to
-              individuals, families and communities through an uncompromising
-              commitment to create outstanding living, work and leisure
-              environments.
+              We deal in a wide range of{" "}
+              <b>residential properties in Gurgaon</b> and{" "}
+              <b>commercial properties in Gurgaon</b>, helping clients find the
+              right options based on their needs.
             </p>
 
             {/* ================= MOBILE IMAGE ================= */}

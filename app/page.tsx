@@ -215,15 +215,15 @@ export default function Home() {
       {/* <!-- Primary Meta Tags --> */}
       <meta
         name="title"
-        content="Property Dealer in Gurgaon  | Buy, Sell, Rent & Lease - CPE"
+        content="Property Dealer in Gurgaon - Trusted Real Estate Consultants"
       />
       <meta
         name="description"
-        content="Buy, sell, rent or lease property with a trusted property dealer in gurgaon . Call +91 9811556625"
+        content="Looking for a trusted property dealer in Gurgaon? Buy, sell, rent or lease property with a trusted real estate agent in Gurgaon . Call +91 9811556625"
       />
       <meta
         name="keywords"
-        content="property dealer in gurgaon , property dealer in gurgaon, real estate agent in gurgaon, commercial property dealer in gurgaon, residential property dealer in gurgaon, buy property in gurgaon, property for sale in gurgaon, residential property for sale in gurgaon, commercial property for sale in gurgaon, plot for sale in gurgaon, apartment for sale in gurgaon, flats for sale in gurgaon, highrise apartments in gurgaon, builder floor for sale in gurgaon, property for rent in gurgaon, property for lease in gurgaon, residential property for rent in gurgaon, commercial property for lease in gurgaon, office space for lease in gurgaon, flats for rent in gurgaon, builder floor in dlf phase 1, builder floor in dlf phase 2, builder floor in dlf phase 3, apartment in dlf phase 4, flats in dlf phase 5, property for sale in dlf gurgaon, property on golf course road gurgaon, apartments on golf course road, highrise apartments golf course road, builder floor golf course road, property on golf course extension road, flats on golf course extension road, highrise apartments golf course extension road, builder floor in sushant lok, apartment in sushant lok gurgaon, property for sale in sushant lok, property on mg road gurgaon, commercial property on mg road, office space mg road gurgaon, property on sohna road gurgaon, flats on sohna road, residential projects on sohna road, builder floor in nirvana country, property for sale in nirvana country, residential property nirvana country, builder floor in sun city gurgaon, property in sun city gurgaon, flats in sun city, commercial property in udyog vihar, office space in udyog vihar, industrial property udyog vihar, plot for sale in imt manesar, industrial plot imt manesar, commercial property imt manesar"
+        content="property dealer in Gurgaon, Gurgaon real estate consultants, property consultant in Gurgaon, property dealer in Gurugram, real estate services Gurgaon, residential properties in Gurgaon, commercial properties in Gurgaon"
       />
       {/* <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />
@@ -288,12 +288,14 @@ export default function Home() {
           {/* HEADER */}
           <div className="flex items-end justify-between mb-8">
             <div data-aos="fade-up">
-              <p className="uppercase tracking-widest text-sm text-(--primary-color) mb-4 font-heading">
-                Featured Properties
-              </p>
-              <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-(--primary-bg)">
-                Where happiness lives
+              <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-(--primary-bg) mb-4">
+                Featured Properties in Gurgaon
               </h2>
+              <p className="tracking-widest md:pe-64 text-sm font-heading">
+                Explore premium residential and commercial properties in
+                Gurgaon, carefully selected based on location, quality, and
+                investment potential.
+              </p>
             </div>
 
             <Link

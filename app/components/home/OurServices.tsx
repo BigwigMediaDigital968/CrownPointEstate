@@ -9,33 +9,70 @@ import { House, TrendingUp, FileSignature, Key } from "lucide-react";
 const services = [
   {
     id: 1,
-    title: "Buy Property",
-    description:
-      "Looking to buy residential or commercial property? Crownpoint Estates is a trusted property dealer in gurgaon , helping homebuyers and investors find the right property at the best market price. From luxury apartments and builder floors to office spaces and retail units, we provide expert guidance, verified listings, and end-to-end support to ensure a smooth and secure buying experience.",
+    title: "Buy Property in Gurgaon",
+    description: (
+      <>
+        <p>
+          Looking to invest in <b>residential properties in Gurgaon</b> or
+          commercial spaces? Crownpoint Estates, a trusted{" "}
+          <b>property dealer in Gurgaon</b>, helps you find the right property
+          at the best market value. <br /> <br /> From luxury apartments and
+          builder floors to office spaces and retail units, we provide verified
+          listings, expert insights, and complete support throughout the buying
+          process.
+        </p>
+      </>
+    ),
     link: "/buy-property",
     icon: House,
   },
   {
     id: 2,
-    title: "Sell Property",
-    description:
-      "If you want to sell your property quickly and at the right value, partner with an experienced property dealer in gurgaon . At Crownpoint Estates, we use strong market insights, an active buyer network, and strategic marketing to attract genuine buyers. From pricing and promotion to negotiation and documentation, we manage the entire selling process professionally and transparently.",
+    title: "Sell Property in Gurgaon",
+    description: (
+      <>
+        <p>
+          If you want to sell your property at the best price, working with an
+          experienced <b>property dealer in Gurgaon</b> is essential. We help
+          property owners connect with verified buyers and close deals faster.
+          <br /> <br /> Our approach includes accurate pricing, targeted
+          marketing, and complete assistance from listing to final registration.
+        </p>
+      </>
+    ),
     link: "/sell-property",
     icon: TrendingUp,
   },
   {
     id: 3,
-    title: "Lease Property",
-    description:
-      "As a reliable property dealer in gurgaon , we help property owners lease residential and commercial spaces to verified tenants. Whether it’s office leasing, retail space, or residential leasing, our team ensures maximum rental value, minimal vacancy, and complete legal assistance, making the leasing process hassle-free for landlords.",
+    title: "Lease Property in Gurgaon",
+    description: (
+      <>
+        <p>
+          We help property owners lease residential and commercial spaces to
+          verified tenants. As a reliable <b>property consultant in Gurgaon</b>,
+          we ensure maximum rental value, minimal vacancy, and smooth
+          documentation.
+        </p>
+      </>
+    ),
     link: "/lease-property",
     icon: FileSignature,
   },
   {
     id: 4,
-    title: "Rent Property",
-    description:
-      "Searching for a rental home or commercial space? Crownpoint Estates, a trusted property dealer in Gurgaon , offers a wide range of rental options across prime locations. We help tenants find suitable properties based on budget, location, and requirements while ensuring clear agreements and smooth move-in support.",
+    title: "Rent Property in Gurgaon",
+    description: (
+      <>
+        <p>
+          Searching for a rental home or commercial space? As a trusted{" "}
+          <b>property dealer in Gurugram</b>, we offer a wide range of rental
+          options across prime locations. Whether it’s a fully furnished
+          apartment or office space, we help you find the right property quickly
+          and efficiently.
+        </p>
+      </>
+    ),
     link: "/rent-property",
     icon: Key,
   },
@@ -57,18 +94,18 @@ export default function OurServices() {
         {/* HEADER */}
         <div className="mb-12" data-aos="fade-up">
           <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
-            What We Do
+            What We Do – Complete Real Estate Solutions in Gurgaon
           </p>
           <h2 className="font-heading text-3xl md:text-4xl leading-snug font-bold text-[var(--primary-bg)]">
             Best Property Dealer in Gurgaon for Buying, Selling & Leasing
+            Property
           </h2>
           <p className="mt-4 text-[var(--primary-bg)] text-base md:text-lg leading-relaxed">
-            As the best property dealer in Gurgaon, we provide end-to-end
-            solutions for buying, selling, and leasing properties. Our services
-            cover residential real estate, commercial real estate, and
-            investment properties. Whether you are searching for a home, office
-            space, retail shop, or rental income opportunity, our experienced
-            property brokers in gurgaon ensure smooth and secure transactions.
+            As a leading property dealer in Gurugram, we provide end-to-end
+            solutions for buying, selling, and leasing property across
+            residential and commercial segments. Our local expertise helps
+            clients make informed decisions based on location, budget, and
+            investment potential.
           </p>
         </div>
 

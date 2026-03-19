@@ -74,7 +74,7 @@ export default function About() {
               <div className="space-y-6" data-aos="fade-left">
                 <h2 className="font-heading text-2xl md:text-2xl leading-snug font-bold text-[var(--primary-bg)]  mb-8 ">
                   Property Dealer in Gurgaon – Trusted Real Estate Experts{" "}
-                  <br className="hidden md:block" />
+                  {/* <br className="hidden md:block" /> */}
                   for Residential & Commercial Properties
                 </h2>
 
@@ -86,10 +86,14 @@ export default function About() {
                 </p>
 
                 <p className="text-gray-600 text-justify leading-relaxed">
-                  With in-depth knowledge of the Gurgaon real estate market, we
-                  help homebuyers, investors, NRIs, and businesses find verified
-                  properties with complete transparency, legal clarity, and
-                  long-term value.
+                  With deep knowledge of the Gurgaon real estate market, we help
+                  homebuyers, investors, NRIs, and businesses find verified
+                  opportunities with complete transparency, legal clarity, and
+                  long-term value. As an experienced property consultant in
+                  Gurgaon, we ensure every transaction is smooth, secure, and
+                  aligned with your goals. We also cater to clients searching
+                  for properties across Gurugram, ensuring complete coverage of
+                  the region.
                 </p>
 
                 <Link href="/about">

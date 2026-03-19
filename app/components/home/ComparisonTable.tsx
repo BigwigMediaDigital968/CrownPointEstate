@@ -47,6 +47,13 @@ export default function ComparisonTable() {
           Comparison: Buying Property in Gurgaon vs Other NCR Cities
         </h2>
 
+        <p className="text-sm sm:text-base text-gray-600">
+          Gurgaon continues to be one of the most preferred real estate
+          destinations due to its infrastructure, corporate presence, and high
+          rental yield. Compared to other NCR cities, Gurgaon offers better
+          appreciation potential and a wider range of premium property options.
+        </p>
+
         {/* Desktop Table */}
         <div
           className="hidden md:block overflow-x-auto"
