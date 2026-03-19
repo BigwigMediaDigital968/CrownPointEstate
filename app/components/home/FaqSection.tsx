@@ -9,26 +9,117 @@ const faqs = [
   {
     id: 1,
     question: "Why is Gurgaon real estate so expensive?",
-    answer:
-      "Gurgaon real estate is expensive due to continuous government and private-sector investment, rapid infrastructure development, proximity to Delhi, and the presence of corporate hubs like Cyber City and Golf Course Road. High demand for quality housing and commercial spaces also drives property prices. Consulting an experienced property dealer in Gurgaon  helps buyers make informed and value-driven decisions.",
+    answer: (
+      <>
+        <p>
+          Gurgaon is one of the fastest-growing real estate markets due to its
+          strong corporate presence, modern infrastructure, and high demand for
+          both <b>residential properties in Gurgaon</b> and{" "}
+          <b>commercial properties in Gurgaon</b>. Prime locations like Golf
+          Course Road and DLF Phase 1-5 contribute to higher property values.
+        </p>
+      </>
+    ),
   },
   {
     id: 2,
-    question: "Does Crownpoint Estate help in buying residential in Gurgaon ?",
-    answer:
-      "Absolutely. As a professional property dealer in Gurgaon , we assist clients in buying apartments, villas, and investment properties with complete support from site visits to documentation.",
+    question:
+      "Does Crownpoint Estates help in buying residential properties in Gurgaon?",
+    answer: (
+      <>
+        <p>
+          Yes, as a trusted <b>property dealer in Gurgaon</b>, Crownpoint
+          Estates helps buyers find verified{" "}
+          <b>residential properties in Gurgaon</b>
+          with complete support, including site visits, price negotiation, and
+          legal documentation.
+        </p>
+      </>
+    ),
   },
   {
     id: 3,
     question: "Which locations in Gurgaon  do you deal in?",
-    answer:
-      "We deal in all prime locations including DLF Phase 1–5, Golf Course Road, Golf Course Extension Road, Sohna Road, New Gurgaon, and major residential and commercial sectors.",
+    answer: (
+      <>
+        <p>
+          We deal in all prime areas including DLF Phase 1–5, Golf Course Road,
+          Golf Course Extension Road, Sohna Road, Dwarka Expressway, and Sushant
+          Lok, offering a wide range of{" "}
+          <b>residential and commercial properties in Gurgaon</b>.
+        </p>
+      </>
+    ),
   },
   {
     id: 4,
     question: "Is Gurgaon a good location for property investment?",
-    answer:
-      "Yes, Gurgaon is one of India’s fastest-growing real estate markets with strong infrastructure, corporate hubs, and high rental demand, making it ideal for long-term investments.",
+    answer: (
+      <>
+        <p>
+          Yes, Gurgaon is a top investment destination due to its strong
+          infrastructure, corporate hubs, and high rental demand. Working with
+          an experienced <b>property consultant in Gurgaon</b> helps you
+          identify high-growth areas and make profitable investments.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 5,
+    question: "Which locality is best to buy property in Gurgaon?",
+    answer: (
+      <>
+        <p>
+          The best locality depends on your budget and purpose. Areas like Golf
+          Course Road and DLF Phase 1–5 are ideal for premium living, while
+          Sohna Road and New Gurgaon offer affordable options with strong future
+          growth for <b>property buyers in Gurgaon</b>.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 6,
+    question: "Is it a good time to buy property in Gurgaon?",
+    answer: (
+      <>
+        <p>
+          Yes, with continuous infrastructure development and rising demand, it
+          is a favorable time to invest in <b>Gurgaon real estate</b>. Early
+          investment in emerging sectors can provide better appreciation and
+          returns.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 7,
+    question: "Where should I invest in Gurgaon for better returns?",
+    answer: (
+      <>
+        <p>
+          For better returns, investors can consider areas like Dwarka
+          Expressway, Golf Course Extension Road, and New Gurgaon. These
+          locations offer strong growth potential for both{" "}
+          <b>residential and commercial properties in Gurgaon</b>.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 8,
+    question: "What is the RERA Act 2016 and how does it benefit buyers?",
+    answer: (
+      <>
+        <p>
+          The RERA Act 2016 ensures transparency and accountability in real
+          estate transactions. As a professional{" "}
+          <b>property dealer in Gurugram</b>, we deal in RERA-compliant projects
+          to protect buyers’ interests and ensure safe investments.
+        </p>
+      </>
+    ),
   },
 ];
 

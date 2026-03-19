@@ -39,6 +39,7 @@ import img15 from "./assets/client15.png";
 import img16 from "./assets/client16.png";
 import ComparisonTable from "./components/home/ComparisonTable";
 import ContactCTA from "./components/home/ContactCTA";
+import PropertyCTA from "./components/home/CalltoAction";
 
 const project1 = "/assets/projects/project_1.jpg";
 const project2 = "/assets/projects/project_2.jpg";
@@ -503,6 +504,7 @@ export default function Home() {
       </section>
       <ContactCTA />
       <FaqSection />
+      <PropertyCTA />
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
       <Footer />
     </>
