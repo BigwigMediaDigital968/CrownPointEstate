@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import popup from "../assets/h8_pic5.jpg";
+// import popup from "../assets/h8_pic5.jpg";
 import EnquiryForm from "./EnquiryForm";
 
 interface PopupFormProps {
@@ -18,14 +18,19 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
         {/* CLOSE */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl z-10"
+          className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl z-10 cursor-pointer transition-colors duration-300"
         >
           ✕
         </button>
 
         {/* IMAGE */}
         <div className="hidden md:block relative w-1/2">
-          <Image src={popup} alt="Popup" fill className="object-fill" />
+          <Image
+            src="/cpe-recognition-certificate.png"
+            alt="Popup"
+            fill
+            className="object-fill"
+          />
         </div>
 
         {/* FORM */}
@@ -33,7 +38,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
           <h2 className="text-2xl font-bold text-center mb-6 text-[var(--primary-color)]">
             Enquire Now
           </h2>
-          
+
           <EnquiryForm onSuccess={onClose} variant="default" />
         </div>
       </div>

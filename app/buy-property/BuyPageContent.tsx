@@ -3,14 +3,16 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import QuickEnquiry from "../components/QuickEnquiry";
-
 import heroImg from "../assets/hero/buy-property.svg";
-
 import { useEffect } from "react";
+import {
+  WhyChooseSection,
+  FeaturesSection,
+  TestimonialsSection,
+} from "./Buypageextrasections";
 
 // Icons
 import {
@@ -22,8 +24,12 @@ import {
   IndianRupee,
   Loader,
 } from "lucide-react";
+
 import PopupForm from "../components/Popup";
 import ButtonFill from "../components/ButtonFill";
+import BuyPageSEOContent from "./Buypageseocontent";
+import BuyPropFaq from "./BuypropFaq";
+
 interface Property {
   _id: string;
   title: string;
@@ -39,27 +45,6 @@ interface Property {
   areaSqft?: string;
   builder?: string;
 }
-
-// const staticLocations = [
-//   "Select Location",
-//   "DLF Phase 1",
-//   "DLF Phase 2",
-//   "DLF Phase 3",
-//   "DLF Phase 4",
-//   "DLF Phase 5",
-//   "Sushant Lok 1",
-//   "Sushant Lok 2",
-//   "Sushant Lok 3",
-//   "Sushant Lok 4",
-//   "Sushant Lok 5",
-//   "MG Road",
-//   "Golf Course Road",
-//   "Golf Course Ext. Road",
-//   "Sector 77 Gurugram Haryana",
-//   "Sector 76 Gurugram Haryana",
-//   "Sector 102 Gurugram Haryana",
-//   "Sector 59 Gurugram Haryana",
-// ];
 
 export default function BuyPageContent() {
   const [search, setSearch] = useState("");
@@ -174,25 +159,22 @@ export default function BuyPageContent() {
     <>
       {/* SEO Meta Tags */}
 
-      {/* <!-- Primary Meta Tags --> */}
-      <title>
-        Buy Property in Gurugram | Residential & Commercial Real Estate Experts
-      </title>
+      <title>Buy Property in Gurgaon – Flats, Floors & Commercial Spaces</title>
       <meta
         name="title"
-        content="Buy Property in Gurugram | Residential & Commercial Real Estate Experts"
+        content="Buy Property in Gurgaon – Flats, Floors & Commercial Spaces"
       />
       <meta
         name="description"
-        content="Looking to buy property in Gurugram? Crownpoint Estates offers expert guidance on residential & commercial properties, fresh bookings and resale opportunities in Gurgaon."
+        content="Looking to buy property in Gurgaon? Explore verified flats, builder floors & commercial properties with expert guidance and best market deals."
       />
-      {/* <meta
+      <meta
         name="keywords"
-        content="property dealer in gurugram, real estate agent in gurgaon, commercial property gurgaon, residential property gurgaon, buy property gurgaon, sell property gurgaon, crownpoint estates"
-      /> */}
-      {/* <meta name="author" content="Crownpoint Estates" />
+        content="buy property in Gurgaon, properties for sale in Gurgaon, property in Gurgaon, flats for sale in Gurgaon, builder floor Gurgaon, commercial property Gurgaon, investment property Gurgaon"
+      />
+      <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
+      <meta name="googlebot" content="index, follow, max-image-preview:large" />
 
       {/* <!-- Canonical URL --> */}
       <link
@@ -203,19 +185,15 @@ export default function BuyPageContent() {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Buy Property in Gurugram | Residential & Commercial
-Real Estate Experts"
+        content="Buy Property in Gurgaon – Flats, Floors & Commercial Spaces"
       />
       <meta
         property="og:description"
-        content="Looking to buy property in Gurugram? Crownpoint
-Estates offers expert guidance on residential & commercial properties, fresh bookings and
-resale opportunities in Gurgaon."
+        content="Looking to buy property in Gurgaon? Explore verified flats, builder floors & commercial properties with expert guidance and best market deals."
       />
       <meta
         property="og:image"
-        content="https://www.crownpointestates.com/_next/image?url=%2F_next%2Fstatic%2Fmedi
-a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1773922564/buy-property_gbb6l1.png"
       />
       <meta
         property="og:url"
@@ -225,23 +203,25 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
       <meta property="og:site_name" content="Crownpoint Estates" />
       <meta property="og:locale" content="en_IN" />
 
-      {/* <!-- Twitter Card Meta Tags -->
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:title"
-        content="Property Dealer in Gurugram | Crownpoint Estates"
+        content="Buy Property in Gurgaon – Flats, Floors & Commercial Spaces"
       />
       <meta
         name="twitter:description"
-        content="Buy, sell, lease & rent premium residential and commercial properties in Gurugram and Delhi NCR with Crownpoint Estates."
+        content="Looking to buy property in Gurgaon? Explore verified flats, builder floors & commercial properties with expert guidance and best market deals."
       />
       <meta
         name="twitter:image"
-        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
-      /> */}
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1773922564/buy-property_gbb6l1.png"
+      />
 
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      {/* Page Content */}
+
       <Navbar />
 
       {/* HERO SECTION */}
@@ -263,8 +243,12 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
           <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* LEFT TEXT */}
             <div>
-              <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4">
-                Buy Property
+              <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
+                Buy Property in Gurgaon
+                <span className="text-lg md:text-2xl font-medium text-white/80 block mt-2">
+                  {" "}
+                  Verified Properties for Sale in Gurgaon
+                </span>
               </h1>
 
               <p className="text-sm tracking-widest text-white/80 uppercase">
@@ -286,6 +270,17 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
 
       {/* FILTER SECTION */}
       <section className="py-10 bg-gray-50">
+        <p className="w-11/12 md:w-5/6 mx-auto text-gray-700 mb-8">
+          Looking to <b>buy property in Gurgaon</b>? Explore a wide range of
+          <b>properties for sale in Gurgaon</b>, including luxury apartments,
+          builder floors, villas, and commercial spaces across prime locations
+          like Golf Course Road, DLF Phases, Sohna Road, and Dwarka Expressway.
+          Gurgaon (Gurugram) is one of India’s fastest-growing real estate
+          markets, known for its modern infrastructure, seamless connectivity,
+          and strong investment potential. Whether you're a homebuyer or
+          investor, finding the right <b>property in Gurgaon</b> becomes easier
+          with verified listings and expert local guidance.
+        </p>
         <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* <select
             className="border rounded-xl px-4 py-3 w-full"
@@ -450,6 +445,12 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
           )}
         </div>
       </section>
+
+      <BuyPageSEOContent />
+      <WhyChooseSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <BuyPropFaq />
 
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
 

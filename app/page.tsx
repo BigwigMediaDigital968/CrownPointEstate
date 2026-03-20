@@ -38,8 +38,9 @@ import img14 from "./assets/client14.png";
 import img15 from "./assets/client15.png";
 import img16 from "./assets/client16.png";
 import ComparisonTable from "./components/home/ComparisonTable";
-import ContactCTA from "./components/home/ContactCTA";
+// import ContactCTA from "./components/home/ContactCTA";
 import PropertyCTA from "./components/home/CalltoAction";
+import axios from "axios";
 
 const project1 = "/assets/projects/project_1.jpg";
 const project2 = "/assets/projects/project_2.jpg";
@@ -63,37 +64,6 @@ const clients = [
   { id: 14, logo: img14, name: "Client 14" },
   { id: 15, logo: img15, name: "Client 15" },
   { id: 16, logo: img16, name: "Client 16" },
-];
-
-const blogs = [
-  {
-    id: 1,
-    title: "How smart planning transforms modern living",
-    category: "Real Estate",
-    date: "March 18, 2024",
-    image: project1,
-  },
-  {
-    id: 2,
-    title: "Luxury apartments vs villas: What to choose?",
-    category: "Insights",
-    date: "March 10, 2024",
-    image: project2,
-  },
-  {
-    id: 3,
-    title: "Why location matters more than price",
-    category: "Investment",
-    date: "March 05, 2024",
-    image: project3,
-  },
-  {
-    id: 4,
-    title: "Why location matters more than price",
-    category: "Investment",
-    date: "March 05, 2024",
-    image: project4,
-  },
 ];
 
 const faqSchema = {
@@ -209,6 +179,42 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch Blogs
+  const fetchBlogs = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get<BlogPost[]>(
+        `${process.env.NEXT_PUBLIC_API_BASE}/blog/viewblog`,
+      );
+
+      // 🔽 Sort latest first (descending by date)
+      const sortedBlogs = [...res.data].sort(
+        (a, b) =>
+          new Date(b.datePublished).getTime() -
+          new Date(a.datePublished).getTime(),
+      );
+
+      setBlogs(sortedBlogs);
+      setFilteredBlogs(sortedBlogs);
+    } catch (err) {
+      console.error("Failed to fetch blogs", err);
+      setBlogs([]);
+      setFilteredBlogs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  // console.log(blogs);
+
   return (
     <>
       {/* SEO Meta Tags */}
@@ -253,20 +259,19 @@ export default function Home() {
       <meta property="og:site_name" content="Crownpoint Estates" />
       <meta property="og:locale" content="en_IN" />
 
-      {/* <!-- Twitter Card Meta Tags -->
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:title"
-        content="Property Dealer in gurgaon  | Crownpoint Estates"
+        content="Property Dealer in gurgaon | Crownpoint Estates"
       />
       <meta
         name="twitter:description"
-        content="Buy, sell, lease & rent premium residential and commercial properties in gurgaon  and Delhi NCR with Crownpoint Estates."
+        content="Crownpoint Estates is a trusted property dealer in gurgaon  with 15+ years of experience. Buy, sell, lease & rent residential and commercial properties in Gurgaon & Delhi NCR."
       />
       <meta
         name="twitter:image"
-        content="https://www.crownpointestates.com/og/crownpoint-estates-og.jpg"
-      /> */}
+        content="https://res.cloudinary.com/dyum0r6gf/image/upload/v1770102763/Crown/images/xxzp9gncdj0v1lzcharb.jpg"
+      />
 
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -374,6 +379,7 @@ export default function Home() {
       <ComparisonTable />
       <TestimonialSection />
 
+      {/* Partners */}
       <section className="py-16">
         <div className="w-11/12 md:w-5/6 mx-auto">
           <div className="mb-8" data-aos="fade-up">
@@ -417,6 +423,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Blogs */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="w-11/12 md:w-5/6 mx-auto">
           {/* HEADER */}
@@ -451,58 +458,79 @@ export default function Home() {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <div className="relative h-[300px] md:h-[420px] overflow-hidden">
-                <Image
-                  src={blogs[0].image}
-                  alt={blogs[0].title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-
-              <div className="mt-6">
-                <p className="text-xs tracking-widest text-[var(--primary-color)] mb-2">
-                  {blogs[0].category} • {blogs[0].date}
-                </p>
-                <h3 className="font-heading text-2xl text-[var(--primary-bg)] leading-snug">
-                  {blogs[0].title}
-                </h3>
-              </div>
+              {blogs.length > 0 && (
+                <>
+                  <Link href={`/blogs/${blogs[0].slug}`}>
+                    <div className="relative h-[300px] md:h-[420px] overflow-hidden">
+                      <Image
+                        src={blogs[0].coverImage} // ✅ was blogs[0].image
+                        alt={blogs[0].title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="mt-6">
+                      <p className="text-xs tracking-widest text-[var(--primary-color)] mb-2">
+                        Real Estate •{" "}
+                        {new Date(blogs[0].datePublished).toLocaleDateString(
+                          "en-IN",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          },
+                        )}
+                      </p>
+                      <h3 className="font-heading text-2xl text-[var(--primary-bg)] leading-snug">
+                        {blogs[0].title}
+                      </h3>
+                    </div>
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* SIDE BLOGS */}
             <div className="flex flex-col gap-16">
-              {blogs.slice(1).map((blog, index) => (
-                <div
-                  key={blog.id}
+              {blogs.slice(1, 4).map((blog, index) => (
+                <Link
+                  key={blog._id}
+                  href={`/blogs/${blog.slug}`}
                   className="group flex gap-6"
                   data-aos="fade-up"
                   data-aos-delay={300 + index * 120}
                 >
                   <div className="relative w-32 h-24 flex-shrink-0 overflow-hidden">
                     <Image
-                      src={blog.image}
+                      src={blog.coverImage} // ✅ was blog.image
                       alt={blog.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
-
                   <div>
                     <p className="text-xs tracking-widest text-[var(--primary-color)] mb-2">
-                      {blog.category} • {blog.date}
+                      Real Estate •{" "}
+                      {new Date(blog.datePublished).toLocaleDateString(
+                        "en-IN",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        },
+                      )}
                     </p>
                     <h4 className="font-heading text-lg text-[var(--primary-bg)] leading-snug">
                       {blog.title}
                     </h4>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
         </div>
       </section>
-      <ContactCTA />
+      {/* <ContactCTA /> */}
       <FaqSection />
       <PropertyCTA />
       <PopupForm open={openPopup} onClose={() => setOpenPopup(false)} />
