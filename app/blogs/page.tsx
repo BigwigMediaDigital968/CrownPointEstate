@@ -90,15 +90,15 @@ const Blogs = () => {
 
       {/* <!-- Primary Meta Tags --> */}
       <title>
-        Real Estate Blogs & Property Insights | Crownpoint Estates Gurgaon
+        Real Estate Blogs Gurgaon | Investment Tips, Trends & Property Insights
       </title>
       <meta
         name="title"
-        content="Real Estate Blogs & Property Insights | Crownpoint Estates Gurgaon"
+        content="Real Estate Blogs Gurgaon | Investment Tips, Trends & Property Insights"
       />
       <meta
         name="description"
-        content="Read expert real estate blogs by Crownpoint Estates covering property trends, investment tips, and market insights in Gurugram and Delhi NCR."
+        content="Explore Gurgaon real estate blogs with expert insights, investment tips & property trends. Make smarter buying & selling decisions today!"
       />
       {/* <meta
         name="keywords"

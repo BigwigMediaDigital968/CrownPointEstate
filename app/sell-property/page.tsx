@@ -303,16 +303,15 @@ export default function SellPropertyPage() {
     <>
       {/* ══ SEO META TAGS ══ */}
       <title>
-        Sell Property in Gurgaon – Get Best Price | Call +91 9811556625 |
-        Crownpoint Estates
+        Sell Property in Gurgaon Fast | Get Best Price & Verified Buyers
       </title>
       <meta
         name="title"
-        content="Sell Property in Gurgaon – Get Best Price | Call +91 9811556625"
+        content="Sell Property in Gurgaon Fast | Get Best Price & Verified Buyers"
       />
       <meta
         name="description"
-        content="Want to sell property in Gurgaon quickly? Get free valuation, verified buyers & expert support to close deals faster. Call +91 9811556625 today."
+        content="Want to sell property in Gurgaon quickly? Get free valuation, genuine buyers & expert support to close deals faster. List your property today!"
       />
       <meta
         name="keywords"

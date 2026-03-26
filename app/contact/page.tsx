@@ -28,15 +28,15 @@ const Contact = () => {
 
       {/* <!-- Primary Meta Tags --> */}
       <title>
-        Contact Crownpoint Estates | Real Estate Consultants in Gurugram
+        Contact Property Dealer in Gurgaon | Get Expert Real Estate Advice
       </title>
       <meta
         name="title"
-        content="Contact Crownpoint Estates | Real Estate Consultants in Gurugram"
+        content="Contact Property Dealer in Gurgaon | Get Expert Real Estate Advice"
       />
       <meta
         name="description"
-        content="Get in touch with Crownpoint Estates for expert real estate advice in Gurugram. Call now for buying, selling, leasing or renting residential & commercial properties."
+        content="Contact Crownpoint Estates for buying, selling, renting or leasing property in Gurgaon. Speak with experts & close deals faster. Call now!"
       />
       {/* <meta
         name="keywords"

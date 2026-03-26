@@ -159,14 +159,16 @@ export default function BuyPageContent() {
     <>
       {/* SEO Meta Tags */}
 
-      <title>Buy Property in Gurgaon – Flats, Floors & Commercial Spaces</title>
+      <title>
+        Buy Property in Gurgaon | Flats, Builder Floors & Investment Deals
+      </title>
       <meta
         name="title"
-        content="Buy Property in Gurgaon – Flats, Floors & Commercial Spaces"
+        content="Buy Property in Gurgaon | Flats, Builder Floors & Investment Deals"
       />
       <meta
         name="description"
-        content="Looking to buy property in Gurgaon? Explore verified flats, builder floors & commercial properties with expert guidance and best market deals."
+        content="Buy property in Gurgaon at best prices. Explore verified flats, builder floors & commercial spaces with expert guidance. Book site visit today!"
       />
       <meta
         name="keywords"

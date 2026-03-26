@@ -346,16 +346,15 @@ export default function RentPropertyPage() {
     <>
       {/* ══ SEO META TAGS ══ */}
       <title>
-        Property for Rent in Gurgaon – Flats, Houses & Offices | Crownpoint
-        Estates
+        Property for Rent in Gurgaon | Flats, Houses & Commercial Spaces
       </title>
       <meta
         name="title"
-        content="Property for Rent in Gurgaon – Flats, Houses & Offices | Crownpoint Estates"
+        content="Property for Rent in Gurgaon | Flats, Houses & Commercial Spaces"
       />
       <meta
         name="description"
-        content="Find the best property for rent in Gurgaon including flats, houses & commercial spaces. Verified listings with a smooth rental process by Crownpoint Estates."
+        content="Find property for rent in Gurgaon with verified listings. Explore flats, builder floors & commercial spaces with easy rental process. Book now!"
       />
       <meta
         name="keywords"

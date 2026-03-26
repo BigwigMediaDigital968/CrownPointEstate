@@ -77,15 +77,15 @@ export default function About() {
 
       {/* <!-- Primary Meta Tags --> */}
       <title>
-        About Crownpoint Estates | Trusted Real Estate Consultants in Gurugram
+        Best Property Dealer in Gurgaon | 15+ Years Real Estate Expertise
       </title>
       <meta
         name="title"
-        content="About Crownpoint Estates | Trusted Real Estate Consultants in Gurugram"
+        content="Best Property Dealer in Gurgaon | 15+ Years Real Estate Expertise"
       />
       <meta
         name="description"
-        content="Know more about Crownpoint Estates, a leading real estate consultancy in Gurugram with 15+ years of expertise in residential and commercial property advisory across Delhi NCR."
+        content="Crownpoint Estates is a trusted property dealer in Gurgaon with 15+ years of experience in residential & commercial real estate. Connect today!"
       />
       {/* <meta
         name="keywords"

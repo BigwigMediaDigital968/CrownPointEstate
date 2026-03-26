@@ -323,15 +323,15 @@ export default function LeasePropertyPage() {
     <>
       {/* ── SEO META TAGS ── */}
       <title>
-        Property for Lease in Gurgaon – List or Find Space | Call +91 9811556625
+        Lease Property in Gurgaon | Commercial & Residential Spaces Available
       </title>
       <meta
         name="title"
-        content="Property for Lease in Gurgaon – List or Find Space | Call +91 9811556625"
+        content="Lease Property in Gurgaon | Commercial & Residential Spaces Available"
       />
       <meta
         name="description"
-        content="Looking for property for lease in Gurgaon? Find verified spaces or list your property easily with expert assistance. Call +91 9811556625 now."
+        content="Looking to lease property in Gurgaon? Find verified tenants or premium spaces with expert assistance. Hassle-free leasing starts here!"
       />
       <meta
         name="keywords"

@@ -11,6 +11,7 @@ import OurServices from "./components/home/OurServices";
 import FaqSection from "./components/home/FaqSection";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Script from "next/script";
 
 import PropertyTypes from "./components/home/PropertyTypes";
 import Areas from "./components/home/Areas";
@@ -38,14 +39,8 @@ import img14 from "./assets/client14.png";
 import img15 from "./assets/client15.png";
 import img16 from "./assets/client16.png";
 import ComparisonTable from "./components/home/ComparisonTable";
-// import ContactCTA from "./components/home/ContactCTA";
 import PropertyCTA from "./components/home/CalltoAction";
 import axios from "axios";
-
-const project1 = "/assets/projects/project_1.jpg";
-const project2 = "/assets/projects/project_2.jpg";
-const project3 = "/assets/projects/project_3.jpg";
-const project4 = "/assets/projects/project_4.jpg";
 
 const clients = [
   { id: 1, logo: img1, name: "Client 1" },
@@ -222,19 +217,16 @@ export default function Home() {
       {/* <!-- Primary Meta Tags --> */}
       <meta
         name="title"
-        content="Property Dealer in Gurgaon - Trusted Real Estate Consultants"
+        content="Property Dealer in Gurgaon | Buy, Sell, Rent Property Fast with Experts"
       />
       <meta
         name="description"
-        content="Looking for a trusted property dealer in Gurgaon? Buy, sell, rent or lease property with a trusted real estate agent in Gurgaon . Call +91 9811556625"
+        content="Looking to buy, sell, rent or lease property in Gurgaon? Work with trusted property dealers for verified deals, best prices & quick closures. Call now!"
       />
       <meta
         name="keywords"
         content="property dealer in Gurgaon, Gurgaon real estate consultants, property consultant in Gurgaon, property dealer in Gurugram, real estate services Gurgaon, residential properties in Gurgaon, commercial properties in Gurgaon"
       />
-      {/* <meta name="author" content="Crownpoint Estates" />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow, max-image-preview:large" /> */}
 
       {/* <!-- Canonical URL --> */}
       <link rel="canonical" href="https://www.crownpointestates.com/" />
@@ -276,8 +268,10 @@ export default function Home() {
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(faqSchema),
         }}
