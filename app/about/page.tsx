@@ -75,7 +75,6 @@ export default function About() {
     <>
       {/* SEO Meta Tags */}
 
-      {/* <!-- Primary Meta Tags --> */}
       <title>
         Best Property Dealer in Gurgaon | 15+ Years Real Estate Expertise
       </title>
