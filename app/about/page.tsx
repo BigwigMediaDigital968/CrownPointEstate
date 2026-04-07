@@ -214,10 +214,32 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
           </div>
 
           {/* ===== DESKTOP OFFSET PANEL LAYOUT ===== */}
-          <div className="hidden lg:block relative">
+          <div className="hidden lg:flex relative items-center ">
+            {/* SMALL LEFT PANEL (VERTICALLY CENTERED) */}
+            <div
+              className="
+          relative
+          w-[45%]
+          bg-[#e7e0d4]
+          px-14 
+          py-12
+          shadow-sm
+          h-[70%]
+          -right-20    
+          z-10    "
+            >
+              <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
+                Who we are
+              </p>
+
+              <h2 className="font-heading text-4xl leading-snug font-bold text-[var(--primary-bg)]">
+                Guiding Smart Property Decisions Across Gurugram & Delhi NCR
+              </h2>
+            </div>
+
             {/* BIG RIGHT PANEL */}
             <div className="relative ml-auto w-[65%] bg-[#f6f2ec] py-20 px-16">
-              <div className="max-w-xl ml-auto space-y-6 text-gray-600 leading-relaxed">
+              <div className="max-w-xl space-y-6 ml-10 text-gray-600 leading-relaxed">
                 <p>
                   Crownpoint Estates is a professional real estate consultancy
                   with deep-rooted market knowledge and over 15 years of
@@ -251,29 +273,6 @@ a%2Fcpe-logo.56cc1d43.png&w=64&q=75"
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* SMALL LEFT PANEL (VERTICALLY CENTERED) */}
-            <div
-              className="
-          absolute 
-          top-1/2 
-          -translate-y-1/2 
-          left-0 
-          w-[45%]
-          bg-[#e7e0d4]
-          px-14 
-          py-12
-          shadow-sm
-        "
-            >
-              <p className="uppercase tracking-widest text-sm text-[var(--primary-color)] mb-4 font-heading">
-                Who we are
-              </p>
-
-              <h2 className="font-heading text-4xl leading-snug font-bold text-[var(--primary-bg)]">
-                Guiding Smart Property Decisions Across Gurugram & Delhi NCR
-              </h2>
             </div>
           </div>
         </div>
