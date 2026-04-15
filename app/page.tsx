@@ -217,11 +217,11 @@ export default function Home() {
       {/* <!-- Primary Meta Tags --> */}
       <meta
         name="title"
-        content="Property Dealer in Gurgaon | Buy, Sell, Rent Property Fast with Experts"
+        content="Property Dealer in Gurgaon | Crownpoint Estates"
       />
       <meta
         name="description"
-        content="Looking to buy, sell, rent or lease property in Gurgaon? Work with trusted property dealers for verified deals, best prices & quick closures. Call now!"
+        content="Trusted property dealer in Gurgaon with 15+ years of experience. Buy, sell, rent & lease properties with ease. Contact us today!"
       />
       <meta
         name="keywords"
@@ -234,12 +234,12 @@ export default function Home() {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Property Dealer in Gurgaon  – Crownpoint Estates"
+        content="Property Dealer in Gurgaon | Crownpoint Estates"
       />
 
       <meta
         property="og:description"
-        content="Crownpoint Estates is a trusted property dealer in gurgaon  with 15+ years of experience. Buy, sell, lease & rent residential and commercial properties in Gurgaon & Delhi NCR."
+        content="Trusted property dealer in Gurgaon with 15+ years of experience. Buy, sell, rent & lease properties with ease. Contact us today!"
       />
 
       <meta

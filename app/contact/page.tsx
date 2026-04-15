@@ -27,16 +27,14 @@ const Contact = () => {
       {/* SEO Meta Tags */}
 
       {/* <!-- Primary Meta Tags --> */}
-      <title>
-        Contact Property Dealer in Gurgaon | Get Expert Real Estate Advice
-      </title>
+      <title>Contact Property Dealer in Gurgaon | Crownpoint Estates</title>
       <meta
         name="title"
-        content="Contact Property Dealer in Gurgaon | Get Expert Real Estate Advice"
+        content="Contact Property Dealer in Gurgaon | Crownpoint Estates"
       />
       <meta
         name="description"
-        content="Contact Crownpoint Estates for buying, selling, renting or leasing property in Gurgaon. Speak with experts & close deals faster. Call now!"
+        content="Contact Crownpoint Estates, a trusted property dealer in Gurgaon. Get expert help for buying, selling, renting or leasing property. Call or enquire now!"
       />
       {/* <meta
         name="keywords"
@@ -52,14 +50,11 @@ const Contact = () => {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Contact Crownpoint Estates | Real Estate Consultants in
-Gurugram"
+        content="Contact Property Dealer in Gurgaon | Crownpoint Estates"
       />
       <meta
         property="og:description"
-        content="Get in touch with Crownpoint Estates for expert
-real estate advice in Gurugram. Call now for buying, selling, leasing or renting residential &
-commercial properties."
+        content="Contact Crownpoint Estates, a trusted property dealer in Gurgaon. Get expert help for buying, selling, renting or leasing property. Call or enquire now!"
       />
       <meta
         property="og:image"

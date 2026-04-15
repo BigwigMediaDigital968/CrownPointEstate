@@ -322,16 +322,14 @@ export default function LeasePropertyPage() {
   return (
     <>
       {/* ── SEO META TAGS ── */}
-      <title>
-        Lease Property in Gurgaon | Commercial & Residential Spaces Available
-      </title>
+      <title>Property for Lease in Gurgaon | Verified Spaces | CPE</title>
       <meta
         name="title"
-        content="Lease Property in Gurgaon | Commercial & Residential Spaces Available"
+        content="Property for Lease in Gurgaon | Verified Spaces | CPE"
       />
       <meta
         name="description"
-        content="Looking to lease property in Gurgaon? Find verified tenants or premium spaces with expert assistance. Hassle-free leasing starts here!"
+        content="Lease property in Gurgaon with ease. Find verified tenants for residential and commercial spaces with full support from Crownpoint Estates. Enquire now!"
       />
       <meta
         name="keywords"
@@ -347,11 +345,11 @@ export default function LeasePropertyPage() {
 
       <meta
         property="og:title"
-        content="Property for Lease in Gurgaon – Residential & Commercial | Crownpoint Estates"
+        content="Property for Lease in Gurgaon | Verified Spaces | CPE"
       />
       <meta
         property="og:description"
-        content="Find verified property for lease in Gurgaon — apartments, builder floors, villas, and office spaces. Expert leasing support by Crownpoint Estates."
+        content="Lease property in Gurgaon with ease. Find verified tenants for residential and commercial spaces with full support from Crownpoint Estates. Enquire now!"
       />
       <meta
         property="og:image"

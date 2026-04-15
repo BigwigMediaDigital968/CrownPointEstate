@@ -89,16 +89,14 @@ const Blogs = () => {
       {/* SEO Meta Tags */}
 
       {/* <!-- Primary Meta Tags --> */}
-      <title>
-        Real Estate Blogs Gurgaon | Investment Tips, Trends & Property Insights
-      </title>
+      <title>Rent Property in Gurgaon | Find Your Ideal Space | CPE</title>
       <meta
         name="title"
-        content="Real Estate Blogs Gurgaon | Investment Tips, Trends & Property Insights"
+        content="Rent Property in Gurgaon | Find Your Ideal Space | CPE"
       />
       <meta
         name="description"
-        content="Explore Gurgaon real estate blogs with expert insights, investment tips & property trends. Make smarter buying & selling decisions today!"
+        content="Read real estate blogs for Gurgaon with tips, market trends and investment ideas for buyers, sellers and property investors. Explore now!"
       />
       {/* <meta
         name="keywords"
@@ -114,14 +112,12 @@ const Blogs = () => {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Real Estate Blogs & Property Insights | Crownpoint
-Estates Gurgaon"
+        content="Rent Property in Gurgaon | Find Your Ideal Space | CPE
+"
       />
       <meta
         property="og:description"
-        content="Read expert real estate blogs by Crownpoint
-Estates covering property trends, investment tips, and market insights in Gurugram and
-Delhi NCR."
+        content="Read real estate blogs for Gurgaon with tips, market trends and investment ideas for buyers, sellers and property investors. Explore now!"
       />
       <meta
         property="og:image"

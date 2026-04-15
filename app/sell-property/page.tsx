@@ -302,20 +302,18 @@ export default function SellPropertyPage() {
   return (
     <>
       {/* ══ SEO META TAGS ══ */}
-      <title>
-        Sell Property in Gurgaon Fast | Get Best Price & Verified Buyers
-      </title>
+      <title>Sell Property in Gurgaon | Fast Sale & Best Price</title>
       <meta
         name="title"
-        content="Sell Property in Gurgaon Fast | Get Best Price & Verified Buyers"
+        content="Sell Property in Gurgaon | Fast Sale & Best Price"
       />
       <meta
         name="description"
-        content="Want to sell property in Gurgaon quickly? Get free valuation, genuine buyers & expert support to close deals faster. List your property today!"
+        content="Sell property in Gurgaon at the best price. Connect with verified buyers and get fast, hassle-free closure with Crownpoint Estates. List your property today!"
       />
       <meta
         name="keywords"
-        content="sell property in Gurgaon, sell your property in Gurgaon, property dealers in Gurgaon, property valuation Gurgaon, sell house Gurgaon, real estate agents Gurgaon, property selling services Gurgaon"
+        content="Sell property in Gurgaon at the best price. Connect with verified buyers and get fast, hassle-free closure with Crownpoint Estates. List your property today!"
       />
       <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />
@@ -327,11 +325,11 @@ export default function SellPropertyPage() {
 
       <meta
         property="og:title"
-        content="Sell Property in Gurgaon – Get Best Price | Crownpoint Estates"
+        content="Sell Property in Gurgaon | Fast Sale & Best Price"
       />
       <meta
         property="og:description"
-        content="Want to sell property in Gurgaon quickly? Get free valuation, verified buyers & expert support to close deals faster."
+        content="Sell property in Gurgaon at the best price. Connect with verified buyers and get fast, hassle-free closure with Crownpoint Estates. List your property today!"
       />
       <meta
         property="og:image"

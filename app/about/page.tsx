@@ -75,16 +75,14 @@ export default function About() {
     <>
       {/* SEO Meta Tags */}
 
-      <title>
-        Best Property Dealer in Gurgaon | 15+ Years Real Estate Expertise
-      </title>
+      <title>About Crownpoint Estates | Gurgaon Property Experts</title>
       <meta
         name="title"
-        content="Best Property Dealer in Gurgaon | 15+ Years Real Estate Expertise"
+        content="About Crownpoint Estates | Gurgaon Property Experts"
       />
       <meta
         name="description"
-        content="Crownpoint Estates is a trusted property dealer in Gurgaon with 15+ years of experience in residential & commercial real estate. Connect today!"
+        content="Know Crownpoint Estates, a trusted property dealer in Gurgaon with 15+ years of experience in residential and commercial real estate."
       />
       {/* <meta
         name="keywords"
@@ -100,14 +98,11 @@ export default function About() {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="About Crownpoint Estates | Trusted Real Estate
-Consultants in Gurugram"
+        content="About Crownpoint Estates | Gurgaon Property Experts"
       />
       <meta
         property="og:description"
-        content="Know more about Crownpoint Estates, a leading
-real estate consultancy in Gurugram with 15+ years of expertise in residential and
-commercial property advisory across Delhi NCR."
+        content="Know Crownpoint Estates, a trusted property dealer in Gurgaon with 15+ years of experience in residential and commercial real estate."
       />
       <meta
         property="og:image"

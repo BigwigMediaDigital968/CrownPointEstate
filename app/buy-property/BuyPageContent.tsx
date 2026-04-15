@@ -159,16 +159,14 @@ export default function BuyPageContent() {
     <>
       {/* SEO Meta Tags */}
 
-      <title>
-        Buy Property in Gurgaon | Flats, Builder Floors & Investment Deals
-      </title>
+      <title>Buy Property in Gurgaon | Verified Listings | CPE</title>
       <meta
         name="title"
-        content="Buy Property in Gurgaon | Flats, Builder Floors & Investment Deals"
+        content="Buy Property in Gurgaon | Verified Listings | CPE"
       />
       <meta
         name="description"
-        content="Buy property in Gurgaon at best prices. Explore verified flats, builder floors & commercial spaces with expert guidance. Book site visit today!"
+        content="Buy property in Gurgaon with verified listings. Explore flats, villas & commercial spaces with expert guidance from Crownpoint Estates. Book a site visit now!"
       />
       <meta
         name="keywords"
@@ -187,11 +185,11 @@ export default function BuyPageContent() {
       {/* <!-- Open Graph Meta Tags --> */}
       <meta
         property="og:title"
-        content="Buy Property in Gurgaon – Flats, Floors & Commercial Spaces"
+        content="Buy Property in Gurgaon | Verified Listings | CPE"
       />
       <meta
         property="og:description"
-        content="Looking to buy property in Gurgaon? Explore verified flats, builder floors & commercial properties with expert guidance and best market deals."
+        content="Buy property in Gurgaon with verified listings. Explore flats, villas & commercial spaces with expert guidance from Crownpoint Estates. Book a site visit now!"
       />
       <meta
         property="og:image"
