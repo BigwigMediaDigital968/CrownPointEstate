@@ -313,7 +313,7 @@ export default function SellPropertyPage() {
       />
       <meta
         name="keywords"
-        content="Sell property in Gurgaon at the best price. Connect with verified buyers and get fast, hassle-free closure with Crownpoint Estates. List your property today!"
+        content="sell property in Gurgaon, sell your property in Gurgaon, property dealers in Gurgaon, property valuation Gurgaon, sell house Gurgaon, real estate agents Gurgaon, property selling services Gurgaon"
       />
       <meta name="author" content="Crownpoint Estates" />
       <meta name="robots" content="index, follow" />

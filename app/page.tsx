@@ -215,6 +215,7 @@ export default function Home() {
       {/* SEO Meta Tags */}
 
       {/* <!-- Primary Meta Tags --> */}
+      <title>Property Dealer in Gurgaon | Crownpoint Estates</title>
       <meta
         name="title"
         content="Property Dealer in Gurgaon | Crownpoint Estates"
