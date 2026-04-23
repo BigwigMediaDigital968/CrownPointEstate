@@ -18,6 +18,7 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
   const [step, setStep] = useState<"FORM" | "OTP">("FORM");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -82,12 +83,12 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/send-otp`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead//create-lead`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-        }
+        },
       );
 
       const data = await res.json();
@@ -122,25 +123,27 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             phone: formData.phone,
             otp,
           }),
-        }
+        },
       );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
-      if (onSuccess) onSuccess();
+      if (onSuccess) {
+        onSuccess();
+      }
       // Optional: Reset form or show success message if onSuccess doesn't unmount component
       if (!onSuccess) {
         setStep("FORM");
         setOtp("");
         setFormData({
-            name: "",
-            phone: "",
-            email: "",
-            purpose: "",
-            requirements: "",
-            budget: "",
-            message: "",
+          name: "",
+          phone: "",
+          email: "",
+          purpose: "",
+          requirements: "",
+          budget: "",
+          message: "",
         });
         alert("Thank you! Our team will contact you shortly.");
       }
@@ -151,6 +154,58 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
         setError("OTP verification failed");
       }
     } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/lead/create-lead`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      if (onSuccess) {
+        onSuccess();
+      }
+      // Optional: Reset form or show success message if onSuccess doesn't unmount component
+      if (!onSuccess) {
+        setIsFormSubmitted(true);
+
+        setTimeout(() => {
+          setIsFormSubmitted(false);
+          setStep("FORM");
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            purpose: "",
+            requirements: "",
+            budget: "",
+            message: "",
+          });
+        }, 2000);
+        //alert("Thank you! Our team will contact you shortly.");
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to submit form.");
+      } else {
+        setError("Failed to submit form.");
+      }
+    } finally {
+      setStep("FORM");
       setLoading(false);
     }
   };
@@ -169,7 +224,7 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
   const phoneInputClass = isGlass
     ? "!w-full !h-[44px] !pl-12 !rounded-lg !bg-white/80 !border !border-gray-300 !text-black placeholder:!text-gray-600 focus:!border-[var(--primary-color)]"
     : "!w-full !h-[44px] !pl-12 !rounded-lg !border !border-gray-400 !text-black placeholder:!text-gray-500 focus:!border-[var(--primary-color)] focus:!ring-1 focus:!ring-[var(--primary-color)]";
-  
+
   const phoneButtonClass = isGlass
     ? "!border !border-gray-300 !bg-transparent !rounded-l-lg"
     : "!border !border-gray-400 !rounded-l-lg";
@@ -177,11 +232,13 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
   return (
     <div className="w-full">
       {error && (
-        <p className="text-red-600 text-sm text-center mb-3 bg-red-50 p-2 rounded">{error}</p>
+        <p className="text-red-600 text-sm text-center mb-3 bg-red-50 p-2 rounded">
+          {error}
+        </p>
       )}
 
-      {step === "FORM" && (
-        <form onSubmit={handleSendOtp} className="space-y-3">
+      {!isFormSubmitted && step === "FORM" && (
+        <form onSubmit={handleFormSubmit} className="space-y-3">
           <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
               <input
@@ -190,7 +247,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 required
                 className={inputClass}
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             </div>
             <div className="flex-1">
@@ -211,7 +270,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             placeholder="Email Address"
             className={inputClass}
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
           />
 
           <div className="flex flex-col md:flex-row gap-3">
@@ -220,7 +281,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
               <select
                 className={selectClass}
                 value={formData.purpose}
-                onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, purpose: e.target.value })
+                }
                 required
               >
                 <option value="">Select Purpose</option>
@@ -236,7 +299,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
               <select
                 className={selectClass}
                 value={formData.requirements}
-                onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, requirements: e.target.value })
+                }
                 required
               >
                 <option value="">Property Type</option>
@@ -253,7 +318,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             <select
               className={selectClass}
               value={formData.budget}
-              onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, budget: e.target.value })
+              }
               disabled={budgetOptions.length === 0}
             >
               <option value="">
@@ -273,18 +340,20 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             placeholder="Any specific requirement (BHK, facing, possession timeline, etc.)"
             className={`${inputClass} h-20 resize-none`}
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
           />
 
           <ButtonFill
             type="submit"
             className="w-full"
-            text={loading ? "Sending OTP..." : btnText}
+            text={loading ? "Sending..." : btnText}
           />
         </form>
       )}
 
-      {step === "OTP" && (
+      {false && step === "OTP" && (
         <div className="space-y-4">
           <input
             type="text"
@@ -300,6 +369,36 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             className="w-full"
             text={loading ? "Verifying..." : "Verify & Submit"}
           />
+        </div>
+      )}
+      {isFormSubmitted && (
+        <div className="flex flex-col items-center justify-center p-10 text-center bg-[#f0f0f0] rounded-lg shadow-sm min-h-[400px]">
+          {/* Success Icon */}
+          <div className="mb-6 flex items-center justify-center w-16 h-16 rounded-full border-2 border-[var(--primary-color)] bg-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-[var(--primary-color)]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={3}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          {/* Success Message */}
+          <h2 className="text-2xl font-semibold text-[var(--primary-color)] mb-2">
+            Thank You!
+          </h2>
+
+          <p className="text-gray-600 text-base max-w-[250px] leading-relaxed">
+            Our team will be in touch shortly.
+          </p>
         </div>
       )}
     </div>
