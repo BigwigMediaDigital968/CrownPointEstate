@@ -27,7 +27,7 @@ const ScrollToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-20 md:bottom-6 right-6 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center z-50 transition-opacity duration-300 ${
+      className={`fixed bottom-20 md:bottom-6 right-6 w-12 h-12 rounded-full bg-[var(--primary)] shadow-lg flex items-center justify-center z-50 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       aria-label="Scroll to top"
@@ -38,13 +38,13 @@ const ScrollToTopButton = () => {
              a 15.9155 15.9155 0 0 1 0 31.831
              a 15.9155 15.9155 0 0 1 0 -31.831"
           fill="none"
-          stroke="#173e62"
+          stroke="#ffffff"
           strokeWidth="2"
           strokeDasharray="100, 100"
           strokeDashoffset={`${100 - scrollPercent}`}
         />
       </svg>
-      <span className="relative z-10 text-[var(--primary-color)]">&#8679;</span>
+      <span className="relative z-10 text-white">&#8679;</span>
     </button>
   );
 };

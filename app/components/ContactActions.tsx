@@ -39,7 +39,7 @@ export default function FloatingContactActions() {
       </div>
 
       {/* DESKTOP FLOATING ACTIONS */}
-      <div className="hidden md:block fixed bottom-6 right-6 z-50">
+      <div className="hidden md:block fixed bottom-6 right-1/2 translate-x-1/2 z-50">
         <div className="flex items-center gap-5 bg-[var(--primary)] px-6 py-3 rounded-full shadow-lg">
           
           <a
