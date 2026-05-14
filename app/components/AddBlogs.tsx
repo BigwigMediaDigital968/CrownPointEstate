@@ -16,7 +16,7 @@ interface BlogPost {
   author: string;
   tags?: string;
   coverImage?: string;
-  schemaMarkup?: string[]; // ✅ add this
+  schemaMarkup?: string[];
   faqs?: FAQItem[];
 }
 
@@ -116,16 +116,45 @@ const AddBlog = ({
     }
   };
 
+  const cleanEditorContent = (html: string) => {
+    if (!html) return "";
+
+    let cleaned = html;
+
+    // 1. Replace &nbsp; with normal space
+    cleaned = cleaned.replace(/&nbsp;/g, " ");
+
+    // 2. Remove multiple spaces
+    cleaned = cleaned.replace(/\s+/g, " ");
+
+    // 3. Remove empty paragraphs like <p><br></p>
+    cleaned = cleaned.replace(/<p><br><\/p>/g, "");
+
+    // 4. Remove empty tags
+    cleaned = cleaned.replace(/<p>\s*<\/p>/g, "");
+
+    // 5. Trim spaces between tags
+    cleaned = cleaned.replace(/>\s+</g, "><");
+
+    // 6. Optional: remove extra line breaks
+    cleaned = cleaned.replace(/(<br\s*\/?>\s*){2,}/g, "<br>");
+
+    return cleaned.trim();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
       const blogData = new FormData();
+
+      const cleanedContent = cleanEditorContent(formData.content);
+
       blogData.append("title", formData.title);
       blogData.append("slug", formData.slug);
       blogData.append("excerpt", formData.excerpt);
-      blogData.append("content", formData.content);
+      blogData.append("content", cleanedContent);
       blogData.append("author", formData.author);
       blogData.append("tags", formData.tags);
 
@@ -169,7 +198,7 @@ const AddBlog = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-100">
       <div className="bg-white text-black p-6 w-full max-w-2xl rounded-xl overflow-y-auto max-h-[90vh]">
         <h2 className="text-2xl font-bold mb-4 text-black">
           {existingBlog ? "Edit Blog" : "Add New Blog"}
@@ -289,7 +318,7 @@ const AddBlog = ({
             <div className="flex gap-4">
               <button
                 type="button"
-                className="px-3 py-1 bg-green-600 text-white rounded"
+                className="px-3 py-1 bg-green-600 text-white rounded cursor-pointer"
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -302,7 +331,7 @@ const AddBlog = ({
               {formData.schemaMarkup.length > 1 && (
                 <button
                   type="button"
-                  className="px-3 py-1 bg-red-500 text-white rounded"
+                  className="px-3 py-1 bg-red-500 text-white rounded cursor-pointer"
                   onClick={() =>
                     setFormData((prev) => ({
                       ...prev,
@@ -350,7 +379,7 @@ const AddBlog = ({
             <div className="flex gap-4">
               <button
                 type="button"
-                className="px-3 py-1 bg-green-600 text-white rounded"
+                className="px-3 py-1 bg-green-600 text-white rounded cursor-pointer"
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -364,7 +393,7 @@ const AddBlog = ({
               {formData.faqs.length > 1 && (
                 <button
                   type="button"
-                  className="px-3 py-1 bg-red-500 text-white rounded"
+                  className="px-3 py-1 bg-red-500 text-white rounded cursor-pointer"
                   onClick={() =>
                     setFormData((prev) => ({
                       ...prev,
@@ -382,7 +411,7 @@ const AddBlog = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-400 rounded"
+              className="px-4 py-2 bg-gray-400 rounded cursor-pointer"
             >
               Cancel
             </button>
@@ -392,7 +421,7 @@ const AddBlog = ({
                 submitting
                   ? "bg-gray-500 cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700"
-              }`}
+              } cursor-pointer`}
               disabled={submitting}
             >
               {submitting

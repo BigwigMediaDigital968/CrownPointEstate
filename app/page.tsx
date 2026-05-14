@@ -325,9 +325,7 @@ export default function Home() {
                   key={project._id}
                   data-aos="fade-up"
                   data-aos-delay={index * 120}
-                  className={`group relative overflow-hidden border-2 border-amber-100 rounded-md cursor-pointer
-          ${isTall ? "lg:row-span-2" : ""}
-        `}
+                  className={`group relative overflow-hidden border-2 border-amber-100 rounded-md cursor-pointer ${isTall ? "lg:row-span-2" : ""}      `}
                 >
                   <Link
                     href={`/buy-property/${project.slug}`}
@@ -339,9 +337,7 @@ export default function Home() {
                       alt={project.title}
                       width={600}
                       height={400}
-                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-105
-            h-[260px] sm:h-[280px] lg:h-full
-          `}
+                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 h-[260px] sm:h-[280px] lg:h-full`}
                     />
 
                     {/* OVERLAY */}
