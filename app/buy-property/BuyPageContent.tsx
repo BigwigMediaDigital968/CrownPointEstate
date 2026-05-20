@@ -93,7 +93,7 @@ export default function BuyPageContent() {
     setPage(1);
   }, [search, type, budget]);
 
-  console.log(properties);
+  // console.log(properties);
 
   /* ------------------ FILTER LOGIC ------------------ */
   //
@@ -158,7 +158,7 @@ export default function BuyPageContent() {
     setBudget("");
   }, [type]);
 
-  console.log("filtered properties", filteredProperties);
+  // console.log("filtered properties", filteredProperties);
 
   const PageLoader = () => {
     return (
