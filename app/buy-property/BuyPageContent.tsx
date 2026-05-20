@@ -46,6 +46,8 @@ interface Property {
   builder?: string;
 }
 
+const ITEMS_PER_PAGE = 9;
+
 export default function BuyPageContent() {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
@@ -53,19 +55,29 @@ export default function BuyPageContent() {
   const [openPopup, setOpenPopup] = useState(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
 
-  // Data fetching on component mount
+  // Data fetching on component mount and when page changes
   useEffect(() => {
     const fetchProperties = async () => {
+      setLoading(true);
+
       try {
+        const params = new URLSearchParams({
+          purpose: "Buy",
+          page: String(page),
+          limit: String(ITEMS_PER_PAGE),
+        });
+
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property?${params}`,
         );
 
         const data = await res.json();
-        console.log(data);
         if (data.success) {
-          setProperties(data.properties);
+          setProperties(data.properties || []);
+          setHasMore((data.properties || []).length === ITEMS_PER_PAGE);
         }
       } catch (error) {
         console.error("Failed to fetch properties", error);
@@ -75,7 +87,11 @@ export default function BuyPageContent() {
     };
 
     fetchProperties();
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, type, budget]);
 
   console.log(properties);
 
@@ -106,33 +122,33 @@ export default function BuyPageContent() {
 
       const matchBudget = budget
         ? (() => {
-            const price = property.price ?? 0;
+          const price = property.price ?? 0;
 
-            if (type === "Plot") {
-              if (budget === "below-8cr") return price < 80000000;
-              if (budget === "8cr-10cr")
-                return price >= 80000000 && price <= 100000000;
-              if (budget === "above-10cr") return price > 100000000;
-            }
+          if (type === "Plot") {
+            if (budget === "below-8cr") return price < 80000000;
+            if (budget === "8cr-10cr")
+              return price >= 80000000 && price <= 100000000;
+            if (budget === "above-10cr") return price > 100000000;
+          }
 
-            if (type === "Villa") {
-              if (budget === "below-10cr") return price < 100000000;
-              if (budget === "10cr-12cr")
-                return price >= 100000000 && price <= 120000000;
-              if (budget === "12cr-14cr")
-                return price >= 120000000 && price <= 140000000;
-              if (budget === "above-14cr") return price > 140000000;
-            }
+          if (type === "Villa") {
+            if (budget === "below-10cr") return price < 100000000;
+            if (budget === "10cr-12cr")
+              return price >= 100000000 && price <= 120000000;
+            if (budget === "12cr-14cr")
+              return price >= 120000000 && price <= 140000000;
+            if (budget === "above-14cr") return price > 140000000;
+          }
 
-            if (type === "Apartment" || type === "Builder Floor") {
-              if (budget === "below-4cr") return price < 40000000;
-              if (budget === "4cr-6cr")
-                return price >= 40000000 && price <= 60000000;
-              if (budget === "above-6cr") return price > 60000000;
-            }
+          if (type === "Apartment" || type === "Builder Floor") {
+            if (budget === "below-4cr") return price < 40000000;
+            if (budget === "4cr-6cr")
+              return price >= 40000000 && price <= 60000000;
+            if (budget === "above-6cr") return price > 60000000;
+          }
 
-            return true;
-          })()
+          return true;
+        })()
         : true;
 
       return matchType && matchBudget;
@@ -141,6 +157,8 @@ export default function BuyPageContent() {
   useEffect(() => {
     setBudget("");
   }, [type]);
+
+  console.log("filtered properties", filteredProperties);
 
   const PageLoader = () => {
     return (
@@ -317,9 +335,8 @@ export default function BuyPageContent() {
 
           {type === "Apartment" && (
             <select
-              className={`border rounded-xl px-4 py-3 ${
-                !type ? "bg-gray-100 cursor-not-allowed" : ""
-              }`}
+              className={`border rounded-xl px-4 py-3 ${!type ? "bg-gray-100 cursor-not-allowed" : ""
+                }`}
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
               disabled={!type}
@@ -445,6 +462,36 @@ export default function BuyPageContent() {
           )}
         </div>
       </section>
+
+      {!loading && (properties.length > 0 || page > 1) && (
+        <section className="py-6">
+          <div className="w-11/12 md:w-5/6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-600">
+              Page {page}
+            </p>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setPage((current) => Math.max(1, current - 1))}
+                disabled={page === 1}
+                className="rounded-full border px-5 py-2 text-sm transition disabled:opacity-50"
+              >
+                Previous
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPage((current) => current + 1)}
+                disabled={!hasMore}
+                className="rounded-full border px-5 py-2 text-sm transition disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <BuyPageSEOContent />
       <WhyChooseSection />

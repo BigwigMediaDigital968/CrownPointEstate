@@ -230,6 +230,8 @@ function FaqItem({
 /* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE COMPONENT
 ═══════════════════════════════════════════════════════════════════ */
+const ITEMS_PER_PAGE = 9;
+
 export default function RentPropertyPage() {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
@@ -239,16 +241,29 @@ export default function RentPropertyPage() {
   const [testimonialPage, setTestimonialPage] = useState(0);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
 
   /* ── FETCH ── */
   useEffect(() => {
     const fetchProperties = async () => {
+      setLoading(true);
+
       try {
+        const params = new URLSearchParams({
+          purpose: "Rent",
+          page: String(page),
+          limit: String(ITEMS_PER_PAGE),
+        });
+
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/property?${params}`,
         );
         const data = await res.json();
-        if (data.success) setProperties(data.properties);
+        if (data.success) {
+          setProperties(data.properties || []);
+          setHasMore((data.properties || []).length === ITEMS_PER_PAGE);
+        }
       } catch (err) {
         console.error("Failed to fetch rent properties", err);
       } finally {
@@ -256,11 +271,15 @@ export default function RentPropertyPage() {
       }
     };
     fetchProperties();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     setBudget("");
   }, [type]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, type, budget]);
 
   /* ── FILTER ── */
   const filteredProperties = properties
@@ -620,6 +639,32 @@ export default function RentPropertyPage() {
           )}
         </div>
       </section>
+
+      {!loading && (properties.length > 0 || page > 1) && (
+        <section className="py-6 bg-white">
+          <div className="w-11/12 md:w-5/6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-600">Page {page}</p>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setPage((current) => Math.max(1, current - 1))}
+                disabled={page === 1}
+                className="rounded-full border px-5 py-2 text-sm transition disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                onClick={() => setPage((current) => current + 1)}
+                disabled={!hasMore}
+                className="rounded-full border px-5 py-2 text-sm transition disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ══════════════════════════════════════════════════════════
           SECTION 1 — Intro / Find the Best Rental
